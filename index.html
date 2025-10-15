@@ -12,15 +12,21 @@
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
   
   <!-- Feather Icons -->
   <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  
+  <!-- Vanta.js Globe Effect -->
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
   
   <!-- Firebase Config -->
   <script src="js/firebase-config.js"></script>
   
   <style>
+    /* ฟอนต์ Sarabun ให้เหมือนเว็บเดิม */
+    @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap');
+    body { font-family: 'Sarabun', sans-serif; }
+
     .content-container {
       min-height: calc(100vh - 64px - 200px); /* 100vh - header height - footer height */
     }
@@ -110,6 +116,409 @@
           `;
         });
     }
+
+    // ฟังก์ชันเริ่มต้นสำหรับหน้า Coding
+    window.initCoding = function() {
+      try {
+        if (typeof window._codingCleanup === 'function') {
+          try { window._codingCleanup(); } catch (cleanupError) {}
+        }
+
+        const cleanupFns = [];
+        window._codingCleanup = () => {
+          while (cleanupFns.length) {
+            const fn = cleanupFns.pop();
+            try { fn(); } catch {}
+          }
+        };
+
+        if (typeof feather !== 'undefined') {
+          feather.replace();
+        }
+
+        const $ = (sel) => document.querySelector(sel);
+        const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+
+        // Vanta globe
+        const globeEl = document.getElementById('vanta-globe');
+        if (globeEl && window.VANTA && typeof VANTA.GLOBE === 'function') {
+          try { window._vantaInstance?.destroy?.(); } catch {}
+          window._vantaInstance = VANTA.GLOBE({
+            el: globeEl,
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x3b82f6,
+            backgroundColor: 0x2563eb,
+            size: 0.8
+          });
+        }
+
+        const getNum = (key) => {
+          try {
+            const raw = localStorage.getItem(key);
+            return raw ? parseInt(raw, 10) || 0 : 0;
+          } catch {
+            return 0;
+          }
+        };
+        const setNum = (key, val) => {
+          try { localStorage.setItem(key, String(val)); } catch {}
+        };
+
+        const modal = $('#award-modal');
+        const closeBtn = $('#award-modal-close');
+        const tabsWrap = $('#award-modal-tabs');
+        const pdfPanel = $('#award-modal-panel-pdf');
+        const youtubePanel = $('#award-modal-panel-youtube');
+        const pdfFrame = $('#award-pdf-frame');
+        const pdfEmbed = $('#award-pdf-embed');
+        const pdfObject = $('#award-pdf-object');
+        const pdfSwitch = $('#award-pdf-switch');
+        const pdfDownload = $('#award-pdf-download');
+        const youtubeFrame = $('#award-youtube-frame');
+        let currentPdfMode = 'embed';
+
+        const tabButtons = () => (tabsWrap ? Array.from(tabsWrap.querySelectorAll('.award-tab')) : []);
+
+        function setActiveTab(which, hasPdf, hasYoutube) {
+          if (!tabsWrap) return;
+          tabsWrap.classList.toggle('hidden', !(hasPdf && hasYoutube));
+          tabButtons().forEach(btn => {
+            const isActive = btn.dataset.tab === which;
+            btn.classList.toggle('bg-blue-600', isActive);
+            btn.classList.toggle('text-white', isActive);
+            btn.classList.toggle('bg-white', !isActive);
+            btn.classList.toggle('text-gray-700', !isActive);
+          });
+          if (pdfPanel) pdfPanel.classList.toggle('hidden', which !== 'pdf');
+          if (youtubePanel) youtubePanel.classList.toggle('hidden', which !== 'youtube');
+        }
+
+        function computePdfEmbed(url) {
+          if (!url) return { mode: 'none', embedUrl: '' };
+          try {
+            const parsed = new URL(url, window.location.origin);
+            if (parsed.hostname.includes('drive.google.com')) {
+              const match = parsed.pathname.match(/\/file\/d\/([^/]+)/);
+              const id = match ? match[1] : (parsed.searchParams.get('id') || '');
+              if (id) {
+                return { mode: 'iframe', embedUrl: `https://drive.google.com/file/d/${id}/preview` };
+              }
+            }
+          } catch {}
+          return { mode: 'object', embedUrl: url };
+        }
+
+        function resetPdfViews() {
+          if (pdfFrame) {
+            pdfFrame.src = '';
+            pdfFrame.classList.add('hidden');
+          }
+          if (pdfEmbed) {
+            pdfEmbed.src = '';
+            pdfEmbed.classList.add('hidden');
+          }
+          if (pdfObject) {
+            pdfObject.data = '';
+            pdfObject.classList.add('hidden');
+          }
+        }
+
+        function openAwardModal(options = {}) {
+          if (!modal) return;
+          const { pdfUrl = '', youtubeId = '', defaultTab = 'pdf' } = options;
+          resetPdfViews();
+          if (pdfDownload) pdfDownload.href = pdfUrl || '#';
+
+          const pdfInfo = computePdfEmbed(pdfUrl);
+          if (pdfUrl) {
+            if (pdfInfo.mode === 'iframe' && pdfFrame) {
+              currentPdfMode = 'iframe';
+              pdfFrame.src = pdfInfo.embedUrl;
+              pdfFrame.classList.remove('hidden');
+            } else if (pdfInfo.mode === 'object') {
+              currentPdfMode = 'embed';
+              if (pdfEmbed) {
+                pdfEmbed.src = pdfInfo.embedUrl;
+                pdfEmbed.classList.remove('hidden');
+              }
+              if (pdfObject) {
+                pdfObject.data = pdfInfo.embedUrl;
+              }
+            }
+          }
+          if (youtubeFrame) {
+            youtubeFrame.src = youtubeId ? `https://www.youtube.com/embed/${youtubeId}` : '';
+          }
+          const hasPdf = !!pdfUrl;
+          const hasYoutube = !!youtubeId;
+          const firstTab = hasPdf && hasYoutube ? defaultTab : (hasPdf ? 'pdf' : 'youtube');
+          setActiveTab(firstTab, hasPdf, hasYoutube);
+          document.body.classList.add('overflow-hidden');
+          modal.classList.remove('hidden');
+        }
+
+        window.openAwardModal = openAwardModal;
+
+        function closeAwardModal() {
+          if (!modal) return;
+          modal.classList.add('hidden');
+          document.body.classList.remove('overflow-hidden');
+          if (pdfFrame) pdfFrame.src = '';
+          if (pdfEmbed) pdfEmbed.src = '';
+          if (pdfObject) pdfObject.data = '';
+          if (youtubeFrame) youtubeFrame.src = '';
+        }
+
+        if (tabsWrap) {
+          tabsWrap.addEventListener('click', (evt) => {
+            const btn = evt.target.closest('.award-tab');
+            if (!btn) return;
+            setActiveTab(btn.dataset.tab, true, true);
+          });
+        }
+
+        if (pdfSwitch) {
+          pdfSwitch.addEventListener('click', () => {
+            const order = ['embed', 'object', 'iframe'];
+            const nextMode = order[(order.indexOf(currentPdfMode) + 1) % order.length];
+            currentPdfMode = nextMode;
+            if (!pdfFrame || !pdfEmbed || !pdfObject) return;
+            pdfFrame.classList.add('hidden');
+            pdfEmbed.classList.add('hidden');
+            pdfObject.classList.add('hidden');
+            if (nextMode === 'embed' && pdfEmbed.src) {
+              pdfEmbed.classList.remove('hidden');
+            } else if (nextMode === 'object' && pdfObject.data) {
+              pdfObject.classList.remove('hidden');
+            } else if (nextMode === 'iframe' && pdfFrame.src) {
+              pdfFrame.classList.remove('hidden');
+            }
+          });
+        }
+
+        if (closeBtn) {
+          closeBtn.addEventListener('click', closeAwardModal);
+        }
+
+        if (modal) {
+          modal.addEventListener('click', (evt) => {
+            if (evt.target === modal) closeAwardModal();
+          });
+        }
+
+        $$('[data-view-count-for]').forEach(span => {
+          const id = span.getAttribute('data-view-count-for');
+          span.textContent = String(getNum(`award_views_${id}`));
+        });
+
+        const likeButtons = $$('.like-btn[data-award-id]');
+        likeButtons.forEach(btn => {
+          const id = btn.getAttribute('data-award-id');
+          const key = `award_like_${id}`;
+          const liked = localStorage.getItem(key) === '1';
+          const counter = document.querySelector(`.like-count[data-like-count-for="${id}"]`);
+          if (counter) counter.textContent = liked ? '1' : '0';
+          btn.classList.toggle('text-red-600', liked);
+          btn.addEventListener('click', (evt) => {
+            evt.preventDefault();
+            const nowLiked = !(localStorage.getItem(key) === '1');
+            try { localStorage.setItem(key, nowLiked ? '1' : '0'); } catch {}
+            if (counter) counter.textContent = nowLiked ? '1' : '0';
+            btn.classList.toggle('text-red-600', nowLiked);
+          });
+        });
+
+        $$('[data-view-increment]').forEach(link => {
+          const id = link.getAttribute('data-view-increment');
+          const key = `award_views_${id}`;
+          const counter = document.querySelector(`[data-view-count-for="${id}"]`);
+          link.addEventListener('click', (evt) => {
+            const pdfUrl = link.dataset.modalPdfUrl;
+            const youtubeId = link.dataset.modalYoutubeId;
+            const defaultTab = link.dataset.modalDefault || (youtubeId ? 'youtube' : 'pdf');
+            if (pdfUrl || youtubeId) {
+              evt.preventDefault();
+              const next = getNum(key) + 1;
+              setNum(key, next);
+              if (counter) counter.textContent = String(next);
+              openAwardModal({ pdfUrl: pdfUrl || '', youtubeId: youtubeId || '', defaultTab });
+            }
+          });
+        });
+
+        const chatToggle = $('#chatbot-toggle');
+        const chatContainer = $('#chatbot-container');
+        const chatClose = $('#chatbot-close');
+        const chatMessages = $('#chat-messages');
+        const chatInput = $('#chat-input');
+        const chatSend = $('#chat-send');
+
+        function appendChatMessage(role, text) {
+          if (!chatMessages) return;
+          const wrap = document.createElement('div');
+          wrap.className = 'chat-message mb-3 flex ' + (role === 'user' ? 'justify-end' : 'justify-start');
+          const bubble = document.createElement('div');
+          bubble.className = role === 'user'
+            ? 'bg-blue-600 text-white rounded-lg p-3 max-w-xs'
+            : 'bg-blue-100 text-blue-800 rounded-lg p-3 max-w-xs';
+          bubble.textContent = text;
+          wrap.appendChild(bubble);
+          chatMessages.appendChild(wrap);
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function botReply(text) {
+          const lower = (text || '').toLowerCase();
+          const contains = (...keys) => keys.some(key => lower.includes(key));
+          if (contains('สมัคร', 'ลงทะเบียน', 'register', 'sign up')) {
+            return 'การลงทะเบียน: ไปที่ปุ่ม “เข้าสู่ระบบ” แล้วเลือกสร้างบัญชีใหม่ หรือเชื่อมบัญชีหน่วยงาน หากต้องการคู่มือ กด “วิธีการใช้งานเว็บไซต์นี้”.';
+          }
+          if (contains('แบบสอบถาม', 'questionnaire', 'survey')) {
+            return 'สร้าง/จัดการแบบสอบถาม: ไปที่เมนู “แบบสอบถาม” เลือกสร้างแบบฟอร์ม กำหนดผู้ตอบ และดูสรุปผลได้แบบเรียลไทม์.';
+          }
+          if (contains('นิเทศ', 'รายงาน', 'report')) {
+            return 'บันทึกการนิเทศและรายงาน: ใช้เมนู “บันทึกการนิเทศ” เพื่อกรอกข้อมูล/อัปโหลดไฟล์ และดูรายงานในเมนู “รายงานผล”.';
+          }
+          if (contains('ติดต่อ', 'contact', 'เบอร์', 'อีเมล')) {
+            return 'ติดต่อเรา: contact@edusupervisor.ac.th หรือ 02-123-4567 (เวลาราชการ).';
+          }
+          if (contains('ช่วย', 'วิธีใช้', 'how', 'help')) {
+            return 'ฉันช่วยได้เรื่องสมัครใช้งาน, บันทึกการนิเทศ, แบบสอบถาม, รายงานผล และข้อมูลติดต่อ ลองพิมพ์หัวข้อที่สนใจได้เลยครับ.';
+          }
+          if (contains('ai', 'coding')) {
+            return 'เนื้อหา AI และ Coding: ดูที่เมนู “การเรียนรู้ CODING/AI” จะมีสื่อการเรียนรู้และลิงก์ที่เกี่ยวข้อง.';
+          }
+          return 'ขอบคุณครับ รับทราบคำถามแล้ว ขณะนี้ยังเป็นเวอร์ชันทดลอง หากต้องการความช่วยเหลือด่วน แนะนำเมนู “วิธีการใช้งานเว็บไซต์นี้” หรือพิมพ์คำสำคัญ เช่น “สมัคร”, “แบบสอบถาม”, “รายงาน”, “ติดต่อ”.';
+        }
+
+        function openChat() {
+          if (!chatContainer) return;
+          chatContainer.classList.remove('chatbot-hidden');
+          chatContainer.setAttribute('aria-modal', 'true');
+          if (chatInput) {
+            setTimeout(() => chatInput.focus(), 50);
+          }
+        }
+
+        function closeChat() {
+          if (!chatContainer) return;
+          chatContainer.classList.add('chatbot-hidden');
+          chatContainer.setAttribute('aria-modal', 'false');
+        }
+
+        function sendChatMessage() {
+          if (!chatInput) return;
+          const value = chatInput.value.trim();
+          if (!value) return;
+          appendChatMessage('user', value);
+          chatInput.value = '';
+          setTimeout(() => appendChatMessage('bot', botReply(value)), 200);
+        }
+
+        if (chatToggle && chatContainer) {
+          chatToggle.addEventListener('click', () => {
+            const hidden = chatContainer.classList.contains('chatbot-hidden');
+            hidden ? openChat() : closeChat();
+            if (hidden && chatMessages && chatMessages.childElementCount === 0) {
+              appendChatMessage('bot', 'สวัสดีครับ ผมคือแชทบอทของระบบนิเทศการศึกษา พิมพ์ “ช่วย” เพื่อดูสิ่งที่ช่วยได้ครับ');
+            }
+          });
+        }
+
+        if (chatClose) chatClose.addEventListener('click', closeChat);
+        if (chatSend) chatSend.addEventListener('click', sendChatMessage);
+        if (chatInput) {
+          chatInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' && !event.shiftKey) {
+              event.preventDefault();
+              sendChatMessage();
+            }
+          });
+        }
+
+        const escapeHandler = (event) => {
+          if (event.key !== 'Escape') return;
+          closeAwardModal();
+          closeChat();
+        };
+        document.addEventListener('keydown', escapeHandler);
+        cleanupFns.push(() => document.removeEventListener('keydown', escapeHandler));
+
+        const tiltCards = document.querySelectorAll('#coding-roadmap .tilt-card');
+        const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+        tiltCards.forEach(card => {
+          const bound = 10;
+          card.addEventListener('mousemove', (event) => {
+            const rect = card.getBoundingClientRect();
+            const px = clamp((event.clientX - rect.left) / rect.width, 0, 1);
+            const py = clamp((event.clientY - rect.top) / rect.height, 0, 1);
+            const rx = (py - 0.5) * bound;
+            const ry = (0.5 - px) * bound;
+            card.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+            card.style.setProperty('--mx', `${px * 100}%`);
+            card.style.setProperty('--my', `${py * 100}%`);
+          });
+          card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(800px) rotateX(0) rotateY(0)';
+          });
+        });
+
+        // Testimonials render & rotate (fallbackข้อมูลทดแทน)
+        const GRID_ID = 'testimonials-grid';
+        const META_ID = 'testimonials-meta';
+        const grid = document.getElementById(GRID_ID);
+        const meta = document.getElementById(META_ID);
+        const shuffleBtn = document.getElementById('shuffle-testimonials');
+        if (grid) {
+          const samples = [
+            { name: 'ครูอร', role: 'ครูวิทยาการคอมพิวเตอร์', text: 'เนื้อหา CODING เข้าใจง่าย นำไปใช้ในห้องเรียนได้จริง' },
+            { name: 'นักเรียนปอนด์', role: 'ชั้น ม.2', text: 'ชอบกิจกรรมเขียนเกมด้วย Scratch สนุกและได้ฝึกคิด' },
+            { name: 'ผอ. วิชัย', role: 'ผู้บริหารโรงเรียน', text: 'แนวทางและเครื่องมือชัดเจน ช่วยขับเคลื่อนโครงการ CODING ได้ดี' },
+            { name: 'ครูนิด', role: 'ครูวิทย์', text: 'โครงงาน Micro:bit เหมาะกับ STEM มาก เด็กๆ สนใจ' },
+            { name: 'นักเรียนมาย', role: 'ชั้น ป.6', text: 'ได้ลงมือทำจริง รู้สึกภูมิใจเมื่อผลงานเสร็จ' }
+          ];
+          let start = 0;
+          function renderTestimonials() {
+            grid.innerHTML = '';
+            const view = samples.slice(start, start + 3);
+            view.forEach(t => {
+              const card = document.createElement('div');
+              card.className = 'bg-white rounded-lg shadow p-4';
+              card.innerHTML = `<div class="font-semibold">${t.name}</div><div class="text-xs text-gray-500 mb-2">${t.role}</div><p class="text-gray-700">${t.text}</p>`;
+              grid.appendChild(card);
+            });
+            if (meta) meta.textContent = `กำลังแสดง ${start + 1}-${Math.min(start + 3, samples.length)} จาก ${samples.length} ความคิดเห็น`;
+          }
+          function rotateTestimonials() {
+            start = (start + 1) % Math.max(1, samples.length - 2);
+            renderTestimonials();
+          }
+          let testimonialTimer = setInterval(rotateTestimonials, 8000);
+          cleanupFns.push(() => clearInterval(testimonialTimer));
+          if (shuffleBtn) {
+            shuffleBtn.addEventListener('click', () => {
+              for (let i = samples.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [samples[i], samples[j]] = [samples[j], samples[i]];
+              }
+              start = 0;
+              renderTestimonials();
+              clearInterval(testimonialTimer);
+              testimonialTimer = setInterval(rotateTestimonials, 8000);
+            });
+          }
+          renderTestimonials();
+        }
+      } catch (err) {
+        console.error('initCoding error:', err);
+      }
+    };
     
     // โหลด Header
     fetch('components/header.html')
