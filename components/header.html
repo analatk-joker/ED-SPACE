@@ -1,0 +1,39 @@
+<nav class="bg-yellow-500 text-white shadow-lg">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+            <img src="https://img5.pic.in.th/file/secure-sv1/Eb4cb506143f520ba.png" alt="ED Space Logo" class="w-11 h-8">
+            <span class="text-xl font-bold">ED Space</span>
+        </div>
+        <div class="hidden md:flex space-x-6">
+            <a href="?path=home" data-path="home" class="font-medium text-white/80 hover:text-blue-200 transition-colors">หน้าหลัก</a>
+            <a href="?path=local" data-path="local" class="font-medium text-white/80 hover:text-blue-200 transition-colors">หลักสูตรท้องถิ่น</a>
+            <a href="?path=coding" data-path="coding" class="font-medium text-white/80 hover:text-blue-200 transition-colors">การเรียนรู้ CODING</a>
+            <a href="?path=ai" data-path="ai" class="font-medium text-white/80 hover:text-blue-200 transition-colors">การเรียนรู้ AI</a>
+            <a href="?path=shareandshow" data-path="shareandshow" class="font-medium text-white/80 hover:text-blue-200 transition-colors">Share &amp; Show</a>
+            <a href="?path=develop" data-path="develop" class="font-medium text-white/80 hover:text-blue-200 transition-colors">ผู้พัฒนา</a>
+        </div>
+        <div class="flex items-center space-x-4">
+            <button class="md:hidden">
+                <i data-feather="menu"></i>
+            </button>
+            <a href="?path=login" class="login-button bg-blue-700 hover:bg-blue-800 px-4 py-2 rounded-lg font-medium inline-block transition-colors" role="button">เข้าสู่ระบบ</a>
+        </div>
+    </div>
+</nav>
+
+<script>
+    // เพิ่ม active class ให้กับลิงก์ที่กำลังใช้งาน
+    document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const currentPath = urlParams.get('path') || 'home';
+        
+        document.querySelectorAll('a[data-path]').forEach(link => {
+            const linkPath = link.getAttribute('data-path');
+            if (linkPath === currentPath) {
+                link.classList.add('relative', 'font-semibold', 'text-white', 'after:absolute', 'after:-bottom-1', 'after:left-0', 'after:h-0.5', 'after:w-full', 'after:bg-white');
+                link.classList.remove('font-medium', 'text-white/80');
+                link.setAttribute('aria-current', 'page');
+            }
+        });
+    });
+</script>

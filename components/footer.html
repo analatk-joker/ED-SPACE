@@ -1,0 +1,63 @@
+<footer class="bg-gray-800 text-white py-12">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <div class="flex items-center space-x-2 mb-4">
+                    <img src="https://img5.pic.in.th/file/secure-sv1/Eb4cb506143f520ba.png" alt="ED Space Logo" class="w-11 h-8">
+                    <span class="text-xl font-bold">ED Space</span>
+                </div>
+                <p class="text-gray-400 mb-4">แพลตฟอร์มการเรียนรู้สำหรับครูและนักเรียน</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i data-feather="facebook"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i data-feather="twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i data-feather="instagram"></i>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold mb-4">เมนูหลัก</h3>
+                <ul class="space-y-2">
+                    <li><a href="?path=home" data-path="home" class="text-gray-400 hover:text-white">หน้าหลัก</a></li>
+                    <li><a href="?path=local" data-path="local" class="text-gray-400 hover:text-white">หลักสูตรท้องถิ่น</a></li>
+                    <li><a href="?path=coding" data-path="coding" class="text-gray-400 hover:text-white">การเรียนรู้ CODING</a></li>
+                    <li><a href="?path=ai" data-path="ai" class="text-gray-400 hover:text-white">การเรียนรู้ AI</a></li>
+                    <li><a href="?path=shareandshow" data-path="shareandshow" class="text-gray-400 hover:text-white">Share & Show</a></li>
+                    <li><a href="?path=develop" data-path="develop" class="text-gray-400 hover:text-white">ผู้พัฒนา</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold mb-4">ติดต่อเรา</h3>
+                <p class="text-gray-400 mb-2">อีเมล: info@edspace.com</p>
+                <p class="text-gray-400 mb-2">โทรศัพท์: 02-123-4567</p>
+                <p class="text-gray-400">ที่อยู่: กรุงเทพมหานคร ประเทศไทย</p>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+            <p>&copy; 2023 ED Space. สงวนลิขสิทธิ์.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // เพิ่ม active class ให้กับลิงก์ที่กำลังใช้งาน
+    document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const currentPath = urlParams.get('path') || 'home';
+        
+        document.querySelectorAll('a[data-path]').forEach(link => {
+            const linkPath = link.getAttribute('data-path');
+            if (linkPath === currentPath) {
+                link.classList.add('text-white', 'font-medium');
+                link.classList.remove('text-gray-400');
+            }
+        });
+        
+        // ทำให้ไอคอนทำงาน
+        feather.replace();
+    });
+</script>
