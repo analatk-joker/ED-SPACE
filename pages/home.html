@@ -1,116 +1,253 @@
-<!-- Hero Section -->
-<section class="bg-blue-600 text-white py-16">
+<!-- Hero Section (เหมือนหน้าเดิม) -->
+<section class="relative bg-gradient-to-r from-blue-500 to-blue-700 text-white py-16">
+    <div class="absolute inset-0 overflow-hidden">
+        <div id="vanta-globe" class="w-full h-full"></div>
+    </div>
+    <div class="container mx-auto px-4 relative z-10">
+        <div class="max-w-3xl mx-auto text-center">
+            <div class="mb-2">
+                <img src="https://img5.pic.in.th/file/secure-sv1/Eb4cb506143f520ba.png" alt="ED Space Logo" class="mx-auto w-25 h-20 mb-4">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">ED SPACE | ระบบนิเทศการศึกษา</h1>
+                <p class="text-xl mb-6">กลุ่มงานพัฒนาหลักสูตรการศึกษาขั้นพื้นฐานและกระบวนการเรียนรู้</p>
+                <p class="text-xl mb-6">กลุ่มนิเทศ ติดตามและประเมินผลการจัดการศึกษา</p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="https://www.sec-plkutt.go.th" target="_blank" rel="noopener noreferrer" class="bg-white text-blue-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-bold text-lg shadow-lg inline-block" role="button">
+                        สำนักงานเขตพื้นที่การศึกษามัธยมศึกษาพิษณุโลก อุตรดิตถ์
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Banner Links Section (เหมือนหน้าเดิม) -->
+<section class="py-16 bg-white">
     <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Local Curriculum -->
+            <div class="relative group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 h-64">
+                <img src="http://static.photos/education/640x360/1" alt="หลักสูตรท้องถิ่น" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
+                    <h3 class="text-2xl font-bold text-white mb-2">หลักสูตรท้องถิ่น</h3>
+                    <p class="text-blue-200">พัฒนาหลักสูตรที่สอดคล้องกับชุมชน</p>
+                    <a href="?path=local" class="mt-4 inline-block bg-white text-blue-600 px-4 py-2 rounded-lg font-medium hover:bg-blue-100 transition-colors">ดูรายละเอียด</a>
+                </div>
+            </div>
+
+            <!-- Coding Learning -->
+            <div class="relative group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 h-64">
+                <img src="http://static.photos/technology/640x360/2" alt="การเรียนรู้ CODING" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
+                    <h3 class="text-2xl font-bold text-white mb-2">การเรียนรู้ CODING</h3>
+                    <p class="text-purple-200">พัฒนาทักษะการคิดเชิงคำนวณ</p>
+                    <a href="?path=coding" class="mt-4 inline-block bg-white text-purple-600 px-4 py-2 rounded-lg font-medium hover:bg-purple-100 transition-colors">ดูรายละเอียด</a>
+                </div>
+            </div>
+
+            <!-- AI Learning -->
+            <div class="relative group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 h-64">
+                <img src="http://static.photos/technology/640x360/3" alt="การเรียนรู้ AI" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
+                    <h3 class="text-2xl font-bold text-white mb-2">การเรียนรู้ AI</h3>
+                    <p class="text-green-200">การศึกษาในยุคปัญญาประดิษฐ์</p>
+                    <a href="?path=ai" class="mt-4 inline-block bg-white text-green-600 px-4 py-2 rounded-lg font-medium hover:bg-green-100 transition-colors">ดูรายละเอียด</a>
+                </div>
+            </div>
+
+            <!-- Share & Show -->
+            <div class="relative group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 h-64">
+                <img src="http://static.photos/workspace/640x360/4" alt="Share & Show" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
+                    <h3 class="text-2xl font-bold text-white mb-2">Share & Show</h3>
+                    <p class="text-orange-200">พื้นที่แบ่งปันผลงานและนวัตกรรม</p>
+                    <a href="?path=shareandshow" class="mt-4 inline-block bg-white text-orange-600 px-4 py-2 rounded-lg font-medium hover:bg-orange-100 transition-colors">ดูรายละเอียด</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Dashboard Stats Section (เหมือนหน้าเดิม) -->
+<section class="py-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12">ภาพรวมระบบนิเทศการศึกษา</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white/20 backdrop-blur-sm rounded-xl p-6 text-center">
+                <div class="text-3xl font-bold mb-2">1,234</div>
+                <div class="text-blue-100">ครูที่เข้าร่วมระบบ</div>
+            </div>
+            <div class="bg-white/20 backdrop-blur-sm rounded-xl p-6 text-center">
+                <div class="text-3xl font-bold mb-2">568</div>
+                <div class="text-blue-100">การนิเทศเสร็จสิ้น</div>
+            </div>
+            <div class="bg-white/20 backdrop-blur-sm rounded-xl p-6 text-center">
+                <div class="text-3xl font-bold mb-2">89%</div>
+                <div class="text-blue-100">ความพึงพอใจ</div>
+            </div>
+            <div class="bg-white/20 backdrop-blur-sm rounded-xl p-6 text-center">
+                <div class="text-3xl font-bold mb-2">45</div>
+                <div class="text-blue-100">โรงเรียนที่เข้าร่วม</div>
+            </div>
+        </div>
+        
+        <!-- Progress Charts -->
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                <h3 class="text-xl font-bold mb-4">อัตราการนิเทศตามเดือน</h3>
+                <div class="space-y-4">
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span>มกราคม</span>
+                            <span>78%</span>
+                        </div>
+                        <div class="w-full bg-white/20 rounded-full h-2">
+                            <div class="bg-green-400 h-2 rounded-full" style="width: 78%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span>กุมภาพันธ์</span>
+                            <span>92%</span>
+                        </div>
+                        <div class="w-full bg-white/20 rounded-full h-2">
+                            <div class="bg-green-400 h-2 rounded-full" style="width: 92%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span>มีนาคม</span>
+                            <span>65%</span>
+                        </div>
+                        <div class="w-full bg-white/20 rounded-full h-2">
+                            <div class="bg-yellow-400 h-2 rounded-full" style="width: 65%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span>เมษายน</span>
+                            <span>45%</span>
+                        </div>
+                        <div class="w-full bg-white/20 rounded-full h-2">
+                            <div class="bg-orange-400 h-2 rounded-full" style="width: 45%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                <h3 class="text-xl font-bold mb-4">การนิเทศตามประเภท</h3>
+                <div class="space-y-4">
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span>นิเทศแบบเข้ม</span>
+                            <span>35%</span>
+                        </div>
+                        <div class="w-full bg-white/20 rounded-full h-2">
+                            <div class="bg-blue-400 h-2 rounded-full" style="width: 35%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span>นิเทศแบบพัฒนา</span>
+                            <span>28%</span>
+                        </div>
+                        <div class="w-full bg-white/20 rounded-full h-2">
+                            <div class="bg-purple-400 h-2 rounded-full" style="width: 28%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span>นิเทศแบบติดตาม</span>
+                            <span>22%</span>
+                        </div>
+                        <div class="w-full bg-white/20 rounded-full h-2">
+                            <div class="bg-indigo-400 h-2 rounded-full" style="width: 22%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span>นิเทศแบบเสริมพลัง</span>
+                            <span>15%</span>
+                        </div>
+                        <div class="w-full bg-white/20 rounded-full h-2">
+                            <div class="bg-pink-400 h-2 rounded-full" style="width: 15%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works Section (เหมือนหน้าเดิม) -->
+<section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">วิธีการใช้งาน ED Space</h2>
         <div class="flex flex-col md:flex-row items-center">
             <div class="md:w-1/2 mb-8 md:mb-0">
-                <h1 class="text-4xl md:text-5xl font-bold mb-4">ED Space</h1>
-                <p class="text-xl mb-6">แพลตฟอร์มการเรียนรู้สำหรับครูและนักเรียน</p>
-                <p class="mb-8">พัฒนาทักษะการเรียนรู้ในยุคดิจิทัลผ่านหลักสูตรที่หลากหลาย</p>
-                <a href="?path=local" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-medium hover:bg-blue-100 transition-colors inline-block">เริ่มต้นเรียนรู้</a>
+                <img src="https://v1.padlet.pics/3/image.webp?t=c_limit%2Cdpr_1%2Ch_1314%2Cw_1869&url=https%3A%2F%2Fu1.padletusercontent.com%2Fuploads%2Fpadlet-uploads%2F357272542%2F2400d5cfb2781b586f8eb575fab07048%2FADAACE_T_Model.png%3Fexpiry_token%3D5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ95V-PNmxLqT52rgNU3YuWlt0WLItZkpd-LeLRgagKBCdYcVZlG7otOH8bvybrnTQOe65MagmJ6YZyWXXHLHc26mRdSAcIgdOZqAW1D3JcGErBaAiDi1OIWUsgXnV-iB173aNkwR7hINho6IftlnvhM%3D" alt="ระบบนิเทศการศึกษา" class="rounded-lg shadow-xl">
             </div>
-            <div class="md:w-1/2">
-                <img src="https://img5.pic.in.th/file/secure-sv1/hero-image.png" alt="Education Platform" class="rounded-lg shadow-lg">
+            <div class="md:w-1/2 md:pl-12">
+                <div class="mb-8">
+                    <div class="flex items-start mb-4">
+                        <div class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0">
+                            <span>1</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 text-gray-800">สำรวจปัญหาและความต้องการ</h3>
+                            <p class="text-gray-600">ตอบแบบสอบถามออนไลน์และประมวลผลข้อมูลด้วย DATA Driven</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start mb-4">
+                        <div class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0">
+                            <span>2</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 text-gray-800">ออกแบบแนวทางนิเทศ</h3>
+                            <p class="text-gray-600">กำหนดแนวทางและวิธีการนิเทศให้สอดคล้องกับบริบท</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start mb-4">
+                        <div class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0">
+                            <span>3</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 text-gray-800">ติดตามและประเมินผล</h3>
+                            <p class="text-gray-600">บันทึกผลการนิเทศและติดตามผลการดำเนินงาน</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0">
+                            <span>4</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 text-gray-800">รายงานผลและสรุปบทเรียน</h3>
+                            <p class="text-gray-600">จัดทำรายงานและวิเคราะห์บทเรียนเพื่อการพัฒนาต่อเนื่อง</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Features Section -->
-<section class="py-16">
-    <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-12">บริการของเรา</h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <!-- หลักสูตรท้องถิ่น -->
-            <div class="bg-blue-600 rounded-xl p-6 text-center shadow-lg transform transition-transform hover:scale-105">
-                <div class="bg-white inline-block p-3 rounded-full mb-4">
-                    <img src="https://img5.pic.in.th/file/secure-sv1/local-icon.png" alt="Local Curriculum" class="w-12 h-12">
-                </div>
-                <h3 class="text-2xl font-bold text-white mb-2">หลักสูตรท้องถิ่น</h3>
-                <p class="text-blue-200">พัฒนาหลักสูตรที่สอดคล้องกับชุมชน</p>
-                <a href="?path=local" class="mt-4 inline-block bg-white text-blue-600 px-4 py-2 rounded-lg font-medium hover:bg-blue-100 transition-colors">ดูรายละเอียด</a>
-            </div>
-            
-            <!-- การเรียนรู้ CODING -->
-            <div class="bg-purple-600 rounded-xl p-6 text-center shadow-lg transform transition-transform hover:scale-105">
-                <div class="bg-white inline-block p-3 rounded-full mb-4">
-                    <img src="https://img5.pic.in.th/file/secure-sv1/coding-icon.png" alt="Coding" class="w-12 h-12">
-                </div>
-                <h3 class="text-2xl font-bold text-white mb-2">การเรียนรู้ CODING</h3>
-                <p class="text-purple-200">พัฒนาทักษะการคิดเชิงคำนวณ</p>
-                <a href="?path=coding" class="mt-4 inline-block bg-white text-purple-600 px-4 py-2 rounded-lg font-medium hover:bg-purple-100 transition-colors">ดูรายละเอียด</a>
-            </div>
-            
-            <!-- การเรียนรู้ AI -->
-            <div class="bg-green-600 rounded-xl p-6 text-center shadow-lg transform transition-transform hover:scale-105">
-                <div class="bg-white inline-block p-3 rounded-full mb-4">
-                    <img src="https://img5.pic.in.th/file/secure-sv1/ai-icon.png" alt="AI Learning" class="w-12 h-12">
-                </div>
-                <h3 class="text-2xl font-bold text-white mb-2">การเรียนรู้ AI</h3>
-                <p class="text-green-200">การศึกษาในยุคปัญญาประดิษฐ์</p>
-                <a href="?path=ai" class="mt-4 inline-block bg-white text-green-600 px-4 py-2 rounded-lg font-medium hover:bg-green-100 transition-colors">ดูรายละเอียด</a>
-            </div>
-            
-            <!-- Share & Show -->
-            <div class="bg-orange-600 rounded-xl p-6 text-center shadow-lg transform transition-transform hover:scale-105">
-                <div class="bg-white inline-block p-3 rounded-full mb-4">
-                    <img src="https://img5.pic.in.th/file/secure-sv1/share-icon.png" alt="Share and Show" class="w-12 h-12">
-                </div>
-                <h3 class="text-2xl font-bold text-white mb-2">Share & Show</h3>
-                <p class="text-orange-200">พื้นที่แบ่งปันผลงานและนวัตกรรม</p>
-                <a href="?path=shareandshow" class="mt-4 inline-block bg-white text-orange-600 px-4 py-2 rounded-lg font-medium hover:bg-orange-100 transition-colors">ดูรายละเอียด</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Testimonials Section -->
-<section class="py-16 bg-gray-100">
-    <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-12">เสียงจากผู้ใช้งาน</h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <div class="flex items-center mb-4">
-                    <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="User" class="w-12 h-12 rounded-full mr-4">
-                    <div>
-                        <h4 class="font-bold">อาจารย์สมศรี</h4>
-                        <p class="text-gray-600">ครูประถมศึกษา</p>
-                    </div>
-                </div>
-                <p class="text-gray-700">"แพลตฟอร์มนี้ช่วยให้ฉันสามารถพัฒนาหลักสูตรท้องถิ่นได้อย่างมีประสิทธิภาพ นักเรียนให้ความสนใจและมีส่วนร่วมมากขึ้น"</p>
-            </div>
-            
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <div class="flex items-center mb-4">
-                    <img src="https://randomuser.me/api/portraits/men/46.jpg" alt="User" class="w-12 h-12 rounded-full mr-4">
-                    <div>
-                        <h4 class="font-bold">อาจารย์สมชาย</h4>
-                        <p class="text-gray-600">ครูมัธยมศึกษา</p>
-                    </div>
-                </div>
-                <p class="text-gray-700">"การสอน Coding ผ่านแพลตฟอร์มนี้ทำให้นักเรียนเข้าใจง่ายและสนุกกับการเรียนรู้ ขอบคุณสำหรับเครื่องมือที่ยอดเยี่ยมนี้"</p>
-            </div>
-            
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <div class="flex items-center mb-4">
-                    <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="User" class="w-12 h-12 rounded-full mr-4">
-                    <div>
-                        <h4 class="font-bold">น้องแก้ว</h4>
-                        <p class="text-gray-600">นักเรียนมัธยมศึกษา</p>
-                    </div>
-                </div>
-                <p class="text-gray-700">"หนูชอบเรียนรู้เกี่ยวกับ AI มาก ทำให้เข้าใจว่าเทคโนโลยีนี้จะเปลี่ยนแปลงอนาคตของเราอย่างไร และหนูอยากเป็นส่วนหนึ่งของการพัฒนา"</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Call to Action -->
-<section class="py-16 bg-blue-600 text-white text-center">
-    <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold mb-4">พร้อมที่จะเริ่มต้นการเรียนรู้แล้วหรือยัง?</h2>
-        <p class="text-xl mb-8">เข้าร่วมกับเราวันนี้และเริ่มต้นการเดินทางสู่การศึกษายุคใหม่</p>
-        <a href="?path=login" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-medium hover:bg-blue-100 transition-colors inline-block">สมัครสมาชิก</a>
-    </div>
-</section>
+<script>
+  // เริ่มต้น Vanta Globe เมื่อมี element อยู่ในหน้า
+  (function(){
+    const el = document.getElementById('vanta-globe');
+    if(!el || !window.VANTA || !VANTA.GLOBE) return;
+    VANTA.GLOBE({
+      el,
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      scale: 1.00,
+      scaleMobile: 1.00,
+      color: 0x3b82f6,
+      backgroundColor: 0x2563eb,
+      size: 0.8
+    });
+  })();
+</script>

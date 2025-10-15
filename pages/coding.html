@@ -1,227 +1,681 @@
-<div class="container mx-auto px-4 py-8">
-  <div class="text-center mb-12">
-    <h1 class="text-4xl font-bold text-gray-900 mb-4">การเขียนโค้ด</h1>
-    <p class="text-xl text-gray-600 max-w-3xl mx-auto">เรียนรู้ทักษะการเขียนโค้ดและการพัฒนาซอฟต์แวร์ที่จำเป็นสำหรับอนาคต</p>
-  </div>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Sarabun', sans-serif;
+        }
+        .chatbot-container {
+            transition: all 0.3s ease;
+        }
+        .chatbot-hidden {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+        /* Hide scrollbar for horizontal roadmap */
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        /* Roadmap interactive cards */
+        .tilt-card {
+            transition: transform 160ms ease, box-shadow 200ms ease;
+            transform-style: preserve-3d;
+            position: relative;
+        }
+        .tilt-card:hover {
+            box-shadow: 0 12px 30px rgba(2, 6, 23, 0.12);
+        }
+        .tilt-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(600px circle at var(--mx, 50%) var(--my, 50%), rgba(59, 130, 246, 0.15), transparent 45%);
+            opacity: 0;
+            transition: opacity 180ms ease;
+            pointer-events: none;
+        }
+        .tilt-card:hover::before { opacity: 1; }
+    </style>
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <h1 class="text-4xl font-bold text-center mb-12 text-gray-800">การเรียนรู้ CODING</h1>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h2 class="text-2xl font-bold mb-4">พัฒนาทักษะการคิดเชิงคำนวณผ่านการเขียนโปรแกรม</h2>
+                    <p class="text-gray-600 mb-6">การจัดการเรียนรู้ CODING เพื่อพัฒทักษะการคิดเชิงคำนวณสำหรับนักเรียนทุกระดับชั้น</p>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <i data-feather="code" class="text-blue-600 w-6 h-6 mr-3"></i>
+                            <span>บทเรียนการเขียนโปรแกรมแบบขั้นตอน</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i data-feather="cpu" class="text-blue-600 w-6 h-6 mr-3"></i>
+                            <span>แบบฝึกหัดและโครงการ coding</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i data-feather="award" class="text-blue-600 w-6 h-6 mr-3"></i>
+                            <span>ระบบประเมินผลทักษะ coding</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <img src="https://www.kroochut.com/wp-content/uploads/2024/12/celebrating-50-years-of-kids-coding-5745168905928704-2xa-1.gif" alt="การเรียนรู้ CODING" class="rounded-lg shadow-lg">
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- ส่วนแสดงคอร์สเรียนแนะนำ -->
-  <div class="bg-blue-50 rounded-lg p-6 mb-12">
-    <div class="flex flex-col md:flex-row items-center">
-      <div class="md:w-1/2 mb-6 md:mb-0 md:pr-8">
-        <img src="https://img5.pic.in.th/file/secure-sv1/coding-hero.jpg" alt="การเขียนโค้ด" class="rounded-lg shadow-lg w-full h-auto">
-      </div>
-      <div class="md:w-1/2">
-        <h2 class="text-3xl font-bold text-gray-900 mb-4">เริ่มต้นการเขียนโค้ดอย่างมืออาชีพ</h2>
-        <p class="text-gray-700 mb-6">เรียนรู้พื้นฐานการเขียนโค้ดและพัฒนาทักษะที่จำเป็นสำหรับการเป็นนักพัฒนาซอฟต์แวร์ที่มีประสิทธิภาพ ผ่านคอร์สเรียนที่ออกแบบมาสำหรับผู้เริ่มต้น</p>
-        <div class="flex space-x-4">
-          <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition duration-300 ease-in-out flex items-center">
-            <i data-feather="play" class="mr-2 h-5 w-5"></i>
-            เริ่มเรียนฟรี
-          </button>
-          <button class="bg-white hover:bg-gray-100 text-blue-600 border border-blue-600 font-medium py-2 px-4 rounded-md transition duration-300 ease-in-out flex items-center">
-            <i data-feather="info" class="mr-2 h-5 w-5"></i>
-            ดูรายละเอียด
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
+    <!-- Minimal Roadmap: ปีงบ 2569 -->
+    <section id="coding-roadmap" class="py-6">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Roadmap การขับเคลื่อนการจัดการเรียนรู้ CODING 2569</h2>
 
-  <!-- ส่วนแสดงภาษาโปรแกรมมิ่งยอดนิยม -->
-  <h2 class="text-2xl font-bold text-gray-900 mb-6">ภาษาโปรแกรมมิ่งยอดนิยม</h2>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-    <!-- Python -->
-    <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg hover:-translate-y-1">
-      <div class="p-6">
-        <div class="flex items-center mb-4">
-          <div class="bg-blue-100 p-3 rounded-full mr-4">
-            <svg class="h-8 w-8 text-blue-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="currentColor"/>
-              <path d="M12 11C13.1046 11 14 10.1046 14 9C14 7.89543 13.1046 7 12 7C10.8954 7 10 7.89543 10 9C10 10.1046 10.8954 11 12 11Z" fill="currentColor"/>
-              <path d="M12 13C9.33 13 7 14.34 7 16V17H17V16C17 14.34 14.67 13 12 13Z" fill="currentColor"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold text-gray-900">Python</h3>
-        </div>
-        <p class="text-gray-700 mb-4">ภาษาโปรแกรมมิ่งที่เรียนรู้ง่าย เหมาะสำหรับผู้เริ่มต้น มีไลบรารีมากมายสำหรับการวิเคราะห์ข้อมูล, AI และการพัฒนาเว็บ</p>
-        <div class="flex justify-between items-center">
-          <span class="text-sm text-gray-500">ความยาก: เริ่มต้น</span>
-          <a href="#" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
-            เรียนรู้เพิ่มเติม
-            <i data-feather="arrow-right" class="ml-2 h-4 w-4"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-    
-    <!-- JavaScript -->
-    <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg hover:-translate-y-1">
-      <div class="p-6">
-        <div class="flex items-center mb-4">
-          <div class="bg-yellow-100 p-3 rounded-full mr-4">
-            <svg class="h-8 w-8 text-yellow-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M3 3H21V21H3V3Z" fill="currentColor"/>
-              <path d="M16.5 15.5C16.5 16.5 15.5 17.5 14 17.5C12.5 17.5 11.5 16.5 11.5 15.5H9.5C9.5 17.5 11.5 19 14 19C16.5 19 18.5 17.5 18.5 15.5C18.5 13.5 17 12.5 15 12L14 11.5C13 11 13 10.5 13 10.5C13 9.5 14 9.5 14.5 9.5C15 9.5 16 10 16 11H18C18 9 16.5 7.5 14.5 7.5C12.5 7.5 11 9 11 10.5C11 12.5 12.5 13.5 14 14L15 14.5C16 15 16.5 15 16.5 15.5Z" fill="white"/>
-              <path d="M8 11H10V17H8V11Z" fill="white"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold text-gray-900">JavaScript</h3>
-        </div>
-        <p class="text-gray-700 mb-4">ภาษาสำหรับการพัฒนาเว็บไซต์ ทำให้เว็บมีความโต้ตอบกับผู้ใช้ สามารถใช้พัฒนาทั้งฝั่ง Frontend และ Backend</p>
-        <div class="flex justify-between items-center">
-          <span class="text-sm text-gray-500">ความยาก: ปานกลาง</span>
-          <a href="#" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
-            เรียนรู้เพิ่มเติม
-            <i data-feather="arrow-right" class="ml-2 h-4 w-4"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Java -->
-    <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg hover:-translate-y-1">
-      <div class="p-6">
-        <div class="flex items-center mb-4">
-          <div class="bg-red-100 p-3 rounded-full mr-4">
-            <svg class="h-8 w-8 text-red-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 3L3 9V15L12 21L21 15V9L12 3Z" fill="currentColor"/>
-              <path d="M12 8L8 10.5V15.5L12 18L16 15.5V10.5L12 8Z" fill="white"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold text-gray-900">Java</h3>
-        </div>
-        <p class="text-gray-700 mb-4">ภาษาที่ใช้กันอย่างแพร่หลายในองค์กรขนาดใหญ่ เหมาะสำหรับการพัฒนาแอปพลิเคชันขนาดใหญ่และแอปพลิเคชันมือถือ Android</p>
-        <div class="flex justify-between items-center">
-          <span class="text-sm text-gray-500">ความยาก: ปานกลาง-สูง</span>
-          <a href="#" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
-            เรียนรู้เพิ่มเติม
-            <i data-feather="arrow-right" class="ml-2 h-4 w-4"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
+            <!-- Desktop: minimal horizontal stepper -->
+            <div class="hidden md:block relative max-w-5xl mx-auto">
+                <div class="absolute left-0 right-0 top-5 h-0.5 bg-slate-300 z-0"></div>
+                <div class="flex items-start justify-between">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-10 h-10 rounded-full bg-red-600 text-white flex items-center justify-center text-sm font-semibold relative z-10 ring-2 ring-white shadow-md transition-transform duration-200 hover:scale-110 hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-200">1</div>
+                        <div class="mt-2 text-sm font-medium text-gray-800">กำหนดทิศทาง</div>
+                        <div class="text-xs text-gray-500">ต.ค. 2568</div>
+                    </div>
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-10 h-10 rounded-full bg-red-600 text-white flex items-center justify-center text-sm font-semibold relative z-10 ring-2 ring-white shadow-md transition-transform duration-200 hover:scale-110 hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-200">2</div>
+                        <div class="mt-2 text-sm font-medium text-gray-800">อบรมพี่เลี้ยง</div>
+                        <div class="text-xs text-gray-500">พ.ย. 2568</div>
+                    </div>
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-10 h-10 rounded-full bg-red-600 text-white flex items-center justify-center text-sm font-semibold relative z-10 ring-2 ring-white shadow-md transition-transform duration-200 hover:scale-110 hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-200">3</div>
+                        <div class="mt-2 text-sm font-medium text-gray-800">หลักสูตรต้นแบบ</div>
+                        <div class="text-xs text-gray-500">ธ.ค. 68 - ม.ค. 69</div>
+                    </div>
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-10 h-10 rounded-full bg-red-600 text-white flex items-center justify-center text-sm font-semibold relative z-10 ring-2 ring-white shadow-md transition-transform duration-200 hover:scale-110 hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-200">4</div>
+                        <div class="mt-2 text-sm font-medium text-gray-800">นิเทศรอบ 1</div>
+                        <div class="text-xs text-gray-500">ก.พ. - มี.ค. 69</div>
+                    </div>
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-10 h-10 rounded-full bg-red-600 text-white flex items-center justify-center text-sm font-semibold relative z-10 ring-2 ring-white shadow-md transition-transform duration-200 hover:scale-110 hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-200">5</div>
+                        <div class="mt-2 text-sm font-medium text-gray-800">ขยายผล/รอบ 2</div>
+                        <div class="text-xs text-gray-500">เม.ย. - มิ.ย. 69</div>
+                    </div>
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-10 h-10 rounded-full bg-red-600 text-white flex items-center justify-center text-sm font-semibold relative z-10 ring-2 ring-white shadow-md transition-transform duration-200 hover:scale-110 hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-200">6</div>
+                        <div class="mt-2 text-sm font-medium text-gray-800">สรุปผล/วางแผน</div>
+                        <div class="text-xs text-gray-500">ก.ค. - ก.ย. 69</div>
+                    </div>
+                </div>
+            </div>
 
-  <!-- ส่วนแสดงโปรเจกต์ตัวอย่าง -->
-  <div class="mb-12">
-    <h2 class="text-2xl font-bold text-gray-900 mb-6">โปรเจกต์ตัวอย่างสำหรับฝึกฝน</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <!-- โปรเจกต์ที่ 1 -->
-      <div class="bg-white rounded-lg shadow-md overflow-hidden">
-        <img src="https://img5.pic.in.th/file/secure-sv1/project-1.jpg" alt="โปรเจกต์เว็บแอป" class="w-full h-48 object-cover">
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-gray-900 mb-2">สร้างเว็บแอปพลิเคชันบันทึกโน้ต</h3>
-          <div class="flex mb-4">
-            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded mr-2">HTML</span>
-            <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded mr-2">CSS</span>
-            <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">JavaScript</span>
-          </div>
-          <p class="text-gray-700 mb-4">เรียนรู้การสร้างเว็บแอปพลิเคชันบันทึกโน้ตอย่างง่ายด้วย HTML, CSS และ JavaScript พร้อมฟีเจอร์การบันทึก, แก้ไข และลบโน้ต</p>
-          <a href="#" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
-            ดูรายละเอียดโปรเจกต์
-            <i data-feather="arrow-right" class="ml-2 h-4 w-4"></i>
-          </a>
+            <!-- Mobile: minimal vertical list -->
+            <div class="md:hidden max-w-2xl mx-auto">
+                <ul class="space-y-6">
+                    <li class="flex items-start gap-3">
+                        <span class="mt-1 w-3 h-3 rounded-full bg-indigo-600 ring-2 ring-white transition-transform duration-200 hover:scale-125"></span>
+                        <div>
+                            <div class="text-sm font-medium text-gray-800">กำหนดทิศทาง</div>
+                            <div class="text-xs text-gray-500">ต.ค. 2568</div>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="mt-1 w-3 h-3 rounded-full bg-indigo-600 ring-2 ring-white transition-transform duration-200 hover:scale-125"></span>
+                        <div>
+                            <div class="text-sm font-medium text-gray-800">อบรมพี่เลี้ยง</div>
+                            <div class="text-xs text-gray-500">พ.ย. 2568</div>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="mt-1 w-3 h-3 rounded-full bg-indigo-600 ring-2 ring-white transition-transform duration-200 hover:scale-125"></span>
+                        <div>
+                            <div class="text-sm font-medium text-gray-800">หลักสูตรต้นแบบ</div>
+                            <div class="text-xs text-gray-500">ธ.ค. 68 - ม.ค. 69</div>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="mt-1 w-3 h-3 rounded-full bg-indigo-600 ring-2 ring-white transition-transform duration-200 hover:scale-125"></span>
+                        <div>
+                            <div class="text-sm font-medium text-gray-800">นิเทศรอบ 1</div>
+                            <div class="text-xs text-gray-500">ก.พ. - มี.ค. 69</div>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="mt-1 w-3 h-3 rounded-full bg-indigo-600 ring-2 ring-white transition-transform duration-200 hover:scale-125"></span>
+                        <div>
+                            <div class="text-sm font-medium text-gray-800">ขยายผล/รอบ 2</div>
+                            <div class="text-xs text-gray-500">เม.ย. - มิ.ย. 69</div>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="mt-1 w-3 h-3 rounded-full bg-indigo-600 ring-2 ring-white transition-transform duration-200 hover:scale-125"></span>
+                        <div>
+                            <div class="text-sm font-medium text-gray-800">สรุปผล/วางแผน</div>
+                            <div class="text-xs text-gray-500">ก.ค. - ก.ย. 69</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
-      </div>
-      
-      <!-- โปรเจกต์ที่ 2 -->
-      <div class="bg-white rounded-lg shadow-md overflow-hidden">
-        <img src="https://img5.pic.in.th/file/secure-sv1/project-2.jpg" alt="โปรเจกต์แอปพลิเคชันมือถือ" class="w-full h-48 object-cover">
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-gray-900 mb-2">พัฒนาแอปพยากรณ์อากาศ</h3>
-          <div class="flex mb-4">
-            <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded mr-2">Python</span>
-            <span class="bg-pink-100 text-pink-800 text-xs font-medium px-2.5 py-0.5 rounded mr-2">API</span>
-            <span class="bg-indigo-100 text-indigo-800 text-xs font-medium px-2.5 py-0.5 rounded">Data Visualization</span>
-          </div>
-          <p class="text-gray-700 mb-4">สร้างแอปพยากรณ์อากาศด้วย Python โดยใช้ API จากบริการพยากรณ์อากาศและแสดงผลด้วยกราฟและแผนภูมิที่สวยงาม</p>
-          <a href="#" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
-            ดูรายละเอียดโปรเจกต์
-            <i data-feather="arrow-right" class="ml-2 h-4 w-4"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
+    </section>
 
-  <!-- ส่วนแสดงบทความล่าสุด -->
-  <div class="mb-12">
-    <h2 class="text-2xl font-bold text-gray-900 mb-6">บทความล่าสุด</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <!-- บทความที่ 1 -->
-      <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg hover:-translate-y-1">
-        <div class="p-6">
-          <div class="text-xs text-gray-500 mb-2">15 พฤษภาคม 2566 • เทคนิคการเขียนโค้ด</div>
-          <h3 class="text-xl font-bold text-gray-900 mb-2">10 เทคนิคการเขียนโค้ดให้สะอาดและมีประสิทธิภาพ</h3>
-          <p class="text-gray-700 mb-4">เรียนรู้เทคนิคการเขียนโค้ดที่สะอาด อ่านง่าย และมีประสิทธิภาพ เพื่อให้การทำงานร่วมกันในทีมเป็นไปอย่างราบรื่น</p>
-          <a href="#" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
-            อ่านต่อ
-            <i data-feather="arrow-right" class="ml-2 h-4 w-4"></i>
-          </a>
+    <!-- Modal: Award Viewer -->
+    <div id="award-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/60"></div>
+        <div class="relative mx-auto my-8 w-11/12 max-w-5xl bg-white rounded-xl shadow-2xl overflow-hidden">
+            <div class="px-4 py-3 border-b flex items-center justify-between">
+                <h3 id="award-modal-title" class="font-bold text-gray-800">แสดงผลงาน</h3>
+                <button id="award-modal-close" class="text-gray-500 hover:text-gray-800 text-xl leading-none">×</button>
+            </div>
+            <div id="award-modal-tabs" class="px-4 pt-3 hidden">
+                <div class="inline-flex rounded-lg border border-gray-200 overflow-hidden">
+                    <button class="award-tab active px-3 py-1.5 text-sm font-medium bg-blue-600 text-white" data-tab="pdf">เอกสาร PDF</button>
+                    <button class="award-tab px-3 py-1.5 text-sm font-medium bg-white text-gray-700" data-tab="youtube">วิดีโอ YouTube</button>
+                </div>
+            </div>
+            <div class="p-0">
+                <div id="award-modal-panel-pdf" class="block">
+                    <!-- Prefer direct PDF embed when possible; fallback to Drive preview iframe -->
+                    <object id="award-pdf-object" data="" type="application/pdf" class="w-full h-[70vh] hidden">
+                        <div class="p-4 text-sm text-gray-600">
+                            ไม่สามารถแสดงเอกสาร PDF ได้ในหน้านี้ กรุณาใช้ปุ่มดาวน์โหลด/เปิดแท็บใหม่ด้านล่าง
+                        </div>
+                    </object>
+                    <embed id="award-pdf-embed" src="" type="application/pdf" class="w-full h-[70vh] hidden" />
+                    <iframe id="award-pdf-frame" src="" class="w-full h-[70vh] hidden" title="PDF Viewer" referrerpolicy="no-referrer" loading="lazy"></iframe>
+                    <div class="px-4 py-3 border-t flex items-center justify-between">
+                        <button id="award-pdf-switch" class="inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-md bg-gray-100 text-gray-700 hover:bg-gray-200">
+                            เปลี่ยนโหมดการฝังเอกสาร
+                        </button>
+                        <a id="award-pdf-download" href="#" target="_blank" rel="noopener" class="inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-md bg-blue-600 text-white hover:bg-blue-700">
+                            เปิดเอกสารในแท็บใหม่
+                        </a>
+                    </div>
+                </div>
+                <div id="award-modal-panel-youtube" class="hidden">
+                    <div class="w-full aspect-video bg-black">
+                        <iframe id="award-youtube-frame" class="w-full h-full" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      
-      <!-- บทความที่ 2 -->
-      <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg hover:-translate-y-1">
-        <div class="p-6">
-          <div class="text-xs text-gray-500 mb-2">10 พฤษภาคม 2566 • การพัฒนาเว็บ</div>
-          <h3 class="text-xl font-bold text-gray-900 mb-2">เริ่มต้นใช้งาน React.js สำหรับการพัฒนาเว็บแอปพลิเคชัน</h3>
-          <p class="text-gray-700 mb-4">แนะนำการใช้งาน React.js ไลบรารี JavaScript ยอดนิยมสำหรับการสร้าง UI ที่มีประสิทธิภาพและใช้งานง่าย</p>
-          <a href="#" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
-            อ่านต่อ
-            <i data-feather="arrow-right" class="ml-2 h-4 w-4"></i>
-          </a>
-        </div>
-      </div>
-      
-      <!-- บทความที่ 3 -->
-      <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg hover:-translate-y-1">
-        <div class="p-6">
-          <div class="text-xs text-gray-500 mb-2">5 พฤษภาคม 2566 • การพัฒนาแอปมือถือ</div>
-          <h3 class="text-xl font-bold text-gray-900 mb-2">Flutter vs React Native: เลือกใช้เฟรมเวิร์คไหนดี?</h3>
-          <p class="text-gray-700 mb-4">เปรียบเทียบข้อดีและข้อเสียของ Flutter และ React Native สำหรับการพัฒนาแอปพลิเคชันมือถือแบบ Cross-platform</p>
-          <a href="#" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
-            อ่านต่อ
-            <i data-feather="arrow-right" class="ml-2 h-4 w-4"></i>
-          </a>
-        </div>
-      </div>
     </div>
-  </div>
+    <!-- Coding Achievement Awards -->
+    <section class="py-14 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between mb-8">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-800 flex items-center">
+                    <i data-feather="award" class="w-7 h-7 text-yellow-500 mr-3"></i>
+                    มุมแสดงผลงาน Coding Achievement Awards
+                </h2>
+                <div class="hidden md:flex items-center text-sm text-gray-500">
+                    <i data-feather="info" class="w-4 h-4 mr-2"></i>
+                    แสดงผลงาน แยกตามปีการจัดงาน (ครั้งที่ 3 และ 4)
+                </div>
+            </div>
 
-  <!-- ส่วนแสดงการลงทะเบียนรับข่าวสาร -->
-  <div class="bg-blue-600 text-white rounded-lg p-8">
-    <div class="text-center mb-6">
-      <h2 class="text-2xl font-bold mb-2">รับข่าวสารและเทคนิคการเขียนโค้ดใหม่ๆ</h2>
-      <p class="text-blue-100">ลงทะเบียนเพื่อรับบทความ, เคล็ดลับ, และอัปเดตล่าสุดเกี่ยวกับการเขียนโค้ดและการพัฒนาซอฟต์แวร์</p>
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- ครั้งที่ 3 -->
+                <div class="bg-white rounded-2xl shadow-sm ring-1 ring-gray-100 overflow-hidden">
+                    <div class="p-5 border-b bg-gradient-to-r from-blue-50 to-indigo-50">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-xl font-bold text-gray-800">Coding Achievement Awards — ครั้งที่ 3</h3>
+                            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-blue-100 text-blue-700">ครั้งที่ 3</span>
+                        </div>
+                    </div>
+
+                    <!-- ผู้บริหาร: PDF เท่านั้น -->
+                    <div class="p-5">
+                        <div class="flex items-center mb-3">
+                            <span class="text-sm font-semibold px-3 py-1 rounded-full bg-amber-100 text-amber-700">ผู้บริหาร</span>
+                            <span class="ml-3 text-xs text-gray-500">เอกสาร PDF</span>
+                        </div>
+                        <div class="grid sm:grid-cols-2 gap-5">
+                            <!-- Card: Admin PDF 1 -->
+                            <div class="group rounded-xl overflow-hidden bg-white border border-gray-200 hover:shadow-lg transition-all">
+                                <div class="relative h-36 bg-gray-100">
+                                    <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=1200&q=60" alt="Executive PDF" class="w-full h-full object-cover group-hover:opacity-95">
+                                    <div class="absolute top-3 left-3 flex items-center space-x-2">
+                                        <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-red-500 text-white">PDF</span>
+                                        <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-slate-900/80 text-white">ครั้งที่ 3</span>
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <h4 class="font-semibold text-gray-800">นโยบายส่งเสริมการเรียนรู้ Coding</h4>
+                                    <p class="text-sm text-gray-500">ผู้บริหารสถานศึกษา</p>
+                                    <div class="mt-3 flex items-center justify-between">
+                                        <div class="flex items-center space-x-4">
+                                            <button class="like-btn flex items-center text-gray-500 hover:text-red-600 transition" data-award-id="k3-admin-1">
+                                                <i data-feather="heart" class="w-4 h-4"></i>
+                                                <span class="ml-1 text-sm like-count" data-like-count-for="k3-admin-1">0</span>
+                                            </button>
+                                            <div class="flex items-center text-gray-500">
+                                                <i data-feather="eye" class="w-4 h-4"></i>
+                                                <span class="ml-1 text-sm view-count" data-view-count-for="k3-admin-1">0</span>
+                                            </div>
+                                        </div>
+                                        <a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" class="text-blue-600 font-medium hover:underline" data-view-increment="k3-admin-1" data-modal-pdf-url="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" data-modal-default="pdf">ดูเอกสาร</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card: Admin PDF 2 -->
+                            <div class="group rounded-xl overflow-hidden bg-white border border-gray-200 hover:shadow-lg transition-all">
+                                <div class="relative h-36 bg-gray-100">
+                                    <img src="https://images.unsplash.com/photo-1517433456452-f9633a875f6f?auto=format&fit=crop&w=1200&q=60" alt="Executive PDF" class="w-full h-full object-cover group-hover:opacity-95">
+                                    <div class="absolute top-3 left-3 flex items-center space-x-2">
+                                        <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-red-500 text-white">PDF</span>
+                                        <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-slate-900/80 text-white">ครั้งที่ 3</span>
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <h4 class="font-semibold text-gray-800">โครงสร้างหลักสูตร Coding ระดับประถม</h4>
+                                    <p class="text-sm text-gray-500">ผู้บริหารสถานศึกษา</p>
+                                    <div class="mt-3 flex items-center justify-between">
+                                        <div class="flex items-center space-x-4">
+                                            <button class="like-btn flex items-center text-gray-500 hover:text-red-600 transition" data-award-id="k3-admin-2">
+                                                <i data-feather="heart" class="w-4 h-4"></i>
+                                                <span class="ml-1 text-sm like-count" data-like-count-for="k3-admin-2">0</span>
+                                            </button>
+                                            <div class="flex items-center text-gray-500">
+                                                <i data-feather="eye" class="w-4 h-4"></i>
+                                                <span class="ml-1 text-sm view-count" data-view-count-for="k3-admin-2">0</span>
+                                            </div>
+                                        </div>
+                                        <a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" class="text-blue-600 font-medium hover:underline" data-view-increment="k3-admin-2" data-modal-pdf-url="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" data-modal-default="pdf">ดูเอกสาร</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ครู: PDF + YouTube -->
+                    <div class="px-5 pb-6">
+                        <div class="flex items-center mb-3">
+                            <span class="text-sm font-semibold px-3 py-1 rounded-full bg-emerald-100 text-emerald-700">ครูผู้สอน</span>
+                            <span class="ml-3 text-xs text-gray-500">เอกสาร PDF และวิดีโอ YouTube</span>
+                        </div>
+                        <div class="grid sm:grid-cols-2 gap-5">
+                            <!-- Teacher Card 1: PDF + YouTube -->
+                            <div class="group rounded-xl overflow-hidden bg-white border border-gray-200 hover:shadow-lg transition-all">
+                                <div class="relative h-36 bg-gray-100">
+                                    <img src="https://img.youtube.com/vi/nKIu9yen5nc/hqdefault.jpg" alt="Teacher Resources" class="w-full h-full object-cover group-hover:opacity-95" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=1200&q=60';">
+                                    <div class="absolute inset-0 bg-black/20"></div>
+                                    <div class="absolute top-3 left-3 flex items-center space-x-2">
+                                        <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-red-500 text-white">PDF</span>
+                                        <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-rose-500 text-white">YouTube</span>
+                                        <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-indigo-600 text-white">ครู</span>
+                                    </div>
+                                    <div class="absolute inset-0 flex items-center justify-center">
+                                        <div class="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center text-red-600 shadow">
+                                            <i data-feather="play" class="w-6 h-6"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <h4 class="font-semibold text-gray-800">แผนการสอน Scratch: ลูปและเงื่อนไข</h4>
+                                    <p class="text-sm text-gray-500">ครูผู้สอนวิทยาการคำนวณ</p>
+                                    <div class="mt-3 flex items-center justify-between">
+                                        <div class="flex items-center space-x-4">
+                                            <button class="like-btn flex items-center text-gray-500 hover:text-red-600 transition" data-award-id="k3-teacher-1">
+                                                <i data-feather="heart" class="w-4 h-4"></i>
+                                                <span class="ml-1 text-sm like-count" data-like-count-for="k3-teacher-1">0</span>
+                                            </button>
+                                            <div class="flex items-center text-gray-500">
+                                                <i data-feather="eye" class="w-4 h-4"></i>
+                                                <span class="ml-1 text-sm view-count" data-view-count-for="k3-teacher-1">0</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-3">
+                                            <a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" class="text-blue-600 font-medium hover:underline" data-view-increment="k3-teacher-1" data-modal-pdf-url="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" data-modal-youtube-id="nKIu9yen5nc" data-modal-default="pdf">ดูเอกสาร</a>
+                                            <a href="https://www.youtube.com/watch?v=nKIu9yen5nc" class="text-rose-600 font-medium hover:underline" data-view-increment="k3-teacher-1" data-modal-pdf-url="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" data-modal-youtube-id="nKIu9yen5nc" data-modal-default="youtube">ชมวิดีโอ</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Teacher Card 2: PDF + YouTube -->
+                            <div class="group rounded-xl overflow-hidden bg-white border border-gray-200 hover:shadow-lg transition-all">
+                                <div class="relative h-36 bg-gray-100">
+                                    <img src="https://img.youtube.com/vi/8mAITcNt710/hqdefault.jpg" alt="Teacher Resources" class="w-full h-full object-cover group-hover:opacity-95" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1518779578993-ec3579fee39f?auto=format&fit=crop&w=1200&q=60';">
+                                    <div class="absolute inset-0 bg-black/20"></div>
+                                    <div class="absolute top-3 left-3 flex items-center space-x-2">
+                                        <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-red-500 text-white">PDF</span>
+                                        <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-rose-500 text-white">YouTube</span>
+                                        <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-indigo-600 text-white">ครู</span>
+                                    </div>
+                                    <div class="absolute inset-0 flex items-center justify-center">
+                                        <div class="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center text-red-600 shadow">
+                                            <i data-feather="play" class="w-6 h-6"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <h4 class="font-semibold text-gray-800">แนวทางจัดการเรียนรู้ Micro:bit</h4>
+                                    <p class="text-sm text-gray-500">สื่อและวิดีโอประกอบการสอน</p>
+                                    <div class="mt-3 flex items-center justify-between">
+                                        <div class="flex items-center space-x-4">
+                                            <button class="like-btn flex items-center text-gray-500 hover:text-red-600 transition" data-award-id="k3-teacher-2">
+                                                <i data-feather="heart" class="w-4 h-4"></i>
+                                                <span class="ml-1 text-sm like-count" data-like-count-for="k3-teacher-2">0</span>
+                                            </button>
+                                            <div class="flex items-center text-gray-500">
+                                                <i data-feather="eye" class="w-4 h-4"></i>
+                                                <span class="ml-1 text-sm view-count" data-view-count-for="k3-teacher-2">0</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-3">
+                                            <a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" class="text-blue-600 font-medium hover:underline" data-view-increment="k3-teacher-2" data-modal-pdf-url="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" data-modal-youtube-id="8mAITcNt710" data-modal-default="pdf">ดูเอกสาร</a>
+                                            <a href="https://www.youtube.com/watch?v=8mAITcNt710" class="text-rose-600 font-medium hover:underline" data-view-increment="k3-teacher-2" data-modal-pdf-url="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" data-modal-youtube-id="8mAITcNt710" data-modal-default="youtube">ชมวิดีโอ</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ครั้งที่ 4 -->
+                <div class="bg-white rounded-2xl shadow-sm ring-1 ring-gray-100 overflow-hidden">
+                    <div class="p-5 border-b bg-gradient-to-r from-teal-50 to-emerald-50">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-xl font-bold text-gray-800">Coding Achievement Awards — ครั้งที่ 4</h3>
+                            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-emerald-100 text-emerald-700">ครั้งที่ 4</span>
+                        </div>
+                    </div>
+
+                    <!-- ผู้บริหาร: PDF เท่านั้น -->
+                    <div class="p-5">
+                        <div class="flex items-center mb-3">
+                            <span class="text-sm font-semibold px-3 py-1 rounded-full bg-amber-100 text-amber-700">ผู้บริหาร</span>
+                            <span class="ml-3 text-xs text-gray-500">เอกสาร PDF</span>
+                        </div>
+                        <div class="grid sm:grid-cols-2 gap-5">
+                            <!-- Card: Admin PDF 3 -->
+                            <div class="group rounded-xl overflow-hidden bg-white border border-gray-200 hover:shadow-lg transition-all">
+                                <div class="relative h-36 bg-gray-100">
+                                    <img src="https://images.unsplash.com/photo-1485217988980-11786ced9454?auto=format&fit=crop&w=1200&q=60" alt="Executive PDF" class="w-full h-full object-cover group-hover:opacity-95">
+                                    <div class="absolute top-3 left-3 flex items-center space-x-2">
+                                        <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-red-500 text-white">PDF</span>
+                                        <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-slate-900/80 text-white">ครั้งที่ 4</span>
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <h4 class="font-semibold text-gray-800">แนวทางขับเคลื่อน Coding เชิงระบบ</h4>
+                                    <p class="text-sm text-gray-500">ผู้บริหารสถานศึกษา</p>
+                                    <div class="mt-3 flex items-center justify-between">
+                                        <div class="flex items-center space-x-4">
+                                            <button class="like-btn flex items-center text-gray-500 hover:text-red-600 transition" data-award-id="k4-admin-1">
+                                                <i data-feather="heart" class="w-4 h-4"></i>
+                                                <span class="ml-1 text-sm like-count" data-like-count-for="k4-admin-1">0</span>
+                                            </button>
+                                            <div class="flex items-center text-gray-500">
+                                                <i data-feather="eye" class="w-4 h-4"></i>
+                                                <span class="ml-1 text-sm view-count" data-view-count-for="k4-admin-1">0</span>
+                                            </div>
+                                        </div>
+                                        <a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" class="text-blue-600 font-medium hover:underline" data-view-increment="k4-admin-1" data-modal-pdf-url="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" data-modal-default="pdf">ดูเอกสาร</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card: Admin PDF 4 -->
+                            <div class="group rounded-xl overflow-hidden bg-white border border-gray-200 hover:shadow-lg transition-all">
+                                <div class="relative h-36 bg-gray-100">
+                                    <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=1200&q=60" alt="Executive PDF" class="w-full h-full object-cover group-hover:opacity-95">
+                                    <div class="absolute top-3 left-3 flex items-center space-x-2">
+                                        <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-red-500 text-white">PDF</span>
+                                        <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-slate-900/80 text-white">ครั้งที่ 4</span>
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <h4 class="font-semibold text-gray-800">รายงานผลการดำเนินงาน Coding</h4>
+                                    <p class="text-sm text-gray-500">ผู้บริหารสถานศึกษา</p>
+                                    <div class="mt-3 flex items-center justify-between">
+                                        <div class="flex items-center space-x-4">
+                                            <button class="like-btn flex items-center text-gray-500 hover:text-red-600 transition" data-award-id="k4-admin-2">
+                                                <i data-feather="heart" class="w-4 h-4"></i>
+                                                <span class="ml-1 text-sm like-count" data-like-count-for="k4-admin-2">0</span>
+                                            </button>
+                                            <div class="flex items-center text-gray-500">
+                                                <i data-feather="eye" class="w-4 h-4"></i>
+                                                <span class="ml-1 text-sm view-count" data-view-count-for="k4-admin-2">0</span>
+                                            </div>
+                                        </div>
+                                        <a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" class="text-blue-600 font-medium hover:underline" data-view-increment="k4-admin-2" data-modal-pdf-url="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" data-modal-default="pdf">ดูเอกสาร</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ครู: PDF + YouTube -->
+                    <div class="px-5 pb-6">
+                        <div class="flex items-center mb-3">
+                            <span class="text-sm font-semibold px-3 py-1 rounded-full bg-emerald-100 text-emerald-700">ครูผู้สอน</span>
+                            <span class="ml-3 text-xs text-gray-500">เอกสาร PDF และวิดีโอ YouTube</span>
+                        </div>
+                        <div class="grid sm:grid-cols-2 gap-5">
+                            <!-- Teacher Card 1: PDF + YouTube -->
+                            <div class="group rounded-xl overflow-hidden bg-white border border-gray-200 hover:shadow-lg transition-all">
+                                <div class="relative h-36 bg-gray-100">
+                                    <img src="https://img.youtube.com/vi/VIpmkeqJhmQ/hqdefault.jpg" alt="Teacher Resources" class="w-full h-full object-cover group-hover:opacity-95" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&q=60';">
+                                    <div class="absolute inset-0 bg-black/20"></div>
+                                    <div class="absolute top-3 left-3 flex items-center space-x-2">
+                                        <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-red-500 text-white">PDF</span>
+                                        <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-rose-500 text-white">YouTube</span>
+                                        <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-indigo-600 text-white">ครู</span>
+                                    </div>
+                                    <div class="absolute inset-0 flex items-center justify-center">
+                                        <div class="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center text-red-600 shadow">
+                                            <i data-feather="play" class="w-6 h-6"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <h4 class="font-semibold text-gray-800">บทเรียน Python เบื้องต้น: ตัวแปรและเงื่อนไข</h4>
+                                    <p class="text-sm text-gray-500">ครูผู้สอนวิทยาการคำนวณ</p>
+                                    <div class="mt-3 flex items-center justify-between">
+                                        <div class="flex items-center space-x-4">
+                                            <button class="like-btn flex items-center text-gray-500 hover:text-red-600 transition" data-award-id="k4-teacher-1">
+                                                <i data-feather="heart" class="w-4 h-4"></i>
+                                                <span class="ml-1 text-sm like-count" data-like-count-for="k4-teacher-1">0</span>
+                                            </button>
+                                            <div class="flex items-center text-gray-500">
+                                                <i data-feather="eye" class="w-4 h-4"></i>
+                                                <span class="ml-1 text-sm view-count" data-view-count-for="k4-teacher-1">0</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-3">
+                                            <a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" class="text-blue-600 font-medium hover:underline" data-view-increment="k4-teacher-1" data-modal-pdf-url="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" data-modal-youtube-id="VIpmkeqJhmQ" data-modal-default="pdf">ดูเอกสาร</a>
+                                            <a href="https://www.youtube.com/watch?v=VIpmkeqJhmQ" class="text-rose-600 font-medium hover:underline" data-view-increment="k4-teacher-1" data-modal-pdf-url="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" data-modal-youtube-id="VIpmkeqJhmQ" data-modal-default="youtube">ชมวิดีโอ</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Teacher Card 2: PDF + YouTube -->
+                            <div class="group rounded-xl overflow-hidden bg-white border border-gray-200 hover:shadow-lg transition-all">
+                                <div class="relative h-36 bg-gray-100">
+                                    <img src="https://img.youtube.com/vi/PkZNo7MFNFg/hqdefault.jpg" alt="Teacher Resources" class="w-full h-full object-cover group-hover:opacity-95" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1518779578993-ec3579fee39f?auto=format&fit=crop&w=1200&q=60';">
+                                    <div class="absolute inset-0 bg-black/20"></div>
+                                    <div class="absolute top-3 left-3 flex items-center space-x-2">
+                                        <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-red-500 text-white">PDF</span>
+                                        <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-rose-500 text-white">YouTube</span>
+                                        <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-indigo-600 text-white">ครู</span>
+                                    </div>
+                                    <div class="absolute inset-0 flex items-center justify-center">
+                                        <div class="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center text-red-600 shadow">
+                                            <i data-feather="play" class="w-6 h-6"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <h4 class="font-semibold text-gray-800">สาธิตการสอน JavaScript ในชั้นเรียน</h4>
+                                    <p class="text-sm text-gray-500">วิดีโอสาธิตและเอกสารประกอบ</p>
+                                    <div class="mt-3 flex items-center justify-between">
+                                        <div class="flex items-center space-x-4">
+                                            <button class="like-btn flex items-center text-gray-500 hover:text-red-600 transition" data-award-id="k4-teacher-2">
+                                                <i data-feather="heart" class="w-4 h-4"></i>
+                                                <span class="ml-1 text-sm like-count" data-like-count-for="k4-teacher-2">0</span>
+                                            </button>
+                                            <div class="flex items-center text-gray-500">
+                                                <i data-feather="eye" class="w-4 h-4"></i>
+                                                <span class="ml-1 text-sm view-count" data-view-count-for="k4-teacher-2">0</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-3">
+                                            <a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" class="text-blue-600 font-medium hover:underline" data-view-increment="k4-teacher-2" data-modal-pdf-url="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" data-modal-youtube-id="PkZNo7MFNFg" data-modal-default="pdf">ดูเอกสาร</a>
+                                            <a href="https://www.youtube.com/watch?v=PkZNo7MFNFg" class="text-rose-600 font-medium hover:underline" data-view-increment="k4-teacher-2" data-modal-pdf-url="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" data-modal-youtube-id="PkZNo7MFNFg" data-modal-default="youtube">ชมวิดีโอ</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p class="mt-6 text-xs text-gray-500">หมายเหตุ: ตัวอย่างผลงานเป็นข้อมูลสาธิต สามารถอัปเดตลิงก์ PDF/YouTube เป็นของจริงได้ทุกเมื่อ</p>
+        </div>
+    </section>
+
+    <!-- Coding Resources Cards -->
+    <section class="py-8 md:py-14 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between mb-6 md:mb-10">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-800">แหล่งเรียนรู้เว็บไซต์ แนะนำสำหรับการจัดการเรียนรู้ CODING</h2>
+                <span class="hidden md:inline-block text-sm text-gray-500">6 แหล่งเรียนรู้</span>
+            </div>
+
+            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <!-- Code.org -->
+                <a href="https://code.org" target="_blank" rel="noopener noreferrer" class="group rounded-xl overflow-hidden shadow-lg bg-gray-900 hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 ring-1 ring-transparent hover:ring-2 hover:ring-offset-2 hover:ring-cyan-400 hover:ring-offset-white">
+                    <div class="relative h-44 md:h-52">
+                        <img src="https://code.org/shared/images/social-media/codeorg2019_social.png" alt="Code.org" class="w-full h-full object-cover opacity-80 group-hover:opacity-90 transition-transform duration-500 ease-out group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                        <span class="absolute top-3 right-3 text-white text-xs font-semibold px-2.5 py-1 rounded-full shadow bg-gradient-to-r from-cyan-500 to-blue-500">แนะนำ</span>
+                        <div class="absolute bottom-3 left-4 right-4">
+                            <h3 class="text-white text-xl font-bold">Code.org</h3>
+                            <p class="text-gray-200 text-sm">บทเรียนพื้นฐานและกิจกรรม Hour of Code</p>
+                        </div>
+                    </div>
+                    <div class="px-4 py-3 bg-gradient-to-r from-cyan-50 to-blue-50">
+                        <span class="inline-flex items-center text-blue-700 font-semibold">ไปยังเว็บไซต์ <i data-feather="external-link" class="w-4 h-4 ml-2"></i></span>
+                    </div>
+                </a>
+
+                <!-- Scratch -->
+                <a href="https://scratch.mit.edu" target="_blank" rel="noopener noreferrer" class="group rounded-xl overflow-hidden shadow-lg bg-gray-900 hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 ring-1 ring-transparent hover:ring-2 hover:ring-offset-2 hover:ring-orange-400 hover:ring-offset-white">
+                    <div class="relative h-44 md:h-52">
+                        <img src="https://www.codeadvantage.org/uploads/blog/000050.jpg" alt="Scratch" class="w-full h-full object-cover opacity-80 group-hover:opacity-90 transition-transform duration-500 ease-out group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                        <span class="absolute top-3 right-3 text-white text-xs font-semibold px-2.5 py-1 rounded-full shadow bg-gradient-to-r from-orange-400 to-pink-500">เด็ก</span>
+                        <div class="absolute bottom-3 left-4 right-4">
+                            <h3 class="text-white text-xl font-bold">Scratch</h3>
+                            <p class="text-gray-200 text-sm">เรียนรู้การเขียนโปรแกรมแบบบล็อกสำหรับเด็ก</p>
+                        </div>
+                    </div>
+                    <div class="px-4 py-3 bg-gradient-to-r from-orange-50 to-pink-50">
+                        <span class="inline-flex items-center text-orange-700 font-semibold">ไปยังเว็บไซต์ <i data-feather="external-link" class="w-4 h-4 ml-2"></i></span>
+                    </div>
+                </a>
+
+                <!-- Code Monkey -->
+                <a href="https://www.codemonkey.com" target="_blank" rel="noopener noreferrer" class="group rounded-xl overflow-hidden shadow-lg bg-gray-900 hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 ring-1 ring-transparent hover:ring-2 hover:ring-offset-2 hover:ring-emerald-400 hover:ring-offset-white">
+                    <div class="relative h-44 md:h-52">
+                        <img src="https://www.the74million.org/wp-content/uploads/2019/10/codemonkey-lead.jpg" alt="Google CS First" class="w-full h-full object-cover opacity-80 group-hover:opacity-90 transition-transform duration-500 ease-out group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                        <span class="absolute top-3 right-3 text-white text-xs font-semibold px-2.5 py-1 rounded-full shadow bg-gradient-to-r from-green-500 to-emerald-600">แผนครู</span>
+                        <div class="absolute bottom-3 left-4 right-4">
+                            <h3 class="text-white text-xl font-bold">Google CS First</h3>
+                            <p class="text-gray-200 text-sm">แผนการสอนและกิจกรรมสำหรับครูและนักเรียน</p>
+                        </div>
+                    </div>
+                    <div class="px-4 py-3 bg-gradient-to-r from-green-50 to-emerald-50">
+                        <span class="inline-flex items-center text-emerald-700 font-semibold">ไปยังเว็บไซต์ <i data-feather="external-link" class="w-4 h-4 ml-2"></i></span>
+                    </div>
+                </a>
+
+                <!-- Code Combat -->
+                <a href="https://codecombat.com" target="_blank" rel="noopener noreferrer" class="group rounded-xl overflow-hidden shadow-lg bg-gray-900 hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 ring-1 ring-transparent hover:ring-2 hover:ring-offset-2 hover:ring-indigo-400 hover:ring-offset-white">
+                    <div class="relative h-44 md:h-52">
+                        <img src="https://progression.co/images/customers/codecombat-header.jpg" alt="Khan Academy Computing" class="w-full h-full object-cover opacity-80 group-hover:opacity-90 transition-transform duration-500 ease-out group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                        <span class="absolute top-3 right-3 text-white text-xs font-semibold px-2.5 py-1 rounded-full shadow bg-gradient-to-r from-purple-500 to-indigo-600">ฟรี</span>
+                        <div class="absolute bottom-3 left-4 right-4">
+                            <h3 class="text-white text-xl font-bold">Code Combat</h3>
+                            <p class="text-gray-200 text-sm">แพลตฟอร์มเรียนรู้โค้ดดิ้งด้วย Gamebase Fication</p>
+                        </div>
+                    </div>
+                    <div class="px-4 py-3 bg-gradient-to-r from-purple-50 to-indigo-50">
+                        <span class="inline-flex items-center text-indigo-700 font-semibold">ไปยังเว็บไซต์ <i data-feather="external-link" class="w-4 h-4 ml-2"></i></span>
+                    </div>
+                </a>
+
+                <!-- Coding Thailand (depa) -->
+                <a href="https://codingthailand.app" target="_blank" rel="noopener noreferrer" class="group rounded-xl overflow-hidden shadow-lg bg-gray-900 hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 ring-1 ring-transparent hover:ring-2 hover:ring-offset-2 hover:ring-sky-400 hover:ring-offset-white">
+                    <div class="relative h-44 md:h-52">
+                        <img src="https://linktr.ee/og/image/codingthailand.app.jpg" alt="Coding Thailand" class="w-full h-full object-cover opacity-80 group-hover:opacity-90 transition-transform duration-500 ease-out group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                        <span class="absolute top-3 right-3 text-white text-xs font-semibold px-2.5 py-1 rounded-full shadow bg-gradient-to-r from-sky-500 to-blue-600">ไทย</span>
+                        <div class="absolute bottom-3 left-4 right-4">
+                            <h3 class="text-white text-xl font-bold">Coding Thailand</h3>
+                            <p class="text-gray-200 text-sm">แพลตฟอร์มเรียนรู้โค้ดดิ้งของ depa</p>
+                        </div>
+                    </div>
+                    <div class="px-4 py-3 bg-gradient-to-r from-sky-50 to-blue-50">
+                        <span class="inline-flex items-center text-sky-700 font-semibold">ไปยังเว็บไซต์ <i data-feather="external-link" class="w-4 h-4 ml-2"></i></span>
+                    </div>
+                </a>
+
+                <!-- AITHAIGEN -->
+                <a href="https://aithaigen.in.th" target="_blank" rel="noopener noreferrer" class="group rounded-xl overflow-hidden shadow-lg bg-gray-900 hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 ring-1 ring-transparent hover:ring-2 hover:ring-offset-2 hover:ring-amber-400 hover:ring-offset-white">
+                    <div class="relative h-44 md:h-52">
+                        <img src="https://i.ytimg.com/vi/CgZkinBxkB0/maxresdefault.jpg" alt="AITHAI GEN" class="w-full h-full object-cover opacity-80 group-hover:opacity-90 transition-transform duration-500 ease-out group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                        <span class="absolute top-3 right-3 text-white text-xs font-semibold px-2.5 py-1 rounded-full shadow bg-gradient-to-r from-amber-500 to-red-500">ชุมชน</span>
+                        <div class="absolute bottom-3 left-4 right-4">
+                            <h3 class="text-white text-xl font-bold">AITHAIGEN</h3>
+                            <p class="text-gray-200 text-sm">ชุมชนและทรัพยากร AI เพื่อการศึกษา</p>
+                        </div>
+                    </div>
+                    <div class="px-4 py-3 bg-gradient-to-r from-amber-50 to-red-50">
+                        <span class="inline-flex items-center text-amber-700 font-semibold">ไปยังเว็บไซต์ <i data-feather="external-link" class="w-4 h-4 ml-2"></i></span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div class="container mx-auto px-4 my-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="relative w-full overflow-hidden rounded-xl shadow-lg" style="padding-top:50.00%">
+                <iframe src="https://padlet.com/embed/dqc8a3lfnr7jb07a" class="absolute inset-0 w-full h-full" frameborder="0" loading="lazy" allow="camera; microphone; geolocation; display-capture; clipboard-write"></iframe>
+            </div>
+            <div class="flex items-center justify-end mt-2">
+                <a href="https://padlet.com?ref=embed" target="_blank" class="inline-flex items-center gap-2 text-xs text-gray-400 hover:text-gray-600">
+                    <img src="https://padlet.net/embeds/made_with_padlet_2022.png" alt="Made with Padlet" class="h-4 w-auto">
+                    <span>Made with Padlet</span>
+                </a>
+            </div>
+        </div>
     </div>
-    <form class="max-w-md mx-auto">
-      <div class="flex">
-        <input type="email" placeholder="อีเมลของคุณ" class="flex-grow px-4 py-2 rounded-l-md focus:outline-none text-gray-900">
-        <button type="submit" class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-medium px-4 py-2 rounded-r-md transition duration-300 ease-in-out">
-          สมัครรับข่าวสาร
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
 
-<script>
-  // เมื่อโหลดหน้าเสร็จ
-  document.addEventListener('DOMContentLoaded', function() {
-    // ตรวจสอบว่าผู้ใช้ล็อกอินแล้วหรือไม่
-    checkAuthState().then(user => {
-      if (user) {
-        console.log('User is logged in:', user.displayName);
-        // สามารถทำอะไรเพิ่มเติมสำหรับผู้ใช้ที่ล็อกอินแล้ว
-      } else {
-        console.log('User is not logged in');
-      }
-    });
-    
-    // เริ่มต้นไอคอน Feather
-    if (typeof feather !== 'undefined') {
-      feather.replace();
-    }
-  });
-</script>
+
+    <!-- Chatbot Button -->
+    <button id="chatbot-toggle" class="fixed bottom-6 right-6 bg-blue-600 text-white p-4 rounded-full shadow-xl hover:bg-blue-700 transition-colors" aria-label="เปิดแชทบอท">
+        <i data-feather="message-circle" class="w-6 h-6"></i>
+    </button>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="chatbot-container chatbot-hidden fixed bottom-0 right-0 w-full max-w-md h-96 bg-white shadow-2xl rounded-t-xl overflow-hidden" role="dialog" aria-label="กล่องโต้ตอบแชทบอท" aria-modal="false">
+        <div class="bg-blue-600 text-white p-4 flex justify-between items-center">
+            <h3 class="font-bold">แชทบอทช่วยเหลือ</h3>
+            <button id="chatbot-close" class="text-white" aria-label="ปิดแชทบอท">
+                <i data-feather="x" class="w-5 h-5"></i>
+            </button>
+        </div>
+        <div id="chat-messages" class="h-72 overflow-y-auto p-4"></div>
+        <div class="p-4 border-t flex">
+            <input id="chat-input" type="text" placeholder="พิมพ์ข้อความที่นี่..." class="flex-grow border rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" aria-label="ป้อนข้อความ">
+            <button id="chat-send" class="bg-blue-600 text-white px-4 py-2 rounded-r-lg hover:bg-blue-700" aria-label="ส่งข้อความ">
+                <i data-feather="send" class="w-5 h-5"></i>
+            </button>
+        </div>
+    </div>

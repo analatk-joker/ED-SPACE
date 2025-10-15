@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Share & Show - แชร์ผลงานผ่าน Google Drive</title>
+</head>
+<body>
+  <div class="max-w-6xl mx-auto px-4 py-8">
+    <div class="flex items-center gap-3 mb-6">
+      <i data-feather="share-2" class="w-6 h-6 text-indigo-600"></i>
+      <h1 class="text-2xl font-bold">แชร์ผลงาน (Google Drive)</h1>
+    </div>
+
+    <!-- Instructions -->
+    <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4 mb-6">
+      <div class="flex items-start gap-3">
+        <i data-feather="info" class="w-5 h-5 text-indigo-700 mt-1"></i>
+        <div>
+          <p class="text-indigo-900 font-medium">ขั้นตอนการแชร์ลิงก์สาธารณะจาก Google Drive</p>
+          <ul class="list-disc list-inside text-indigo-900 mt-1 text-sm">
+            <li>อัปโหลดไฟล์/โฟลเดอร์ไปยัง Google Drive ของคุณ</li>
+            <li>คลิกขวา > แชร์ > เปลี่ยนเป็น “ทุกคนที่มีลิงก์” และสิทธิ์ “ผู้ดู”</li>
+            <li>คัดลอกลิงก์และนำมาวางในช่อง “ลิงก์ Google Drive” ด้านล่าง</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <div class="bg-white rounded-xl shadow p-6 mb-8">
+      <form id="share-form" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700">ชื่อเรื่อง</label>
+          <input type="text" id="title" class="mt-1 w-full border rounded-md p-2" placeholder="เช่น โครงงานหุ่นยนต์ชั้น ป.6" required>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">คำอธิบาย</label>
+          <textarea id="description" rows="3" class="mt-1 w-full border rounded-md p-2" placeholder="สรุปเนื้อหา/ผลงานอย่างย่อ"></textarea>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">ลิงก์ Google Drive</label>
+          <input type="url" id="drive-link" class="mt-1 w-full border rounded-md p-2" placeholder="https://drive.google.com/file/d/FILE_ID/view?usp=sharing" required>
+          <p id="link-help" class="text-xs text-gray-500 mt-1">รองรับลิงก์แบบ file/folder เช่น /file/d/FILE_ID/view, /open?id=FILE_ID, /folders/FOLDER_ID</p>
+        </div>
+
+        <div id="generated-links" class="hidden bg-gray-50 rounded-md p-3 text-sm">
+          <p class="font-medium">ลิงก์ที่ระบบสร้างให้</p>
+          <div class="mt-1 flex flex-col gap-1">
+            <div class="flex items-center gap-2">
+              <span class="text-gray-600">ลิงก์ preview:</span>
+              <a id="preview-url" href="#" target="_blank" class="text-indigo-600 underline break-all"></a>
+            </div>
+            <div class="flex items-center gap-2" id="download-row">
+              <span class="text-gray-600">ลิงก์ดาวน์โหลดตรง:</span>
+              <a id="download-url" href="#" target="_blank" class="text-indigo-600 underline break-all"></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700">บันทึกผลงาน</button>
+          <span id="save-status" class="text-sm text-gray-600"></span>
+        </div>
+      </form>
+    </div>
+
+    <!-- Preview -->
+    <div id="preview-section" class="hidden bg-white rounded-xl shadow overflow-hidden">
+      <div class="border-b p-3 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <i data-feather="eye" class="w-5 h-5 text-gray-600"></i>
+          <span class="font-medium">ตัวอย่างการแสดงผล</span>
+        </div>
+        <a id="open-preview" href="#" target="_blank" class="text-indigo-600 text-sm underline">เปิดในแท็บใหม่</a>
+      </div>
+      <div class="h-[480px]">
+        <iframe id="drive-preview" src="" class="w-full h-full" allow="autoplay"></iframe>
+      </div>
+    </div>
+
+    <!-- Latest Shares -->
+    <div class="mt-8">
+      <div class="flex items-center gap-3 mb-4">
+        <i data-feather="clock" class="w-5 h-5 text-gray-700"></i>
+        <h2 class="text-xl font-semibold">รายการแชร์ล่าสุด</h2>
+      </div>
+      <div id="recent-list" class="grid md:grid-cols-2 gap-6"></div>
+    </div>
+  </div>
+
+  <script>
+    function extractDriveId(url) {
+      if (!url) return { id: null, isFolder: false };
+      const fileMatch = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+      const idParam = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+      const folderMatch = url.match(/\/folders\/([a-zA-Z0-9_-]+)/);
+      const id = fileMatch ? fileMatch[1] : (idParam ? idParam[1] : (folderMatch ? folderMatch[1] : null));
+      return { id, isFolder: !!folderMatch };
+    }
+
+    function buildPreviewUrl(id, isFolder) {
+      if (!id) return '';
+      if (isFolder) {
+        // Embed folder view
+        return `https://drive.google.com/embeddedfolderview?id=${id}#grid`;
+      }
+      // Embed file preview
+      return `https://drive.google.com/file/d/${id}/preview`;
+    }
+
+    function buildDownloadUrl(id, isFolder) {
+      if (!id || isFolder) return '';
+      return `https://drive.google.com/uc?id=${id}&export=download`;
+    }
+
+    function updatePreview(link) {
+      const { id, isFolder } = extractDriveId(link);
+      const previewUrl = buildPreviewUrl(id, isFolder);
+      const downloadUrl = buildDownloadUrl(id, isFolder);
+
+      const previewSection = document.getElementById('preview-section');
+      const iframe = document.getElementById('drive-preview');
+      const openPreview = document.getElementById('open-preview');
+      const generated = document.getElementById('generated-links');
+      const previewA = document.getElementById('preview-url');
+      const downloadRow = document.getElementById('download-row');
+      const downloadA = document.getElementById('download-url');
+
+      if (previewUrl) {
+        iframe.src = previewUrl;
+        openPreview.href = previewUrl;
+        previewA.href = previewUrl;
+        previewA.textContent = previewUrl;
+        previewSection.classList.remove('hidden');
+        generated.classList.remove('hidden');
+      } else {
+        iframe.src = '';
+        openPreview.href = '#';
+        previewSection.classList.add('hidden');
+        generated.classList.add('hidden');
+      }
+
+      if (downloadUrl) {
+        downloadA.href = downloadUrl;
+        downloadA.textContent = downloadUrl;
+        downloadRow.classList.remove('hidden');
+      } else {
+        downloadRow.classList.add('hidden');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof feather !== 'undefined') feather.replace();
+
+      const linkInput = document.getElementById('drive-link');
+      linkInput.addEventListener('input', function() {
+        updatePreview(this.value);
+      });
+
+      // Load recent items
+      if (window.firebase && window.firebase.firestore) {
+        try {
+          firebase.firestore()
+            .collection('shared_items')
+            .orderBy('createdAt', 'desc')
+            .limit(10)
+            .get()
+            .then(function(snapshot) {
+              const container = document.getElementById('recent-list');
+              container.innerHTML = '';
+              snapshot.forEach(function(doc) {
+                const d = doc.data();
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-xl shadow overflow-hidden';
+                const previewUrl = d.previewUrl || buildPreviewUrl(d.driveId, d.isFolder);
+                card.innerHTML = `
+                  <div class="h-56 bg-gray-100">
+                    ${previewUrl ? `<iframe src="${previewUrl}" class="w-full h-full" allow="autoplay"></iframe>` : `<div class='w-full h-full flex items-center justify-center text-gray-500'>ไม่มีพรีวิว</div>`}
+                  </div>
+                  <div class="p-4">
+                    <div class="flex items-center gap-2">
+                      <i data-feather="file-text" class="w-4 h-4 text-gray-600"></i>
+                      <h3 class="font-medium">${d.title || 'ไม่ระบุชื่อเรื่อง'}</h3>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-1">${d.description || ''}</p>
+                    <div class="mt-2 text-sm">
+                      <a href="${d.driveLink}" target="_blank" class="text-indigo-600 underline">เปิดลิงก์ต้นฉบับ</a>
+                    </div>
+                  </div>
+                `;
+                container.appendChild(card);
+              });
+              if (typeof feather !== 'undefined') feather.replace();
+            });
+        } catch(err) {
+          console.warn('Load recent failed', err);
+        }
+      }
+
+      // Save form
+      const form = document.getElementById('share-form');
+      const statusEl = document.getElementById('save-status');
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const user = firebase.auth().currentUser;
+        if (!user) {
+          alert('กรุณาเข้าสู่ระบบก่อนบันทึกผลงาน');
+          window.location.href = '?path=login';
+          return;
+        }
+
+        const title = document.getElementById('title').value.trim();
+        const description = document.getElementById('description').value.trim();
+        const driveLink = document.getElementById('drive-link').value.trim();
+        const { id, isFolder } = extractDriveId(driveLink);
+        const previewUrl = buildPreviewUrl(id, isFolder);
+        const downloadUrl = buildDownloadUrl(id, isFolder);
+
+        const payload = {
+          userId: user.uid,
+          displayName: user.displayName || '',
+          title,
+          description,
+          driveLink,
+          driveId: id || '',
+          isFolder: !!isFolder,
+          previewUrl: previewUrl || '',
+          downloadUrl: downloadUrl || '',
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        };
+
+        statusEl.textContent = 'กำลังบันทึก...';
+        saveToFirestore('shared_items', null, payload)
+          .then(function() {
+            statusEl.textContent = 'บันทึกสำเร็จ';
+            form.reset();
+            document.getElementById('generated-links').classList.add('hidden');
+            document.getElementById('preview-section').classList.add('hidden');
+          })
+          .catch(function(err) {
+            console.error(err);
+            statusEl.textContent = 'เกิดข้อผิดพลาด: ' + err.message;
+          });
+      });
+    });
+  </script>
+</body>
+</html>

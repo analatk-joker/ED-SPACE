@@ -1,0 +1,95 @@
+<!-- Hero Section: Team -->
+<section class="relative bg-gradient-to-r from-blue-500 to-blue-700 text-white py-16">
+  <div class="absolute inset-0 overflow-hidden">
+    <div id="vanta-globe-dev" class="w-full h-full"></div>
+  </div>
+  <div class="container mx-auto px-4 relative z-10">
+    <div class="max-w-3xl mx-auto text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">ทีมพัฒนา ED Space</h1>
+      <p class="text-lg md:text-xl">ร่วมกันออกแบบ พัฒนา และสนับสนุนระบบนิเทศการศึกษา</p>
+    </div>
+  </div>
+</section>
+
+<!-- Team Members -->
+<section class="py-16 bg-white">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-bold text-center mb-10">โปรไฟล์ผู้พัฒนา</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Member 1 -->
+      <div class="border rounded-xl p-6 shadow-sm hover:shadow-md transition">
+        <img src="http://static.photos/people/400x400/1" alt="Developer" class="w-24 h-24 rounded-full object-cover mb-4">
+        <h3 class="text-xl font-bold">ผู้พัฒนา A</h3>
+        <p class="text-gray-600">Frontend & UI/UX</p>
+        <div class="mt-3 text-gray-600">เน้นการออกแบบส่วนติดต่อผู้ใช้ให้ใช้งานง่ายและสวยงาม</div>
+      </div>
+      <!-- Member 2 -->
+      <div class="border rounded-xl p-6 shadow-sm hover:shadow-md transition">
+        <img src="http://static.photos/people/400x400/2" alt="Developer" class="w-24 h-24 rounded-full object-cover mb-4">
+        <h3 class="text-xl font-bold">ผู้พัฒนา B</h3>
+        <p class="text-gray-600">Backend & Firebase</p>
+        <div class="mt-3 text-gray-600">ดูแลการเชื่อมต่อฐานข้อมูลและการยืนยันตัวตน</div>
+      </div>
+      <!-- Member 3 -->
+      <div class="border rounded-xl p-6 shadow-sm hover:shadow-md transition">
+        <img src="http://static.photos/people/400x400/3" alt="Developer" class="w-24 h-24 rounded-full object-cover mb-4">
+        <h3 class="text-xl font-bold">ผู้พัฒนา C</h3>
+        <p class="text-gray-600">AI & Data</p>
+        <div class="mt-3 text-gray-600">สนับสนุนการประมวลผลข้อมูลและตัวอย่างการใช้ AI</div>
+      </div>
+      <!-- Member 4 -->
+      <div class="border rounded-xl p-6 shadow-sm hover:shadow-md transition">
+        <img src="http://static.photos/people/400x400/4" alt="Developer" class="w-24 h-24 rounded-full object-cover mb-4">
+        <h3 class="text-xl font-bold">ผู้พัฒนา D</h3>
+        <p class="text-gray-600">Content & Docs</p>
+        <div class="mt-3 text-gray-600">จัดทำคู่มือและเนื้อหาเพื่อการเรียนรู้ในระบบ</div>
+      </div>
+      <!-- Member 5 -->
+      <div class="border rounded-xl p-6 shadow-sm hover:shadow-md transition">
+        <img src="http://static.photos/people/400x400/5" alt="Developer" class="w-24 h-24 rounded-full object-cover mb-4">
+        <h3 class="text-xl font-bold">ผู้พัฒนา E</h3>
+        <p class="text-gray-600">QA & Support</p>
+        <div class="mt-3 text-gray-600">ทดสอบระบบและช่วยเหลือผู้ใช้งาน</div>
+      </div>
+      <!-- Member 6 -->
+      <div class="border rounded-xl p-6 shadow-sm hover:shadow-md transition">
+        <img src="http://static.photos/people/400x400/6" alt="Developer" class="w-24 h-24 rounded-full object-cover mb-4">
+        <h3 class="text-xl font-bold">ผู้พัฒนา F</h3>
+        <p class="text-gray-600">Operations</p>
+        <div class="mt-3 text-gray-600">ดูแลการดีพลอยและการอัปเดตระบบ</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact / Links -->
+<section class="py-12 bg-gray-50">
+  <div class="container mx-auto px-4">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-2xl font-bold mb-4">ติดต่อทีมพัฒนา</h2>
+      <p class="text-gray-600 mb-6">หากต้องการเสนอปรับปรุงระบบ หรือต้องการร่วมโครงการ ทดลองติดต่อผ่านช่องทางต่อไปนี้</p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="mailto:edspace@example.com" class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700">อีเมลทีมพัฒนา</a>
+        <a href="https://github.com/" target="_blank" rel="noopener" class="px-6 py-3 bg-gray-800 text-white rounded-lg hover:bg-gray-900">GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function(){
+    const el = document.getElementById('vanta-globe-dev');
+    if(!el || !window.VANTA || !VANTA.GLOBE) return;
+    VANTA.GLOBE({
+      el,
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      color: 0x3b82f6,
+      backgroundColor: 0x2563eb,
+      size: 0.8
+    });
+  })();
+</script>

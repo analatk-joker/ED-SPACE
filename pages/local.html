@@ -1,154 +1,403 @@
-<div class="container mx-auto px-4 py-8">
-  <div class="text-center mb-12">
-    <h1 class="text-4xl font-bold text-gray-900 mb-4">ท้องถิ่นของเรา</h1>
-    <p class="text-xl text-gray-600 max-w-3xl mx-auto">ค้นพบความงดงามและเสน่ห์ของท้องถิ่นไทย ผ่านเรื่องราวและภาพถ่ายที่น่าประทับใจ</p>
-  </div>
-
-  <!-- ส่วนแสดงบทความเด่น -->
-  <div class="bg-blue-50 rounded-lg p-6 mb-12">
-    <div class="flex flex-col md:flex-row items-center">
-      <div class="md:w-1/2 mb-6 md:mb-0 md:pr-8">
-        <img src="https://img5.pic.in.th/file/secure-sv1/local-hero.jpg" alt="ท้องถิ่นไทย" class="rounded-lg shadow-lg w-full h-auto">
+<!-- หลักสูตรท้องถิ่น: โครงสร้างและรูปร่างตาม GAS_local.html -->
+<section class="py-16">
+  <div class="container mx-auto px-4">
+    <h1 class="text-4xl font-bold text-center mb-12 text-gray-800">หลักสูตรท้องถิ่น</h1>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div>
+        <img src="https://img5.pic.in.th/file/secure-sv1/Screenshot-2568-10-02-at-10.22.19.png" alt="หลักสูตรท้องถิ่น" class="rounded-lg shadow-lg">
       </div>
-      <div class="md:w-1/2">
-        <h2 class="text-3xl font-bold text-gray-900 mb-4">วัฒนธรรมท้องถิ่นที่น่าค้นหา</h2>
-        <p class="text-gray-700 mb-6">ประเทศไทยมีความหลากหลายทางวัฒนธรรมที่แตกต่างกันไปในแต่ละภูมิภาค ทั้งภาษา อาหาร การแต่งกาย ศิลปะการแสดง และประเพณีต่างๆ ที่สืบทอดกันมาอย่างยาวนาน</p>
-        <div class="flex space-x-4">
-          <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition duration-300 ease-in-out flex items-center">
-            <i data-feather="book-open" class="mr-2 h-5 w-5"></i>
-            อ่านเพิ่มเติม
-          </button>
-          <button class="bg-white hover:bg-gray-100 text-blue-600 border border-blue-600 font-medium py-2 px-4 rounded-md transition duration-300 ease-in-out flex items-center">
-            <i data-feather="share-2" class="mr-2 h-5 w-5"></i>
-            แชร์
-          </button>
+      <div>
+        <h2 class="text-2xl font-bold mb-4">พัฒนาหลักสูตรท้องถิ่นที่สอดคล้องกับบริบทชุมชน</h2>
+        <p class="text-gray-600 mb-6">การพัฒนาหลักสูตรท้องถิ่นที่เชื่อมโยงกับวัฒนธรรม ประเพณี และภูมิปัญญาท้องถิ่น เพื่อสร้างการเรียนรู้ที่ตอบโจทย์ชุมชน</p>
+        <div class="space-y-4">
+          <div class="flex items-center">
+            <i data-feather="check-circle" class="text-green-600 w-6 h-6 mr-3"></i>
+            <span>การพัฒนาหลักสูตรท้องถิ่นของสถานศึกษา</span>
+          </div>
+          <div class="flex items-center">
+            <i data-feather="check-circle" class="text-green-600 w-6 h-6 mr-3"></i>
+            <span>คลังข้อมูลแหล่งเรียนรู้และภูมิปัญญาท้องถิ่น</span>
+          </div>
+          <div class="flex items-center">
+            <i data-feather="check-circle" class="text-green-600 w-6 h-6 mr-3"></i>
+            <span>การประเมินหลักสูตรสาระการเรียนรู้ท้องถิ่น</span>
+          </div>
+          <div class="flex items-center">
+            <i data-feather="check-circle" class="text-green-600 w-6 h-6 mr-3"></i>
+            <span>การออกแบบแผนการจัดการเรียนรู้บูรณาการสาระการเรียนรู้ท้องถิ่น</span>
+          </div>
+          <div class="flex items-center">
+            <i data-feather="check-circle" class="text-green-600 w-6 h-6 mr-3"></i>
+            <span>การใช้ปัญญาประดิษฐ์ในการออกแบบการจัดการเรียนรู้</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- ส่วนแสดงบทความล่าสุด -->
-  <h2 class="text-2xl font-bold text-gray-900 mb-6">บทความล่าสุด</h2>
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-    <!-- บทความที่ 1 -->
-    <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg hover:-translate-y-1">
-      <img src="https://img5.pic.in.th/file/secure-sv1/local-1.jpg" alt="อาหารท้องถิ่น" class="w-full h-48 object-cover">
-      <div class="p-6">
-        <div class="text-xs text-gray-500 mb-2">12 พฤษภาคม 2566 • อาหาร</div>
-        <h3 class="text-xl font-bold text-gray-900 mb-2">อาหารท้องถิ่นภาคเหนือที่ไม่ควรพลาด</h3>
-        <p class="text-gray-700 mb-4">สำรวจรสชาติอันเป็นเอกลักษณ์ของอาหารภาคเหนือ ที่มีความโดดเด่นด้วยรสชาติเผ็ดร้อนและสมุนไพรหลากหลายชนิด</p>
-        <a href="#" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
-          อ่านต่อ
-          <i data-feather="arrow-right" class="ml-2 h-4 w-4"></i>
-        </a>
-      </div>
-    </div>
-    
-    <!-- บทความที่ 2 -->
-    <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg hover:-translate-y-1">
-      <img src="https://img5.pic.in.th/file/secure-sv1/local-2.jpg" alt="หัตถกรรมท้องถิ่น" class="w-full h-48 object-cover">
-      <div class="p-6">
-        <div class="text-xs text-gray-500 mb-2">5 พฤษภาคม 2566 • หัตถกรรม</div>
-        <h3 class="text-xl font-bold text-gray-900 mb-2">ศิลปะการทอผ้าพื้นเมืองภาคอีสาน</h3>
-        <p class="text-gray-700 mb-4">ผ้าทอมือจากภาคอีสานมีเอกลักษณ์โดดเด่นด้วยลวดลายและสีสันที่สวยงาม สะท้อนภูมิปัญญาท้องถิ่นที่สืบทอดมาหลายชั่วอายุคน</p>
-        <a href="#" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
-          อ่านต่อ
-          <i data-feather="arrow-right" class="ml-2 h-4 w-4"></i>
-        </a>
-      </div>
-    </div>
-    
-    <!-- บทความที่ 3 -->
-    <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg hover:-translate-y-1">
-      <img src="https://img5.pic.in.th/file/secure-sv1/local-3.jpg" alt="เทศกาลท้องถิ่น" class="w-full h-48 object-cover">
-      <div class="p-6">
-        <div class="text-xs text-gray-500 mb-2">28 เมษายน 2566 • เทศกาล</div>
-        <h3 class="text-xl font-bold text-gray-900 mb-2">เทศกาลประเพณีท้องถิ่นภาคใต้</h3>
-        <p class="text-gray-700 mb-4">เทศกาลและประเพณีของภาคใต้มีความหลากหลายและน่าสนใจ สะท้อนให้เห็นถึงความเชื่อและวิถีชีวิตของผู้คนในท้องถิ่น</p>
-        <a href="#" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
-          อ่านต่อ
-          <i data-feather="arrow-right" class="ml-2 h-4 w-4"></i>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- ส่วนแสดงวิดีโอแนะนำ -->
-  <div class="bg-gray-100 rounded-lg p-8 mb-12">
-    <h2 class="text-2xl font-bold text-gray-900 mb-6">วิดีโอแนะนำ</h2>
-    <div class="aspect-w-16 aspect-h-9">
-      <iframe class="rounded-lg shadow-lg" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
-    <div class="mt-4 text-center">
-      <h3 class="text-xl font-bold text-gray-900">สำรวจวิถีชีวิตชาวประมงพื้นบ้าน</h3>
-      <p class="text-gray-700">ติดตามชีวิตประจำวันของชาวประมงพื้นบ้านในภาคใต้ของประเทศไทย และเรียนรู้ภูมิปัญญาท้องถิ่นที่สืบทอดกันมาหลายชั่วอายุคน</p>
-    </div>
-  </div>
-
-  <!-- ส่วนแสดงแผนที่ท่องเที่ยวท้องถิ่น -->
-  <div class="mb-12">
-    <h2 class="text-2xl font-bold text-gray-900 mb-6">แผนที่ท่องเที่ยวท้องถิ่น</h2>
-    <div class="bg-white rounded-lg shadow-md p-4">
-      <div class="h-96 bg-gray-200 rounded-lg mb-4">
-        <!-- แทนที่ด้วย Google Maps หรือแผนที่จริง -->
-        <div class="w-full h-full flex items-center justify-center">
-          <p class="text-gray-500">แผนที่จะแสดงที่นี่ (ต้องเชื่อมต่อกับ Google Maps API)</p>
+<!-- Roadmap 2569 -->
+<section class="py-6">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Roadmap การขับเคลื่อนหลักสูตรท้องถิ่น 2569</h2>
+    <!-- Desktop: minimal horizontal stepper -->
+    <div class="hidden md:block relative max-w-5xl mx-auto">
+      <div class="absolute left-0 right-0 top-5 h-0.5 bg-slate-300 z-0"></div>
+      <div class="flex items-start justify-between">
+        <div class="flex flex-col items-center text-center">
+          <div class="w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center text-sm font-semibold relative z-10 ring-2 ring-white shadow-md transition-transform duration-200 hover:scale-110 hover:bg-indigo-700">1</div>
+          <div class="mt-2 text-sm font-medium text-gray-800">กำหนดทิศทาง</div>
+          <div class="text-xs text-gray-500">ต.ค. 2568</div>
+        </div>
+        <div class="flex flex-col items-center text-center">
+          <div class="w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center text-sm font-semibold relative z-10 ring-2 ring-white shadow-md transition-transform duration-200 hover:scale-110 hover:bg-indigo-700">2</div>
+          <div class="mt-2 text-sm font-medium text-gray-800">อบรมพี่เลี้ยง</div>
+          <div class="text-xs text-gray-500">พ.ย. 2568</div>
+        </div>
+        <div class="flex flex-col items-center text-center">
+          <div class="w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center text-sm font-semibold relative z-10 ring-2 ring-white shadow-md transition-transform duration-200 hover:scale-110 hover:bg-indigo-700">3</div>
+          <div class="mt-2 text-sm font-medium text-gray-800">หลักสูตรต้นแบบ</div>
+          <div class="text-xs text-gray-500">ธ.ค. 68 - ม.ค. 69</div>
+        </div>
+        <div class="flex flex-col items-center text-center">
+          <div class="w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center text-sm font-semibold relative z-10 ring-2 ring-white shadow-md transition-transform duration-200 hover:scale-110 hover:bg-indigo-700">4</div>
+          <div class="mt-2 text-sm font-medium text-gray-800">นิเทศรอบ 1</div>
+          <div class="text-xs text-gray-500">ก.พ. - มี.ค. 69</div>
+        </div>
+        <div class="flex flex-col items-center text-center">
+          <div class="w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center text-sm font-semibold relative z-10 ring-2 ring-white shadow-md transition-transform duration-200 hover:scale-110 hover:bg-indigo-700">5</div>
+          <div class="mt-2 text-sm font-medium text-gray-800">ขยายผล/รอบ 2</div>
+          <div class="text-xs text-gray-500">เม.ย. - มิ.ย. 69</div>
+        </div>
+        <div class="flex flex-col items-center text-center">
+          <div class="w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center text-sm font-semibold relative z-10 ring-2 ring-white shadow-md transition-transform duration-200 hover:scale-110 hover:bg-indigo-700">6</div>
+          <div class="mt-2 text-sm font-medium text-gray-800">สรุปผล/วางแผน</div>
+          <div class="text-xs text-gray-500">ก.ค. - ก.ย. 69</div>
         </div>
       </div>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <button class="bg-white hover:bg-gray-100 text-gray-800 font-medium py-2 px-4 rounded-md border border-gray-300 transition duration-300 ease-in-out flex items-center justify-center">
-          <i data-feather="map-pin" class="mr-2 h-4 w-4"></i>
-          ภาคเหนือ
-        </button>
-        <button class="bg-white hover:bg-gray-100 text-gray-800 font-medium py-2 px-4 rounded-md border border-gray-300 transition duration-300 ease-in-out flex items-center justify-center">
-          <i data-feather="map-pin" class="mr-2 h-4 w-4"></i>
-          ภาคกลาง
-        </button>
-        <button class="bg-white hover:bg-gray-100 text-gray-800 font-medium py-2 px-4 rounded-md border border-gray-300 transition duration-300 ease-in-out flex items-center justify-center">
-          <i data-feather="map-pin" class="mr-2 h-4 w-4"></i>
-          ภาคอีสาน
-        </button>
-        <button class="bg-white hover:bg-gray-100 text-gray-800 font-medium py-2 px-4 rounded-md border border-gray-300 transition duration-300 ease-in-out flex items-center justify-center">
-          <i data-feather="map-pin" class="mr-2 h-4 w-4"></i>
-          ภาคใต้
-        </button>
+    </div>
+    <!-- Mobile: minimal vertical list -->
+    <div class="md:hidden max-w-2xl mx-auto">
+      <ul class="space-y-6">
+        <li class="flex items-start gap-3">
+          <span class="mt-1 w-3 h-3 rounded-full bg-indigo-600 ring-2 ring-white transition-transform duration-200 hover:scale-125"></span>
+          <div>
+            <div class="text-sm font-medium text-gray-800">กำหนดทิศทาง</div>
+            <div class="text-xs text-gray-500">ต.ค. 2568</div>
+          </div>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="mt-1 w-3 h-3 rounded-full bg-indigo-600 ring-2 ring-white transition-transform duration-200 hover:scale-125"></span>
+          <div>
+            <div class="text-sm font-medium text-gray-800">อบรมพี่เลี้ยง</div>
+            <div class="text-xs text-gray-500">พ.ย. 2568</div>
+          </div>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="mt-1 w-3 h-3 rounded-full bg-indigo-600 ring-2 ring-white transition-transform duration-200 hover:scale-125"></span>
+          <div>
+            <div class="text-sm font-medium text-gray-800">หลักสูตรต้นแบบ</div>
+            <div class="text-xs text-gray-500">ธ.ค. 68 - ม.ค. 69</div>
+          </div>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="mt-1 w-3 h-3 rounded-full bg-indigo-600 ring-2 ring-white transition-transform duration-200 hover:scale-125"></span>
+          <div>
+            <div class="text-sm font-medium text-gray-800">นิเทศรอบ 1</div>
+            <div class="text-xs text-gray-500">ก.พ. - มี.ค. 69</div>
+          </div>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="mt-1 w-3 h-3 rounded-full bg-indigo-600 ring-2 ring-white transition-transform duration-200 hover:scale-125"></span>
+          <div>
+            <div class="text-sm font-medium text-gray-800">ขยายผล/รอบ 2</div>
+            <div class="text-xs text-gray-500">เม.ย. - มิ.ย. 69</div>
+          </div>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="mt-1 w-3 h-3 rounded-full bg-indigo-600 ring-2 ring-white transition-transform duration-200 hover:scale-125"></span>
+          <div>
+            <div class="text-sm font-medium text-gray-800">สรุปผล/วางแผน</div>
+            <div class="text-xs text-gray-500">ก.ค. - ก.ย. 69</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ระบบบริหารแหล่งเรียนรู้ท้องถิ่น (LBL) -->
+<section class="py-12">
+  <div class="container mx-auto px-4">
+    <h2 class="text-2xl font-bold text-gray-800 mb-4">ระบบบริหารแหล่งเรียนรู้ท้องถิ่น (LBL)</h2>
+    <a href="https://lbl.obec.go.th" target="_blank" rel="noopener noreferrer" class="block rounded-xl shadow-lg hover:shadow-xl transition overflow-hidden bg-gradient-to-r from-emerald-500 to-teal-600">
+      <div class="p-6 flex items-center gap-4 text-white">
+        <div class="w-12 h-12 rounded-lg bg-white/20 flex items-center justify-center">
+          <i data-feather="map" class="w-7 h-7"></i>
+        </div>
+        <div class="flex-1">
+          <div class="text-xl font-bold">คลังแหล่งเรียนรู้ท้องถิ่น สพฐ.</div>
+          <div class="text-emerald-100">เข้าถึงฐานข้อมูลแหล่งเรียนรู้ท้องถิ่น เพื่อใช้ประกอบการจัดการเรียนรู้</div>
+        </div>
+        <div class="flex items-center gap-2 text-emerald-100">
+          <span>เปิดเว็บไซต์</span>
+          <i data-feather="external-link" class="w-5 h-5"></i>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ดาวน์โหลดหลักสูตรท้องถิ่น -->
+<section class="py-8">
+  <div class="container mx-auto px-4">
+    <h2 class="text-2xl font-bold text-gray-800 mb-6">ดาวน์โหลดหลักสูตรท้องถิ่น</h2>
+    <div class="grid md:grid-cols-2 gap-6">
+      <!-- Uttaradit -->
+      <div class="bg-white rounded-xl shadow p-6 flex flex-col">
+        <img src="https://img5.pic.in.th/file/secure-sv1/Screenshot-2568-10-02-at-10.09.42.png" alt="ปกหลักสูตรท้องถิ่น จังหวัดอุตรดิตถ์" class="w-full h-full object-cover rounded-lg mb-3 cursor-pointer" data-view="utt" title="คลิกเพื่อเปิดดู">
+        <div class="flex items-start gap-4">
+          <div class="w-14 h-14 rounded-lg bg-orange-50 text-orange-600 flex items-center justify-center font-bold">UTT</div>
+          <div class="flex-1">
+            <h3 class="text-lg font-bold text-gray-800">หลักสูตร "รักษ์ถิ่น เมืองท่าเหนือ"</h3>
+            <p class="text-sm text-gray-500">ไฟล์ PDF สำหรับสถานศึกษาในจังหวัดอุตรดิตถ์</p>
+          </div>
+        </div>
+        <div class="flex items-center justify-between mt-4 text-sm text-gray-600">
+          <div>ดู <span id="utt-views">0</span> • ดาวน์โหลด <span id="utt-dls">0</span></div>
+          <div class="flex gap-2">
+            <button class="px-3 py-1.5 rounded-lg border hover:bg-gray-50" data-view="utt">เปิดดู</button>
+            <a class="px-3 py-1.5 rounded-lg bg-blue-600 text-white hover:bg-blue-700" data-dl="utt">ดาวน์โหลด</a>
+          </div>
+        </div>
+      </div>
+      <!-- Phitsanulok -->
+      <div class="bg-white rounded-xl shadow p-6 flex flex-col">
+        <img src="https://img2.pic.in.th/pic/Screenshot-2568-10-02-at-10.10.00.png" alt="ปกหลักสูตรท้องถิ่น จังหวัดพิษณุโลก" class="w-full h-full object-cover rounded-lg mb-3 cursor-pointer" data-view="phl" title="คลิกเพื่อเปิดดู">
+        <div class="flex items-start gap-4">
+          <div class="w-14 h-14 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold">PHL</div>
+          <div class="flex-1">
+            <h3 class="text-lg font-bold text-gray-800">หลักสูตร "รักษ์ถิ่น เมืองสองแคว"</h3>
+            <p class="text-sm text-gray-500">ไฟล์ PDF สำหรับสถานศึกษาในจังหวัดพิษณุโลก</p>
+          </div>
+        </div>
+        <div class="flex items-center justify-between mt-4 text-sm text-gray-600">
+          <div>ดู <span id="phl-views">0</span> • ดาวน์โหลด <span id="phl-dls">0</span></div>
+          <div class="flex gap-2">
+            <button class="px-3 py-1.5 rounded-lg border hover:bg-gray-50" data-view="phl">เปิดดู</button>
+            <a class="px-3 py-1.5 rounded-lg bg-blue-600 text-white hover:bg-blue-700" data-dl="phl">ดาวน์โหลด</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- ส่วนแสดงการลงทะเบียนรับข่าวสาร -->
-  <div class="bg-blue-600 text-white rounded-lg p-8">
-    <div class="text-center mb-6">
-      <h2 class="text-2xl font-bold mb-2">ติดตามข่าวสารท้องถิ่น</h2>
-      <p class="text-blue-100">ลงทะเบียนเพื่อรับข่าวสารและบทความใหม่ๆ เกี่ยวกับท้องถิ่นไทย</p>
-    </div>
-    <form class="max-w-md mx-auto">
-      <div class="flex">
-        <input type="email" placeholder="อีเมลของคุณ" class="flex-grow px-4 py-2 rounded-l-md focus:outline-none text-gray-900">
-        <button type="submit" class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-medium px-4 py-2 rounded-r-md transition duration-300 ease-in-out">
-          สมัครรับข่าวสาร
-        </button>
+<!-- Padlet -->
+<section class="py-8">
+  <div class="container mx-auto px-4 my-10">
+    <h2 class="text-2xl font-bold text-gray-800 mb-4">การพัฒนาหลักสูตรท้องถิ่นของสถานศึกษาขนาดเล็ก สพม.พิษณุโลก อุตรดิตถ์ (Padlet)</h2>
+    <div class="rounded-xl shadow overflow-hidden bg-gray-50">
+      <iframe
+        src="https://padlet.com/embed/ijxlsn894t3lztz1"
+        title="Padlet Board"
+        class="w-full h-[60vh] md:h-[70vh] border-0"
+        allow="camera;microphone;geolocation;display-capture;clipboard-write">
+      </iframe>
+      <div class="flex items-center justify-end bg-white px-3 py-2">
+        <a href="https://padlet.com?ref=embed" target="_blank" class="inline-flex items-center gap-2 text-xs text-gray-400 hover:text-gray-600">
+          <img src="https://padlet.net/embeds/made_with_padlet_2022.png" alt="Made with Padlet" class="h-4 w-auto">
+        </a>
       </div>
-    </form>
+    </div>
+  </div>
+</section>
+
+<!-- PDF Viewer Modal -->
+<div id="local-pdf-modal" class="fixed inset-0 hidden items-center justify-center bg-black/70 p-4 z-50">
+  <div class="bg-white w-full max-w-5xl rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+    <div class="flex items-center justify-between px-6 py-4 border-b bg-gray-50">
+      <h3 id="local-pdf-title" class="font-bold">ดูไฟล์หลักสูตรท้องถิ่น</h3>
+      <div class="flex items-center gap-3">
+        <span class="text-sm text-gray-500">ดู <span id="local-pdf-views">0</span> • ดาวน์โหลด <span id="local-pdf-dls">0</span></span>
+        <button class="text-gray-600 hover:text-black text-2xl leading-none" data-close-local>&times;</button>
+      </div>
+    </div>
+    <div class="flex-1 overflow-hidden">
+      <iframe id="local-pdf-frame" src="about:blank" class="w-full h-[70vh]" allow="fullscreen"></iframe>
+    </div>
+    <div class="p-4 border-t flex items-center justify-end gap-3">
+      <a id="local-pdf-download" href="#" target="_blank" class="inline-flex items-center gap-2 text-blue-600 hover:underline">
+        <i data-feather="download" class="w-4 h-4"></i>
+        ดาวน์โหลดไฟล์
+      </a>
+      <button class="px-3 py-1.5 rounded-lg border hover:bg-gray-50" data-close-local>ปิด</button>
+    </div>
+  </div>
+</div>
+
+<!-- Chatbot Button -->
+<button id="chatbot-toggle" class="fixed bottom-6 right-6 bg-blue-600 text-white p-4 rounded-full shadow-xl hover:bg-blue-700 transition-colors" aria-label="เปิดแชทบอท">
+  <i data-feather="message-circle" class="w-6 h-6"></i>
+</button>
+
+<!-- Chatbot Container -->
+<div id="chatbot-container" class="chatbot-container chatbot-hidden fixed bottom-0 right-0 w-full max-w-md h-96 bg-white shadow-2xl rounded-t-xl overflow-hidden" role="dialog" aria-label="กล่องโต้ตอบแชทบอท" aria-modal="false">
+  <div class="bg-blue-600 text-white p-4 flex justify-between items-center">
+    <h3 class="font-bold">แชทบอทช่วยเหลือ</h3>
+    <button id="chatbot-close" class="text-white" aria-label="ปิดแชทบอท">
+      <i data-feather="x" class="w-5 h-5"></i>
+    </button>
+  </div>
+  <div id="chat-messages" class="h-72 overflow-y-auto p-4"></div>
+  <div class="p-4 border-t flex">
+    <input id="chat-input" type="text" placeholder="พิมพ์ข้อความที่นี่..." class="flex-grow border rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" aria-label="ป้อนข้อความ">
+    <button id="chat-send" class="bg-blue-600 text-white px-4 py-2 rounded-r-lg hover:bg-blue-700" aria-label="ส่งข้อความ">
+      <i data-feather="send" class="w-5 h-5"></i>
+    </button>
   </div>
 </div>
 
 <script>
-  // เมื่อโหลดหน้าเสร็จ
-  document.addEventListener('DOMContentLoaded', function() {
-    // ตรวจสอบว่าผู้ใช้ล็อกอินแล้วหรือไม่
-    checkAuthState().then(user => {
-      if (user) {
-        console.log('User is logged in:', user.displayName);
-        // สามารถทำอะไรเพิ่มเติมสำหรับผู้ใช้ที่ล็อกอินแล้ว
-      } else {
-        console.log('User is not logged in');
-      }
-    });
-    
-    // เริ่มต้นไอคอน Feather
-    if (typeof feather !== 'undefined') {
-      feather.replace();
+  // Feather icons
+  if (typeof feather !== 'undefined') { feather.replace(); }
+
+  // ป้องกัน error: เริ่ม Vanta Globe เฉพาะเมื่อมี element
+  (function(){
+    const el = document.getElementById('vanta-globe');
+    if(el && window.VANTA && VANTA.GLOBE){
+      VANTA.GLOBE({
+        el,
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        scale: 1.00,
+        scaleMobile: 1.00,
+        color: 0x3b82f6,
+        backgroundColor: 0x2563eb,
+        size: 0.8
+      });
     }
-  });
+  })();
+
+  // ตัวนับการดู/ดาวน์โหลด + viewer สำหรับไฟล์หลักสูตรท้องถิ่น
+  (function(){
+    const STORAGE = 'local_curriculum_counts_v1';
+    const items = {
+      utt: { id: 'utt', title: 'หลักสูตรท้องถิ่น จังหวัดอุตรดิตถ์', url: 'https://drive.google.com/file/d/15KQ0ozNEe1yp8eZS3x24Pok6sM0fOMiE/view?usp=share_link' },
+      phl: { id: 'phl', title: 'หลักสูตรท้องถิ่น จังหวัดพิษณุโลก', url: 'https://drive.google.com/file/d/1xo7Iq9twiEW0APVK466pcjO3JlENm5TH/view?usp=share_link' }
+    };
+
+    function read(){ try{ return JSON.parse(localStorage.getItem(STORAGE)||'{}'); }catch{ return {}; } }
+    function write(obj){ localStorage.setItem(STORAGE, JSON.stringify(obj)); }
+    function ensure(id){ const o = read(); if(!o[id]){ o[id] = { views:0, dls:0 }; write(o); } }
+    function inc(id, key){ const o = read(); o[id] = o[id]||{views:0,dls:0}; o[id][key] = (o[id][key]||0)+1; write(o); return o[id][key]; }
+    function get(id){ const o = read()[id]||{views:0,dls:0}; return o; }
+    function driveId(url){ const m = url.match(/\/d\/([^/]+)/); return m? m[1] : null; }
+    function toPreview(url){ const id = driveId(url); return id ? `https://drive.google.com/file/d/${id}/preview` : url; }
+    function toDownload(url){ const id = driveId(url); return id ? `https://drive.google.com/uc?export=download&id=${id}` : url; }
+
+    ['utt','phl'].forEach(id => { ensure(id); const c = get(id); setCounts(id, c); });
+
+    function setCounts(id, c){
+      const vEl = document.getElementById(id+'-views');
+      const dEl = document.getElementById(id+'-dls');
+      if(vEl) vEl.textContent = c.views||0;
+      if(dEl) dEl.textContent = c.dls||0;
+    }
+
+    const modal = document.getElementById('local-pdf-modal');
+    const frame = document.getElementById('local-pdf-frame');
+    const titleEl = document.getElementById('local-pdf-title');
+    const viewsEl = document.getElementById('local-pdf-views');
+    const dlsEl = document.getElementById('local-pdf-dls');
+    const dlLink = document.getElementById('local-pdf-download');
+    function openModal(){ modal.classList.remove('hidden'); modal.classList.add('flex'); }
+    function closeModal(){ modal.classList.add('hidden'); modal.classList.remove('flex'); frame.src='about:blank'; }
+    modal.querySelectorAll('[data-close-local]').forEach(b=> b.addEventListener('click', closeModal));
+
+    document.querySelectorAll('[data-view]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-view');
+        const item = items[id]; if(!item) return;
+        const nowViews = inc(id, 'views');
+        setCounts(id, get(id));
+        titleEl.textContent = item.title;
+        viewsEl.textContent = nowViews;
+        dlsEl.textContent = get(id).dls;
+        frame.src = toPreview(item.url);
+        dlLink.href = toDownload(item.url);
+        openModal();
+      });
+    });
+    document.querySelectorAll('[data-dl]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-dl');
+        const item = items[id]; if(!item) return;
+        const nowDls = inc(id, 'dls');
+        setCounts(id, get(id));
+        window.open(toDownload(item.url), '_blank');
+      });
+    });
+  })();
+
+  // Chatbot logic (ย่อส่วนจาก GAS_local.html)
+  (function(){
+    const chatbotToggle = document.getElementById('chatbot-toggle');
+    const chatbotContainer = document.getElementById('chatbot-container');
+    const chatbotClose = document.getElementById('chatbot-close');
+    const chatMessages = document.getElementById('chat-messages');
+    const chatInput = document.getElementById('chat-input');
+    const chatSend = document.getElementById('chat-send');
+
+    function openChat(){
+      chatbotContainer.classList.remove('chatbot-hidden');
+      chatbotContainer.setAttribute('aria-modal', 'true');
+      setTimeout(() => chatInput?.focus(), 50);
+    }
+    function closeChat(){
+      chatbotContainer.classList.add('chatbot-hidden');
+      chatbotContainer.setAttribute('aria-modal', 'false');
+    }
+    function scrollToBottom(){ chatMessages.scrollTop = chatMessages.scrollHeight; }
+    function addMessage(role, text){
+      const wrap = document.createElement('div');
+      wrap.className = 'chat-message mb-3 flex ' + (role === 'user' ? 'justify-end' : 'justify-start');
+      const bubble = document.createElement('div');
+      bubble.className = (role === 'user')
+        ? 'bg-blue-600 text-white rounded-lg p-3 max-w-xs'
+        : 'bg-blue-100 text-blue-800 rounded-lg p-3 max-w-xs';
+      bubble.textContent = text;
+      wrap.appendChild(bubble);
+      chatMessages.appendChild(wrap);
+      scrollToBottom();
+    }
+    function botReply(userText){
+      const text = (userText || '').toLowerCase();
+      const contains = (...ks) => ks.some(k => text.includes(k));
+      if(contains('สมัคร','ลงทะเบียน','register','sign up')) return 'ไปที่เมนู “เข้าสู่ระบบ” เพื่อสร้างบัญชีใหม่ครับ';
+      if(contains('แบบสอบถาม','survey')) return 'ดูเมนู “แบบสอบถาม” เพื่อสร้าง/จัดการ และดูผลสรุป';
+      if(contains('นิเทศ','รายงาน','report')) return 'ใช้เมนู “บันทึกการนิเทศ” และดูรายงานผลได้ครับ';
+      if(contains('ติดต่อ','contact','อีเมล','เบอร์')) return 'ติดต่อเราได้ที่ contact@edusupervisor.ac.th ครับ';
+      if(contains('ช่วย','วิธีใช้','how','help')) return 'ฉันช่วยได้เรื่องสมัครใช้งาน, นิเทศ, แบบสอบถาม, รายงานผล ลองพิมพ์หัวข้อที่สนใจครับ';
+      return 'รับทราบครับ หากต้องการดูวิธีใช้ กดเมนู “วิธีการใช้งานเว็บไซต์นี้”';
+    }
+    function sendCurrent(){
+      const val = (chatInput.value || '').trim();
+      if(!val) return;
+      addMessage('user', val);
+      chatInput.value = '';
+      setTimeout(() => addMessage('bot', botReply(val)), 200);
+    }
+    chatbotToggle.addEventListener('click', () => {
+      if (chatbotContainer.classList.contains('chatbot-hidden')) openChat(); else closeChat();
+    });
+    chatbotClose.addEventListener('click', closeChat);
+    chatSend.addEventListener('click', sendCurrent);
+    chatInput.addEventListener('keydown', (e) => { if(e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); sendCurrent(); } });
+    document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeChat(); });
+    addMessage('bot', 'สวัสดีครับ ผมคือแชทบอทของระบบนิเทศการศึกษา พิมพ์ “ช่วย” เพื่อดูสิ่งที่ช่วยได้ครับ');
+  })();
 </script>

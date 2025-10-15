@@ -1,0 +1,473 @@
+<!-- Styles needed for spotlight and chatbot -->
+<style>
+  .chatbot-container { transition: all 0.3s ease; }
+  .chatbot-hidden { transform: translateY(100%); opacity: 0; }
+  .spotlight-card { position: relative; transition: transform 180ms ease, box-shadow 220ms ease, border-color 200ms ease; }
+  .spotlight-card:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(2, 6, 23, 0.12); }
+  .spotlight-card::before { content: ''; position: absolute; inset: -1px; border-radius: inherit; background: radial-gradient(500px circle at var(--mx, 50%) var(--my, 50%), rgba(99, 102, 241, 0.15), transparent 45%); opacity: 0; pointer-events: none; transition: opacity 200ms ease; }
+  .spotlight-card:hover::before { opacity: 1; }
+</style>
+
+<!-- Content: การเรียนรู้ AI -->
+<section class="py-16">
+  <div class="container mx-auto px-4">
+    <h1 class="text-4xl font-bold text-center mb-12 text-gray-800">การเรียนรู้ AI</h1>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div>
+        <img src="https://cdn.dribbble.com/userupload/32690165/file/original-91b920c5af3417e456bc46004300944d.gif" alt="การเรียนรู้ AI" class="rounded-lg shadow-lg">
+      </div>
+      <div>
+        <h2 class="text-2xl font-bold mb-4">เตรียมความพร้อมนักเรียนสำหรับยุคปัญญาประดิษฐ์</h2>
+        <p class="text-gray-600 mb-6">ระบบจัดการเรียนรู้เกี่ยวกับปัญญาประดิษฐ์ (AI) สำหรับการศึกษาขั้นพื้นฐาน พร้อมเครื่องมือและทรัพยากรการเรียนรู้</p>
+        <div class="space-y-4">
+          <div class="flex items-center">
+            <i data-feather="monitor" class="text-purple-600 w-6 h-6 mr-3"></i>
+            <span>บทเรียนพื้นฐานเกี่ยวกับ AI</span>
+          </div>
+          <div class="flex items-center">
+            <i data-feather="activity" class="text-purple-600 w-6 h-6 mr-3"></i>
+            <span>โครงการประยุกต์ใช้ AI ในชีวิตประจำวัน</span>
+          </div>
+          <div class="flex items-center">
+            <i data-feather="bar-chart" class="text-purple-600 w-6 h-6 mr-3"></i>
+            <span>แบบประเมินความเข้าใจเกี่ยวกับ AI</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
+
+<!-- Minimal Roadmap: ปีงบ 2569 -->
+<section class="py-6 bg-white">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Roadmap การขับเคลื่อนหลักสูตรท้องถิ่น 2569</h2>
+    <div class="hidden md:block relative max-w-5xl mx-auto">
+      <div class="absolute left-0 right-0 top-5 h-0.5 bg-slate-300 z-0"></div>
+      <div class="flex items-start justify-between">
+        <div class="flex flex-col items-center text-center">
+          <div class="w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center text-sm font-semibold relative z-10 ring-2 ring-white shadow-md transition-transform duration-200 hover:scale-110 hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-200">1</div>
+          <div class="mt-2 text-sm font-medium text-gray-800">กำหนดทิศทาง</div>
+          <div class="text-xs text-gray-500">ต.ค. 2568</div>
+        </div>
+        <div class="flex flex-col items-center text-center">
+          <div class="w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center text-sm font-semibold relative z-10 ring-2 ring-white shadow-md transition-transform duration-200 hover:scale-110 hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-200">2</div>
+          <div class="mt-2 text-sm font-medium text-gray-800">อบรมพี่เลี้ยง</div>
+          <div class="text-xs text-gray-500">พ.ย. 2568</div>
+        </div>
+        <div class="flex flex-col items-center text-center">
+          <div class="w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center text-sm font-semibold relative z-10 ring-2 ring-white shadow-md transition-transform duration-200 hover:scale-110 hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-200">3</div>
+          <div class="mt-2 text-sm font-medium text-gray-800">หลักสูตรต้นแบบ</div>
+          <div class="text-xs text-gray-500">ธ.ค. 68 - ม.ค. 69</div>
+        </div>
+        <div class="flex flex-col items-center text-center">
+          <div class="w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center text-sm font-semibold relative z-10 ring-2 ring-white shadow-md transition-transform duration-200 hover:scale-110 hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-200">4</div>
+          <div class="mt-2 text-sm font-medium text-gray-800">นิเทศรอบ 1</div>
+          <div class="text-xs text-gray-500">ก.พ. - มี.ค. 69</div>
+        </div>
+        <div class="flex flex-col items-center text-center">
+          <div class="w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center text-sm font-semibold relative z-10 ring-2 ring-white shadow-md transition-transform duration-200 hover:scale-110 hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-200">5</div>
+          <div class="mt-2 text-sm font-medium text-gray-800">ขยายผล/รอบ 2</div>
+          <div class="text-xs text-gray-500">เม.ย. - มิ.ย. 69</div>
+        </div>
+        <div class="flex flex-col items-center text-center">
+          <div class="w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center text-sm font-semibold relative z-10 ring-2 ring-white shadow-md transition-transform duration-200 hover:scale-110 hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-200">6</div>
+          <div class="mt-2 text-sm font-medium text-gray-800">สรุปผล/วางแผน</div>
+          <div class="text-xs text-gray-500">ก.ค. - ก.ย. 69</div>
+        </div>
+      </div>
+    </div>
+    <div class="md:hidden max-w-2xl mx-auto">
+      <ul class="space-y-6">
+        <li class="flex items-start gap-3">
+          <span class="mt-1 w-3 h-3 rounded-full bg-indigo-600 ring-2 ring-white transition-transform duration-200 hover:scale-125"></span>
+          <div>
+            <div class="text-sm font-medium text-gray-800">กำหนดทิศทาง</div>
+            <div class="text-xs text-gray-500">ต.ค. 2568</div>
+          </div>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="mt-1 w-3 h-3 rounded-full bg-indigo-600 ring-2 ring-white transition-transform duration-200 hover:scale-125"></span>
+          <div>
+            <div class="text-sm font-medium text-gray-800">อบรมพี่เลี้ยง</div>
+            <div class="text-xs text-gray-500">พ.ย. 2568</div>
+          </div>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="mt-1 w-3 h-3 rounded-full bg-indigo-600 ring-2 ring-white transition-transform duration-200 hover:scale-125"></span>
+          <div>
+            <div class="text-sm font-medium text-gray-800">หลักสูตรต้นแบบ</div>
+            <div class="text-xs text-gray-500">ธ.ค. 68 - ม.ค. 69</div>
+          </div>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="mt-1 w-3 h-3 rounded-full bg-indigo-600 ring-2 ring-white transition-transform duration-200 hover:scale-125"></span>
+          <div>
+            <div class="text-sm font-medium text-gray-800">นิเทศรอบ 1</div>
+            <div class="text-xs text-gray-500">ก.พ. - มี.ค. 69</div>
+          </div>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="mt-1 w-3 h-3 rounded-full bg-indigo-600 ring-2 ring-white transition-transform duration-200 hover:scale-125"></span>
+          <div>
+            <div class="text-sm font-medium text-gray-800">ขยายผล/รอบ 2</div>
+            <div class="text-xs text-gray-500">เม.ย. - มิ.ย. 69</div>
+          </div>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="mt-1 w-3 h-3 rounded-full bg-indigo-600 ring-2 ring-white transition-transform duration-200 hover:scale-125"></span>
+          <div>
+            <div class="text-sm font-medium text-gray-800">สรุปผล/วางแผน</div>
+            <div class="text-xs text-gray-500">ก.ค. - ก.ย. 69</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- LEAD Education (IPST) Platform -->
+<section class="py-12 bg-white">
+  <div class="container mx-auto px-4">
+    <div class="spotlight-card rounded-2xl border border-gray-200 bg-white p-6 md:p-8 flex flex-col md:flex-row items-center gap-6">
+      <div class="flex items-center gap-4 md:gap-6 w-full md:w-auto">
+        <img src="https://i.ytimg.com/vi/1nT4pVujPMg/hq720.jpg?sqp=-oaymwEXCK4FEIIDSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLBgDHMwllT5qUF6SbBMkFUHYbOLrw" alt="LEAD Education" class="w-83 h-60 rounded-lg shadow-md" onerror="this.onerror=null; this.src='https://img.icons8.com/?size=96&id=23264&format=png';">
+        <div>
+          <h3 class="text-xl md:text-2xl font-bold text-gray-900">LEAD Education Platform — สสวท.</h3>
+          <p class="text-gray-600 text-sm md:text-base">แพลตฟอร์มเรียนรู้และพัฒนาศักยภาพครู/นักเรียน ด้วยเทคโนโลยีปัญญาประดิษฐ์ (AI)</p>
+        </div>
+      </div>
+      <div class="flex-1"></div>
+      <div class="w-full md:w-auto">
+        <a href="https://lms.mooc.meca.in.th" target="_blank" rel="noopener" class="group inline-flex items-center justify-center w-full md:w-auto px-5 py-3 rounded-xl text-white font-semibold shadow-lg transition-transform duration-200 hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-purple-200 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500">
+          ไปยังแพลตฟอร์ม LEAD Education
+          <i data-feather="external-link" class="w-4 h-4 ml-2 transition-transform duration-200 group-hover:translate-x-0.5"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- แนวทางการนำรายวิชาเพิ่มเติม “ปัญญาประดิษฐ์” ไปใช้ -->
+<section class="py-14 bg-gray-50">
+  <div class="container mx-auto px-4">
+    <div class="mb-8 text-center">
+      <h2 class="text-2xl md:text-3xl font-bold text-gray-900">แนวทางการนำรายวิชาเพิ่มเติม “ปัญญาประดิษฐ์” ไปใช้ในระดับ ม.ต้น และ ม.ปลาย</h2>
+      <p class="mt-2 text-gray-600 text-sm md:text-base">หนังสือสั่งการและเอกสารประกอบสำหรับสถานศึกษา ครูผู้สอน และผู้เกี่ยวข้อง</p>
+    </div>
+
+    <!-- หนังสือสั่งการ: PDF อ่านได้ทันที + ดาวน์โหลดได้ -->
+    <div class="bg-gray-50 border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
+      <div class="px-4 md:px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <i data-feather="file-text" class="w-5 h-5 text-indigo-600"></i>
+          <div>
+            <div class="font-semibold text-gray-800">หนังสือสั่งการ: แนวทางรายวิชาเพิ่มเติม “ปัญญาประดิษฐ์”</div>
+            <div class="text-sm text-gray-500">แหล่งที่มา: สพฐ. | ไฟล์ PDF</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <a href="https://my2568.ict39.net/data/tkk2/25680530_155315_2677.pdf" target="_blank" class="inline-flex items-center px-3 py-1.5 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700">
+            เปิดแท็บใหม่
+            <i data-feather="external-link" class="w-4 h-4 ml-2"></i>
+          </a>
+          <a href="https://my2568.ict39.net/data/tkk2/25680530_155315_2677.pdf" download class="inline-flex items-center px-3 py-1.5 rounded-lg bg-white border text-sm font-medium hover:bg-gray-50">
+            ดาวน์โหลด
+            <i data-feather="download" class="w-4 h-4 ml-2"></i>
+          </a>
+        </div>
+      </div>
+      <div class="bg-white border-t border-gray-200">
+        <object data="https://my2568.ict39.net/data/tkk2/25680530_155315_2677.pdf" type="application/pdf" class="w-full h-[70vh] hidden md:block"></object>
+        <div class="md:hidden p-4 text-sm text-gray-600">อุปกรณ์ของคุณไม่รองรับการแสดงเอกสารในหน้านี้ กรุณากด “เปิดแท็บใหม่” หรือ “ดาวน์โหลด” ด้านบน</div>
+      </div>
+    </div>
+
+    <!-- เอกสารประกอบเพิ่มเติม -->
+    <div class="mt-10 grid md:grid-cols-3 gap-6">
+      <!-- คำอธิบายรายวิชา -->
+      <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="inline-flex items-center px-2 py-0.5 text-[11px] font-semibold rounded-full bg-amber-50 text-amber-700">เอกสารประกอบ</span>
+          <i data-feather="book-open" class="w-4 h-4 text-amber-600"></i>
+        </div>
+        <h3 class="font-semibold text-gray-800">ตัวอย่างคำอธิบายรายวิชา</h3>
+        <p class="mt-2 text-sm text-gray-600">ตัวอย่างคำอธิบายรายวิชาเพิ่มเติม “ปัญญาประดิษฐ์” สำหรับสถานศึกษา</p>
+        <div class="mt-4 flex items-center gap-3">
+          <a href="https://drive.google.com/file/d/1IipK2-l9yM_yMMvxurIXIfJXnKahBaHs/view?usp=share_link" class="ai-doc-view inline-flex items-center px-3 py-1.5 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700" data-pdf-title="ตัวอย่างคำอธิบายรายวิชา" data-pdf-url="https://drive.google.com/file/d/1IipK2-l9yM_yMMvxurIXIfJXnKahBaHs/view?usp=share_link">
+            อ่านออนไลน์
+            <i data-feather="eye" class="w-4 h-4 ml-2"></i>
+          </a>
+          <a href="https://drive.google.com/uc?export=download&id=1IipK2-l9yM_yMMvxurIXIfJXnKahBaHs" class="inline-flex items-center px-3 py-1.5 rounded-lg bg-white border text-sm font-medium hover:bg-gray-50">
+            ดาวน์โหลด
+            <i data-feather="download" class="w-4 h-4 ml-2"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- คู่มือครู ม.ต้น -->
+      <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="inline-flex items-center px-2 py-0.5 text-[11px] font-semibold rounded-full bg-emerald-50 text-emerald-700">คู่มือครู</span>
+          <i data-feather="users" class="w-4 h-4 text-emerald-600"></i>
+        </div>
+        <h3 class="font-semibold text-gray-800">คู่มือครู ระดับชั้น ม.ต้น</h3>
+        <p class="mt-2 text-sm text-gray-600">แนวทางการจัดการเรียนรู้และประเมินผลรายวิชาเพิ่มเติม “ปัญญาประดิษฐ์”</p>
+        <div class="mt-4 flex items-center gap-3">
+          <a href="https://drive.google.com/file/d/1H093Lvb7VHVGkul-VpJLGphzfDMNixvh/view?usp=sharing" class="ai-doc-view inline-flex items-center px-3 py-1.5 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700" data-pdf-title="คู่มือครู ระดับชั้น ม.ต้น" data-pdf-url="https://drive.google.com/file/d/1H093Lvb7VHVGkul-VpJLGphzfDMNixvh/view?usp=sharing">
+            อ่านออนไลน์
+            <i data-feather="eye" class="w-4 h-4 ml-2"></i>
+          </a>
+          <a href="https://drive.google.com/uc?export=download&id=1H093Lvb7VHVGkul-VpJLGphzfDMNixvh" class="inline-flex items-center px-3 py-1.5 rounded-lg bg-white border text-sm font-medium hover:bg-gray-50">
+            ดาวน์โหลด
+            <i data-feather="download" class="w-4 h-4 ml-2"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- คู่มือครู ม.ปลาย -->
+      <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="inline-flex items-center px-2 py-0.5 text-[11px] font-semibold rounded-full bg-violet-50 text-violet-700">คู่มือครู</span>
+          <i data-feather="user-check" class="w-4 h-4 text-violet-600"></i>
+        </div>
+        <h3 class="font-semibold text-gray-800">คู่มือครู ระดับชั้น ม.ปลาย</h3>
+        <p class="mt-2 text-sm text-gray-600">ตัวอย่างแผนการสอนและแนวทางการจัดกิจกรรมการเรียนรู้</p>
+        <div class="mt-4 flex items-center gap-3">
+          <a href="https://drive.google.com/file/d/1L509E6-CgyHVRrmYRfcHTeAfItVO_4WX/view?usp=sharing" class="ai-doc-view inline-flex items-center px-3 py-1.5 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700" data-pdf-title="คู่มือครู ระดับชั้น ม.ปลาย" data-pdf-url="https://drive.google.com/file/d/1L509E6-CgyHVRrmYRfcHTeAfItVO_4WX/view?usp=sharing">
+            อ่านออนไลน์
+            <i data-feather="eye" class="w-4 h-4 ml-2"></i>
+          </a>
+          <a href="https://drive.google.com/uc?export=download&id=1L509E6-CgyHVRrmYRfcHTeAfItVO_4WX" class="inline-flex items-center px-3 py-1.5 rounded-lg bg-white border text-sm font-medium hover:bg-gray-50">
+            ดาวน์โหลด
+            <i data-feather="download" class="w-4 h-4 ml-2"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>feather.replace();</script>
+<script>
+  // Spotlight mouse effect for LEAD card
+  (function(){
+    const cards = document.querySelectorAll('.spotlight-card');
+    cards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const r = card.getBoundingClientRect();
+        const x = ((e.clientX - r.left) / r.width) * 100;
+        const y = ((e.clientY - r.top) / r.height) * 100;
+        card.style.setProperty('--mx', x + '%');
+        card.style.setProperty('--my', y + '%');
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.removeProperty('--mx');
+        card.style.removeProperty('--my');
+      });
+    });
+  })();
+</script>
+
+<!-- Modal: AI Document Viewer -->
+<div id="ai-doc-modal" class="fixed inset-0 z-50 hidden">
+  <div class="absolute inset-0 bg-black/60"></div>
+  <div class="relative mx-auto my-8 w-11/12 max-w-5xl bg-white rounded-xl shadow-2xl overflow-hidden">
+    <div class="px-4 py-3 border-b flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <i data-feather="file-text" class="w-5 h-5 text-indigo-600"></i>
+        <h3 id="ai-doc-title" class="font-bold text-gray-800">เอกสาร</h3>
+      </div>
+      <div class="flex items-center gap-3">
+        <a id="ai-doc-download" href="#" target="_blank" class="inline-flex items-center px-3 py-1.5 rounded-lg bg-white border text-sm font-medium hover:bg-gray-50">
+          ดาวน์โหลด
+          <i data-feather="download" class="w-4 h-4 ml-2"></i>
+        </a>
+        <button id="ai-doc-close" class="text-gray-500 hover:text-gray-800 text-xl leading-none">×</button>
+      </div>
+    </div>
+    <div class="p-0">
+      <iframe id="ai-doc-frame" src="" class="w-full h-[70vh]" title="Document Viewer" frameborder="0" loading="lazy" referrerpolicy="no-referrer"></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- Chatbot Button -->
+<button id="chatbot-toggle" class="fixed bottom-6 right-6 bg-blue-600 text-white p-4 rounded-full shadow-xl hover:bg-blue-700 transition-colors" aria-label="เปิดแชทบอท">
+  <i data-feather="message-circle" class="w-6 h-6"></i>
+</button>
+
+<!-- Chatbot Container -->
+<div id="chatbot-container" class="chatbot-container chatbot-hidden fixed bottom-0 right-0 w-full max-w-md h-96 bg-white shadow-2xl rounded-t-xl overflow-hidden" role="dialog" aria-label="กล่องโต้ตอบแชทบอท" aria-modal="false">
+  <div class="bg-blue-600 text-white p-4 flex justify-between items-center">
+    <h3 class="font-bold">แชทบอทช่วยเหลือ</h3>
+    <button id="chatbot-close" class="text-white" aria-label="ปิดแชทบอท">
+      <i data-feather="x" class="w-5 h-5"></i>
+    </button>
+  </div>
+  <div id="chat-messages" class="h-72 overflow-y-auto p-4"></div>
+  <div class="p-4 border-t flex">
+    <input id="chat-input" type="text" placeholder="พิมพ์ข้อความที่นี่..." class="flex-grow border rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" aria-label="ป้อนข้อความ">
+    <button id="chat-send" class="bg-blue-600 text-white px-4 py-2 rounded-r-lg hover:bg-blue-700" aria-label="ส่งข้อความ">
+      <i data-feather="send" class="w-5 h-5"></i>
+    </button>
+  </div>
+</div>
+
+<script>
+  feather.replace();
+  // AI Docs modal: open Google Drive or direct PDF in popup
+  (function(){
+    const $ = (s) => document.querySelector(s);
+    const $$ = (s) => Array.from(document.querySelectorAll(s));
+    const modal = $('#ai-doc-modal');
+    const titleEl = $('#ai-doc-title');
+    const frame = $('#ai-doc-frame');
+    const btnClose = $('#ai-doc-close');
+    const btnDl = $('#ai-doc-download');
+
+    function getDriveId(url){
+      try{
+        const u = new URL(url, window.location.origin);
+        const m = u.pathname.match(/\/file\/d\/([^/]+)/);
+        return m ? m[1] : (u.searchParams.get('id') || '');
+      }catch{ return ''; }
+    }
+    function toPreview(url){
+      try{
+        const u = new URL(url, window.location.origin);
+        if(u.hostname.includes('drive.google.com')){
+          const id = getDriveId(url);
+          if(id) return `https://drive.google.com/file/d/${id}/preview`;
+        }
+      }catch{}
+      return url; // fall back
+    }
+    function toDownload(url){
+      const id = getDriveId(url);
+      return id ? `https://drive.google.com/uc?export=download&id=${id}` : url;
+    }
+    function openModal({ title, url }){
+      titleEl.textContent = title || 'เอกสาร';
+      frame.src = toPreview(url);
+      btnDl.href = toDownload(url);
+      document.body.classList.add('overflow-hidden');
+      modal.classList.remove('hidden');
+    }
+    function closeModal(){
+      modal.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+      frame.src = '';
+    }
+
+    // Bind openers
+    $$('.ai-doc-view[data-pdf-url]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal({ title: a.dataset.pdfTitle || a.textContent.trim(), url: a.dataset.pdfUrl || a.href });
+      });
+    });
+
+    // Close handlers
+    btnClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal(); });
+  })();
+
+  // Initialize Vanta.js globe (safe-guard if element not found)
+  (function(){
+    const el = document.getElementById('vanta-globe');
+    try{
+      if(window.VANTA && el){
+        VANTA.GLOBE({
+          el,
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+          minHeight: 200.00,
+          minWidth: 200.00,
+          scale: 1.00,
+          scaleMobile: 1.00,
+          color: 0x3b82f6,
+          backgroundColor: 0x2563eb,
+          size: 0.8
+        });
+      }
+    }catch(e){ /* ignore */ }
+  })();
+
+  // Chatbot: toggle + simple logic
+  const chatbotToggle = document.getElementById('chatbot-toggle');
+  const chatbotContainer = document.getElementById('chatbot-container');
+  const chatbotClose = document.getElementById('chatbot-close');
+  const chatMessages = document.getElementById('chat-messages');
+  const chatInput = document.getElementById('chat-input');
+  const chatSend = document.getElementById('chat-send');
+
+  function openChat(){
+    chatbotContainer.classList.remove('chatbot-hidden');
+    chatbotContainer.setAttribute('aria-modal', 'true');
+    setTimeout(() => chatInput?.focus(), 50);
+  }
+  function closeChat(){
+    chatbotContainer.classList.add('chatbot-hidden');
+    chatbotContainer.setAttribute('aria-modal', 'false');
+  }
+  function scrollToBottom(){
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+  function addMessage(role, text){
+    const wrap = document.createElement('div');
+    wrap.className = 'chat-message mb-3 flex ' + (role === 'user' ? 'justify-end' : 'justify-start');
+
+    const bubble = document.createElement('div');
+    bubble.className = (role === 'user')
+      ? 'bg-blue-600 text-white rounded-lg p-3 max-w-xs'
+      : 'bg-blue-100 text-blue-800 rounded-lg p-3 max-w-xs';
+    bubble.textContent = text;
+
+    wrap.appendChild(bubble);
+    chatMessages.appendChild(wrap);
+    scrollToBottom();
+  }
+  function botReply(userText){
+    const text = (userText || '').toLowerCase();
+    const contains = (...ks) => ks.some(k => text.includes(k));
+
+    if(contains('สมัคร', 'ลงทะเบียน', 'register', 'sign up')){
+      return 'การลงทะเบียน: ไปที่ปุ่ม “เข้าสู่ระบบ” แล้วเลือกสร้างบัญชีใหม่ หรือเชื่อมบัญชีหน่วยงาน หากต้องการคู่มือ กด “วิธีการใช้งานเว็บไซต์นี้”.';
+    }
+    if(contains('แบบสอบถาม', 'questionnaire', 'survey')){
+      return 'สร้าง/จัดการแบบสอบถาม: ไปที่เมนู “แบบสอบถาม” เลือกสร้างแบบฟอร์ม กำหนดผู้ตอบ และดูสรุปผลได้แบบเรียลไทม์.';
+    }
+    if(contains('นิเทศ', 'รายงาน', 'report')){
+      return 'บันทึกการนิเทศและรายงาน: ใช้เมนู “บันทึกการนิเทศ” เพื่อกรอกข้อมูล/อัปโหลดไฟล์ และดูรายงานในเมนู “รายงานผล”.';
+    }
+    if(contains('ติดต่อ', 'contact', 'เบอร์', 'อีเมล')){
+      return 'ติดต่อเรา: contact@edusupervisor.ac.th หรือ 02-123-4567 (เวลาราชการ).';
+    }
+    if(contains('ช่วย', 'วิธีใช้', 'how', 'help')){
+      return 'ฉันช่วยได้เรื่องสมัครใช้งาน, บันทึกการนิเทศ, แบบสอบถาม, รายงานผล และข้อมูลติดต่อ ลองพิมพ์หัวข้อที่สนใจได้เลยครับ.';
+    }
+    if(contains('ai', 'coding')){
+      return 'เนื้อหา AI และ Coding: ดูที่เมนู “การเรียนรู้ CODING/AI” จะมีสื่อการเรียนรู้และลิงก์ที่เกี่ยวข้อง.';
+    }
+    return 'ขอบคุณครับ รับทราบคำถามแล้ว ขณะนี้ยังเป็นเวอร์ชันทดลอง หากต้องการความช่วยเหลือด่วน แนะนำเมนู “วิธีการใช้งานเว็บไซต์นี้” หรือพิมพ์คำสำคัญ เช่น “สมัคร”, “แบบสอบถาม”, “รายงาน”, “ติดต่อ”.';
+  }
+  function sendCurrent(){
+    const val = (chatInput.value || '').trim();
+    if(!val) return;
+    addMessage('user', val);
+    chatInput.value = '';
+    setTimeout(() => addMessage('bot', botReply(val)), 200);
+  }
+
+  chatbotToggle.addEventListener('click', () => {
+    if (chatbotContainer.classList.contains('chatbot-hidden')) openChat(); else closeChat();
+  });
+  chatbotClose.addEventListener('click', closeChat);
+  chatSend.addEventListener('click', sendCurrent);
+  chatInput.addEventListener('keydown', (e) => { if(e.key === 'Enter') sendCurrent(); });
+  // Welcome message
+  addMessage('bot', 'สวัสดีครับ! ฉันคือแชทบอทช่วยเหลือ ถ้าต้องการดูเนื้อหา AI/Coding ลองเปิดเมนูที่เกี่ยวข้องได้เลย หรือพิมพ์หัวข้อเพื่อรับคำแนะนำเบื้องต้นครับ');
+</script>
