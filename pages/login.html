@@ -1,0 +1,157 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-md">
+    <div>
+      <div class="flex justify-center">
+        <img src="https://img5.pic.in.th/file/secure-sv1/Eb4cb506143f520ba.png" alt="ED Space Logo" class="h-12 w-auto">
+      </div>
+      <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">เข้าสู่ระบบ</h2>
+      <p class="mt-2 text-center text-sm text-gray-600">
+        หรือ
+        <a href="#" id="register-link" class="font-medium text-blue-600 hover:text-blue-500">
+          สมัครสมาชิกใหม่
+        </a>
+      </p>
+    </div>
+    
+    <!-- ฟอร์มล็อกอิน -->
+    <form id="login-form" class="mt-8 space-y-6">
+      <div class="rounded-md shadow-sm -space-y-px">
+        <div>
+          <label for="email-address" class="sr-only">อีเมล</label>
+          <input id="email-address" name="email" type="email" autocomplete="email" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" placeholder="อีเมล">
+        </div>
+        <div>
+          <label for="password" class="sr-only">รหัสผ่าน</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" placeholder="รหัสผ่าน">
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between">
+        <div class="flex items-center">
+          <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+          <label for="remember-me" class="ml-2 block text-sm text-gray-900">
+            จดจำฉัน
+          </label>
+        </div>
+
+        <div class="text-sm">
+          <a href="#" class="font-medium text-blue-600 hover:text-blue-500">
+            ลืมรหัสผ่าน?
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+          <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+            <svg class="h-5 w-5 text-blue-500 group-hover:text-blue-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+            </svg>
+          </span>
+          เข้าสู่ระบบ
+        </button>
+      </div>
+    </form>
+    
+    <!-- ฟอร์มลงทะเบียน (ซ่อนไว้เริ่มต้น) -->
+    <form id="register-form" class="mt-8 space-y-6 hidden">
+      <div class="rounded-md shadow-sm -space-y-px">
+        <div>
+          <label for="register-name" class="sr-only">ชื่อ-นามสกุล</label>
+          <input id="register-name" name="name" type="text" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" placeholder="ชื่อ-นามสกุล">
+        </div>
+        <div>
+          <label for="register-email" class="sr-only">อีเมล</label>
+          <input id="register-email" name="email" type="email" autocomplete="email" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" placeholder="อีเมล">
+        </div>
+        <div>
+          <label for="register-password" class="sr-only">รหัสผ่าน</label>
+          <input id="register-password" name="password" type="password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" placeholder="รหัสผ่าน">
+        </div>
+        <div>
+          <label for="confirm-password" class="sr-only">ยืนยันรหัสผ่าน</label>
+          <input id="confirm-password" name="confirm-password" type="password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" placeholder="ยืนยันรหัสผ่าน">
+        </div>
+      </div>
+
+      <div>
+        <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+          สมัครสมาชิก
+        </button>
+      </div>
+      
+      <div class="text-center">
+        <a href="#" id="login-link" class="font-medium text-blue-600 hover:text-blue-500">
+          มีบัญชีอยู่แล้ว? เข้าสู่ระบบ
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const loginForm = document.getElementById('login-form');
+    const registerForm = document.getElementById('register-form');
+    const registerLink = document.getElementById('register-link');
+    const loginLink = document.getElementById('login-link');
+    
+    // สลับระหว่างฟอร์มล็อกอินและลงทะเบียน
+    registerLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      loginForm.classList.add('hidden');
+      registerForm.classList.remove('hidden');
+    });
+    
+    loginLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      registerForm.classList.add('hidden');
+      loginForm.classList.remove('hidden');
+    });
+    
+    // จัดการการส่งฟอร์มล็อกอิน
+    loginForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('email-address').value;
+      const password = document.getElementById('password').value;
+      
+      // เรียกใช้ฟังก์ชันล็อกอินจาก Firebase
+      loginWithEmail(email, password)
+        .then((userCredential) => {
+          // ล็อกอินสำเร็จ
+          window.location.href = '?path=dashboard';
+        })
+        .catch((error) => {
+          // แสดงข้อความผิดพลาด
+          alert('เข้าสู่ระบบไม่สำเร็จ: ' + error.message);
+        });
+    });
+    
+    // จัดการการส่งฟอร์มลงทะเบียน
+    registerForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('register-name').value;
+      const email = document.getElementById('register-email').value;
+      const password = document.getElementById('register-password').value;
+      const confirmPassword = document.getElementById('confirm-password').value;
+      
+      // ตรวจสอบรหัสผ่านตรงกัน
+      if (password !== confirmPassword) {
+        alert('รหัสผ่านไม่ตรงกัน');
+        return;
+      }
+      
+      // เรียกใช้ฟังก์ชันลงทะเบียนจาก Firebase
+      registerWithEmail(email, password, name)
+        .then((userCredential) => {
+          // ลงทะเบียนสำเร็จ
+          alert('ลงทะเบียนสำเร็จ');
+          window.location.href = '?path=dashboard';
+        })
+        .catch((error) => {
+          // แสดงข้อความผิดพลาด
+          alert('ลงทะเบียนไม่สำเร็จ: ' + error.message);
+        });
+    });
+  });
+</script>
