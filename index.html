@@ -519,7 +519,859 @@
         console.error('initCoding error:', err);
       }
     };
-    
+
+    window.initShareandshow = function() {
+      try {
+        if (typeof window._shareCleanup === 'function') {
+          try { window._shareCleanup(); } catch (cleanupError) {}
+        }
+
+        const cleanupFns = [];
+        window._shareCleanup = () => {
+          while (cleanupFns.length) {
+            const fn = cleanupFns.pop();
+            try { fn(); } catch {}
+          }
+        };
+
+        if (typeof feather !== 'undefined') {
+          feather.replace();
+        }
+
+        const $ = (sel) => document.querySelector(sel);
+        const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+        const addListener = (target, type, handler) => {
+          if (!target) return;
+          target.addEventListener(type, handler);
+          cleanupFns.push(() => target.removeEventListener(type, handler));
+        };
+
+        const globeEl = document.getElementById('vanta-globe');
+        if (globeEl && window.VANTA && typeof VANTA.GLOBE === 'function') {
+          try { window._vantaInstance?.destroy?.(); } catch {}
+          window._vantaInstance = VANTA.GLOBE({
+            el: globeEl,
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x3b82f6,
+            backgroundColor: 0x2563eb,
+            size: 0.8
+          });
+        }
+
+        const elGrid = $('#board-grid');
+        const elSearch = $('#board-search');
+        const elTags = $('#board-tags');
+        const modalCreate = $('#modal-create');
+        const modalView = $('#modal-view');
+        const openCreateBtn = $('#open-create');
+        const createForm = $('#create-form');
+        const fTitle = $('#f-title');
+        const fAuthor = $('#f-author');
+        const fPdf = $('#f-pdf');
+        const fThumb = $('#f-thumb');
+        const fTags = $('#f-tags');
+        const fDesc = $('#f-desc');
+        const vTitle = $('#view-title');
+        const vLikeCount = $('#view-like-count');
+        const vViewCount = $('#view-view-count');
+        const vFrame = $('#viewer-frame');
+        const vDownload = $('#btn-download');
+        const vComments = $('#comments-list');
+        const viewAuthor = $('#view-author');
+        const viewTags = $('#view-tags');
+        const btnLike = $('#btn-like');
+        const commentForm = $('#comment-form');
+        const hasBoard = elGrid && elSearch && elTags && modalCreate && modalView && createForm && fTitle && fPdf;
+
+        let items = [];
+        let liked = new Set();
+        let commentsMap = {};
+        let filterTag = null;
+        let activeId = null;
+
+        if (hasBoard) {
+          const STORAGE_ITEMS = 'edspace_share_items_v1';
+          const STORAGE_LIKES = 'edspace_share_likes_v1';
+          const STORAGE_COMMENTS = 'edspace_share_comments_v1';
+
+          const readJSON = (key, fallback) => {
+            try {
+              const raw = localStorage.getItem(key);
+              return raw ? JSON.parse(raw) : fallback;
+            } catch {
+              return fallback;
+            }
+          };
+          const writeJSON = (key, value) => {
+            try { localStorage.setItem(key, JSON.stringify(value)); } catch {}
+          };
+          const persist = () => {
+            writeJSON(STORAGE_ITEMS, items);
+            writeJSON(STORAGE_LIKES, Array.from(liked));
+            writeJSON(STORAGE_COMMENTS, commentsMap);
+          };
+          const uid = () => `id_${Math.random().toString(36).slice(2)}${Date.now().toString(36)}`;
+          const demoItem = (title, author, pdfUrl, thumbUrl, tags) => ({
+            id: uid(),
+            title,
+            author,
+            pdfUrl,
+            thumbUrl,
+            tags,
+            desc: '',
+            likes: 0,
+            views: 0,
+            createdAt: Date.now()
+          });
+          const escapeHtml = (val) => (val || '').replace(/[&<>"]/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[m]));
+
+          items = readJSON(STORAGE_ITEMS, []);
+          liked = new Set(readJSON(STORAGE_LIKES, []));
+          commentsMap = readJSON(STORAGE_COMMENTS, {});
+          if (!Array.isArray(items) || items.length === 0) {
+            items = [
+              demoItem('การจัดการเรียนรู้แบบโครงงาน (STEM)', 'ครูตัวอย่าง โรงเรียนก้าวหน้า', 'https://arxiv.org/pdf/2107.07502.pdf', '', ['STEM', 'วิทยาศาสตร์']),
+              demoItem('คู่มือการใช้สื่อดิจิทัลในห้องเรียน', 'ครูไอที โรงเรียนดิจิทัล', 'https://arxiv.org/pdf/1706.03762.pdf', '', ['เทคโนโลยี', 'สื่อการสอน']),
+              demoItem('รูปแบบการนิเทศภายในโรงเรียน', 'ผู้บริหารสถานศึกษา', 'https://arxiv.org/pdf/1810.04805.pdf', '', ['นิเทศการศึกษา'])
+            ];
+            persist();
+          }
+
+          function renderTags() {
+            if (!elTags) return;
+            const set = new Set();
+            items.forEach((it) => (it.tags || []).forEach((tag) => set.add(tag)));
+            const all = Array.from(set).sort();
+            elTags.innerHTML = '';
+            if (all.length === 0) return;
+            const makeBtn = (label, tagVal) => {
+              const btn = document.createElement('button');
+              btn.className = 'px-3 py-1 rounded-full text-sm border ' + (filterTag === tagVal ? 'bg-blue-600 text-white border-blue-600' : 'hover:bg-gray-50');
+              btn.textContent = label;
+              btn.addEventListener('click', () => {
+                filterTag = filterTag === tagVal ? null : tagVal;
+                render();
+              });
+              return btn;
+            };
+            elTags.appendChild(makeBtn('ทั้งหมด', null));
+            all.forEach((tag) => elTags.appendChild(makeBtn(tag, tag)));
+          }
+
+          function createCard(it) {
+            const card = document.createElement('div');
+            card.className = 'bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden flex flex-col';
+            const tagsHtml = (it.tags || []).map((tag) => `<span class="px-2 py-0.5 text-xs bg-gray-100 rounded">${escapeHtml(tag)}</span>`).join(' ');
+            const likeActive = liked.has(it.id) ? 'text-rose-600' : 'text-gray-500';
+            const thumb = it.thumbUrl
+              ? `<img src="${escapeHtml(it.thumbUrl)}" alt="thumb" class="w-full h-40 object-cover">`
+              : '<div class="w-full h-40 bg-gray-100 flex items-center justify-center text-gray-400">PDF</div>';
+            card.innerHTML = `
+                ${thumb}
+                <div class="p-4 flex-1 flex flex-col">
+                    <h3 class="font-bold text-gray-800 line-clamp-2">${escapeHtml(it.title)}</h3>
+                    <p class="text-sm text-gray-500 mt-1">${escapeHtml(it.author || '')}</p>
+                    <div class="flex flex-wrap gap-2 mt-2">${tagsHtml}</div>
+                    <div class="flex items-center justify-between mt-auto pt-3">
+                        <div class="text-xs text-gray-500">ดู ${it.views || 0} • ❤ ${it.likes || 0}</div>
+                        <div class="flex items-center gap-2">
+                            <button class="text-sm text-blue-600 hover:underline" data-view>เปิดดู</button>
+                            <button class="text-sm ${likeActive} hover:text-rose-600" data-like>ถูกใจ</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            const viewBtn = card.querySelector('[data-view]');
+            const likeBtn = card.querySelector('[data-like]');
+            if (viewBtn) {
+              viewBtn.addEventListener('click', () => openViewer(it.id));
+            }
+            if (likeBtn) {
+              likeBtn.addEventListener('click', () => toggleLike(it.id));
+            }
+            return card;
+          }
+
+          function render() {
+            if (!elGrid) return;
+            const query = (elSearch.value || '').toLowerCase().trim();
+            const filtered = items
+              .filter((it) => {
+                const text = (it.title + ' ' + (it.author || '') + ' ' + (it.tags || []).join(' ')).toLowerCase();
+                const okQuery = query === '' || text.includes(query);
+                const okTag = !filterTag || (it.tags || []).includes(filterTag);
+                return okQuery && okTag;
+              })
+              .sort((a, b) => b.createdAt - a.createdAt);
+            elGrid.innerHTML = '';
+            filtered.forEach((it) => elGrid.appendChild(createCard(it)));
+            renderTags();
+          }
+
+          function openCreate() {
+            if (!modalCreate) return;
+            modalCreate.classList.remove('hidden');
+            modalCreate.classList.add('flex');
+          }
+
+          function closeCreate() {
+            if (!modalCreate) return;
+            modalCreate.classList.add('hidden');
+            modalCreate.classList.remove('flex');
+          }
+
+          function openView() {
+            if (!modalView) return;
+            modalView.classList.remove('hidden');
+            modalView.classList.add('flex');
+          }
+
+          function closeView() {
+            if (!modalView) return;
+            modalView.classList.add('hidden');
+            modalView.classList.remove('flex');
+            activeId = null;
+            if (vFrame) vFrame.src = 'about:blank';
+          }
+
+          function renderComments() {
+            if (!vComments) return;
+            const list = commentsMap[activeId] || [];
+            vComments.innerHTML = '';
+            if (list.length === 0) {
+              const empty = document.createElement('div');
+              empty.className = 'text-sm text-gray-500';
+              empty.textContent = 'ยังไม่มีความคิดเห็น';
+              vComments.appendChild(empty);
+              return;
+            }
+            list.slice(-100).forEach((entry) => {
+              const row = document.createElement('div');
+              row.className = 'bg-gray-50 rounded-lg p-2';
+              const name = escapeHtml(entry.name || 'ผู้แสดงความคิดเห็น');
+              const text = escapeHtml(entry.text || '');
+              const time = new Date(entry.time || Date.now()).toLocaleString();
+              row.innerHTML = `<div class="text-xs text-gray-500">${name} • ${time}</div><div class="text-sm">${text}</div>`;
+              vComments.appendChild(row);
+            });
+          }
+
+          function openViewer(id) {
+            const it = items.find((entry) => entry.id === id);
+            if (!it) return;
+            activeId = id;
+            if (vTitle) vTitle.textContent = it.title;
+            if (viewAuthor) viewAuthor.textContent = it.author || '-';
+            if (viewTags) viewTags.textContent = (it.tags || []).join(', ') || '-';
+            if (vLikeCount) vLikeCount.textContent = it.likes || 0;
+            if (vViewCount) vViewCount.textContent = it.views || 0;
+            if (vFrame) vFrame.src = it.pdfUrl;
+            if (vDownload) vDownload.href = it.pdfUrl;
+            it.views = (it.views || 0) + 1;
+            if (vViewCount) vViewCount.textContent = it.views;
+            persist();
+            render();
+            renderComments();
+            openView();
+          }
+
+          function toggleLike(id) {
+            const it = items.find((entry) => entry.id === id);
+            if (!it) return;
+            if (liked.has(id)) {
+              liked.delete(id);
+              it.likes = Math.max(0, (it.likes || 0) - 1);
+            } else {
+              liked.add(id);
+              it.likes = (it.likes || 0) + 1;
+            }
+            persist();
+            if (activeId === id && vLikeCount) {
+              vLikeCount.textContent = it.likes;
+            }
+            render();
+          }
+
+          if (openCreateBtn) addListener(openCreateBtn, 'click', openCreate);
+          if (modalCreate) {
+            $$('#modal-create [data-close-create]').forEach((btn) => addListener(btn, 'click', closeCreate));
+          }
+          if (modalView) {
+            $$('#modal-view [data-close-view]').forEach((btn) => addListener(btn, 'click', closeView));
+          }
+          if (createForm) {
+            addListener(createForm, 'submit', (event) => {
+              event.preventDefault();
+              const titleVal = fTitle.value.trim();
+              const pdfVal = fPdf.value.trim();
+              if (!titleVal || !pdfVal) {
+                alert('กรุณากรอกชื่อผลงานและลิงก์ PDF');
+                return;
+              }
+              const newItem = {
+                id: uid(),
+                title: titleVal,
+                author: fAuthor?.value.trim() || '',
+                pdfUrl: pdfVal,
+                thumbUrl: fThumb?.value.trim() || '',
+                tags: (fTags?.value || '').split(',').map((tag) => tag.trim()).filter(Boolean).slice(0, 10),
+                desc: fDesc?.value.trim() || '',
+                likes: 0,
+                views: 0,
+                createdAt: Date.now()
+              };
+              items.push(newItem);
+              persist();
+              closeCreate();
+              createForm.reset();
+              render();
+            });
+          }
+          if (elSearch) addListener(elSearch, 'input', render);
+          if (btnLike) addListener(btnLike, 'click', () => {
+            if (activeId) toggleLike(activeId);
+          });
+          if (commentForm) {
+            addListener(commentForm, 'submit', (event) => {
+              event.preventDefault();
+              if (!activeId) return;
+              const nameInput = $('#c-name');
+              const textInput = $('#c-text');
+              const name = nameInput ? nameInput.value.trim() : '';
+              const text = textInput ? textInput.value.trim() : '';
+              if (!text) return;
+              const list = commentsMap[activeId] || (commentsMap[activeId] = []);
+              list.push({ name, text, time: Date.now() });
+              writeJSON(STORAGE_COMMENTS, commentsMap);
+              if (textInput) textInput.value = '';
+              renderComments();
+            });
+          }
+
+          render();
+        }
+
+        const chatbotToggle = $('#chatbot-toggle');
+        const chatbotContainer = $('#chatbot-container');
+        const chatbotClose = $('#chatbot-close');
+        const chatMessages = $('#chat-messages');
+        const chatInput = $('#chat-input');
+        const chatSend = $('#chat-send');
+
+        const appendChatMessage = (role, text) => {
+          if (!chatMessages) return;
+          const wrap = document.createElement('div');
+          wrap.className = 'chat-message mb-3 flex ' + (role === 'user' ? 'justify-end' : 'justify-start');
+          const bubble = document.createElement('div');
+          bubble.className = role === 'user'
+            ? 'bg-blue-600 text-white rounded-lg p-3 max-w-xs'
+            : 'bg-blue-100 text-blue-800 rounded-lg p-3 max-w-xs';
+          bubble.textContent = text;
+          wrap.appendChild(bubble);
+          chatMessages.appendChild(wrap);
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+        };
+
+        const botReply = (input) => {
+          const text = (input || '').toLowerCase();
+          const contains = (...keywords) => keywords.some((keyword) => text.includes(keyword));
+          if (contains('สมัคร', 'ลงทะเบียน', 'register', 'sign up')) {
+            return 'การลงทะเบียน: ไปที่ปุ่ม “เข้าสู่ระบบ” แล้วเลือกสร้างบัญชีใหม่ หรือเชื่อมบัญชีหน่วยงาน หากต้องการคู่มือ กด “วิธีการใช้งานเว็บไซต์นี้”.';
+          }
+          if (contains('แบบสอบถาม', 'questionnaire', 'survey')) {
+            return 'สร้าง/จัดการแบบสอบถาม: ไปที่เมนู “แบบสอบถาม” เลือกสร้างแบบฟอร์ม กำหนดผู้ตอบ และดูสรุปผลได้แบบเรียลไทม์.';
+          }
+          if (contains('นิเทศ', 'รายงาน', 'report')) {
+            return 'บันทึกการนิเทศและรายงาน: ใช้เมนู “บันทึกการนิเทศ” เพื่อกรอกข้อมูล/อัปโหลดไฟล์ และดูรายงานในเมนู “รายงานผล”.';
+          }
+          if (contains('ติดต่อ', 'contact', 'เบอร์', 'อีเมล')) {
+            return 'ติดต่อเรา: contact@edusupervisor.ac.th หรือ 02-123-4567 (เวลาราชการ).';
+          }
+          if (contains('ช่วย', 'วิธีใช้', 'how', 'help')) {
+            return 'ฉันช่วยได้เรื่องสมัครใช้งาน, บันทึกการนิเทศ, แบบสอบถาม, รายงานผล และข้อมูลติดต่อ ลองพิมพ์หัวข้อที่สนใจได้เลยครับ.';
+          }
+          if (contains('ai', 'coding')) {
+            return 'เนื้อหา AI และ Coding: ดูที่เมนู “การเรียนรู้ CODING/AI” จะมีสื่อการเรียนรู้และลิงก์ที่เกี่ยวข้อง.';
+          }
+          return 'ขอบคุณครับ รับทราบคำถามแล้ว ขณะนี้ยังเป็นเวอร์ชันทดลอง หากต้องการความช่วยเหลือด่วน แนะนำเมนู “วิธีการใช้งานเว็บไซต์นี้” หรือพิมพ์คำสำคัญ เช่น “สมัคร”, “แบบสอบถาม”, “รายงาน”, “ติดต่อ”.';
+        };
+
+        const openChat = () => {
+          if (!chatbotContainer) return;
+          chatbotContainer.classList.remove('chatbot-hidden');
+          chatbotContainer.setAttribute('aria-modal', 'true');
+          if (chatInput) {
+            setTimeout(() => chatInput.focus(), 50);
+          }
+        };
+
+        const closeChat = () => {
+          if (!chatbotContainer) return;
+          chatbotContainer.classList.add('chatbot-hidden');
+          chatbotContainer.setAttribute('aria-modal', 'false');
+        };
+
+        const sendChat = () => {
+          if (!chatInput) return;
+          const value = chatInput.value.trim();
+          if (!value) return;
+          appendChatMessage('user', value);
+          chatInput.value = '';
+          setTimeout(() => appendChatMessage('bot', botReply(value)), 200);
+        };
+
+        if (chatbotToggle) {
+          addListener(chatbotToggle, 'click', () => {
+            if (!chatbotContainer) return;
+            const hidden = chatbotContainer.classList.contains('chatbot-hidden');
+            if (hidden) {
+              openChat();
+              if (chatMessages && chatMessages.childElementCount === 0) {
+                appendChatMessage('bot', 'สวัสดีครับ ผมคือแชทบอทของระบบนิเทศการศึกษา พิมพ์ “ช่วย” เพื่อดูสิ่งที่ช่วยได้ครับ');
+              }
+            } else {
+              closeChat();
+            }
+          });
+        }
+        if (chatbotClose) addListener(chatbotClose, 'click', closeChat);
+        if (chatSend) addListener(chatSend, 'click', sendChat);
+        if (chatInput) {
+          addListener(chatInput, 'keydown', (event) => {
+            if (event.key === 'Enter' && !event.shiftKey) {
+              event.preventDefault();
+              sendChat();
+            }
+          });
+        }
+        const escHandler = (event) => {
+          if (event.key === 'Escape') {
+            closeChat();
+          }
+        };
+        addListener(document, 'keydown', escHandler);
+
+        (function setupTestimonials() {
+          const GRID_ID = 'testimonials-grid';
+          const META_ID = 'testimonials-meta';
+          const BTN_ID = 'shuffle-testimonials';
+          const DISPLAY_COUNT = 3;
+          const ENDPOINT = window.TESTIMONIALS_ENDPOINT || null;
+
+          const grid = document.getElementById(GRID_ID);
+          if (!grid) return;
+          const meta = document.getElementById(META_ID);
+          const btn = document.getElementById(BTN_ID);
+
+          const fallback = [
+            { name: 'ดร.สมชาย ใจดี', role: 'ศึกษานิเทศก์เชี่ยวชาญ', message: 'ระบบนี้ช่วยลดเวลาในการจัดทำรายงานการนิเทศได้มาก ทำให้มีเวลาไปนิเทศครูได้มากขึ้น', avatar: 'http://static.photos/people/200x200/1' },
+            { name: 'นางสาวเพชรา มณีโชติ', role: 'ครูผู้รับการนิเทศ', message: 'สะดวกมากที่สามารถส่งงานและดูผลการนิเทศผ่านระบบออนไลน์ ไม่ต้องเดินทางไปส่งเอกสาร', avatar: 'http://static.photos/people/200x200/2' },
+            { name: 'นายวิทยา พัฒนาการ', role: 'ผู้อำนวยการโรงเรียน', message: 'เห็นภาพรวมของโรงเรียนได้ชัดเจนขึ้นจากรายงานที่ระบบสร้างให้อัตโนมัติ', avatar: 'http://static.photos/people/200x200/3' }
+          ];
+
+          let allItems = [];
+          let rotateTimer = null;
+          cleanupFns.push(() => { if (rotateTimer) clearInterval(rotateTimer); });
+
+          const shuffle = (arr) => {
+            for (let i = arr.length - 1; i > 0; i--) {
+              const j = Math.floor(Math.random() * (i + 1));
+              [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+          };
+          const sample = (arr, n) => {
+            if (!arr || arr.length === 0) return [];
+            const copy = arr.slice();
+            shuffle(copy);
+            return copy.slice(0, Math.min(n, copy.length));
+          };
+          const card = (item) => {
+            const wrap = document.createElement('div');
+            wrap.className = 'bg-gray-50 p-6 rounded-xl shadow-md';
+            const row = document.createElement('div');
+            row.className = 'flex items-center mb-4';
+            const img = document.createElement('img');
+            img.src = item.avatar || `https://ui-avatars.com/api/?background=3b82f6&color=fff&name=${encodeURIComponent(item.name || 'U')}`;
+            img.alt = 'ผู้ใช้งาน';
+            img.className = 'w-12 h-12 rounded-full mr-4 object-cover';
+            const info = document.createElement('div');
+            const h4 = document.createElement('h4');
+            h4.className = 'font-bold';
+            h4.textContent = item.name || 'ผู้ใช้งาน';
+            const role = document.createElement('p');
+            role.className = 'text-sm text-gray-500';
+            role.textContent = item.role || '';
+            info.appendChild(h4);
+            info.appendChild(role);
+            row.appendChild(img);
+            row.appendChild(info);
+            const p = document.createElement('p');
+            p.className = 'text-gray-600';
+            p.textContent = item.message || '';
+            wrap.appendChild(row);
+            wrap.appendChild(p);
+            return wrap;
+          };
+          const renderTestimonials = (items) => {
+            grid.innerHTML = '';
+            items.forEach((item) => grid.appendChild(card(item)));
+            if (meta) meta.textContent = `แสดง ${items.length}/${allItems.length} ความคิดเห็น`;
+          };
+          const tryParseGviz = (text) => {
+            if (!text || text.indexOf('google.visualization') === -1) return null;
+            try {
+              const start = text.indexOf('(') + 1;
+              const end = text.lastIndexOf(')');
+              const payload = JSON.parse(text.slice(start, end));
+              const rows = payload.table && payload.table.rows ? payload.table.rows : [];
+              return rows.map((r) => {
+                const c = r.c || [];
+                return {
+                  name: c[0]?.v || '',
+                  role: c[1]?.v || '',
+                  message: c[2]?.v || '',
+                  avatar: c[3]?.v || ''
+                };
+              }).filter((entry) => entry.message);
+            } catch {
+              return null;
+            }
+          };
+          const load = async () => {
+            if (!ENDPOINT) {
+              allItems = fallback;
+              renderTestimonials(sample(allItems, DISPLAY_COUNT));
+              startRotate();
+              return;
+            }
+            try {
+              const res = await fetch(ENDPOINT, { cache: 'no-store' });
+              const text = await res.text();
+              let data = null;
+              try { data = JSON.parse(text); } catch {}
+              if (Array.isArray(data)) {
+                allItems = data.map((entry) => ({
+                  name: entry.name || entry.fullName || entry.displayName || 'ผู้ใช้งาน',
+                  role: entry.role || entry.title || '',
+                  message: entry.message || entry.comment || '',
+                  avatar: entry.avatar || entry.photo || ''
+                })).filter((entry) => entry.message);
+              } else {
+                const gviz = tryParseGviz(text);
+                allItems = Array.isArray(gviz) && gviz.length ? gviz : fallback;
+              }
+            } catch {
+              allItems = fallback;
+            }
+            renderTestimonials(sample(allItems, DISPLAY_COUNT));
+            startRotate();
+          };
+          const startRotate = () => {
+            if (rotateTimer) clearInterval(rotateTimer);
+            if (allItems.length > DISPLAY_COUNT) {
+              rotateTimer = setInterval(() => {
+                renderTestimonials(sample(allItems, DISPLAY_COUNT));
+              }, 12000);
+            }
+          };
+          if (btn) {
+            addListener(btn, 'click', () => {
+              renderTestimonials(sample(allItems, DISPLAY_COUNT));
+            });
+          }
+          load();
+        })();
+      } catch (err) {
+        console.error('initShareandshow error:', err);
+      }
+    };
+
+    window.initDevelop = function() {
+      try {
+        if (typeof window._developCleanup === 'function') {
+          try { window._developCleanup(); } catch (cleanupError) {}
+        }
+
+        const cleanupFns = [];
+        window._developCleanup = () => {
+          while (cleanupFns.length) {
+            const fn = cleanupFns.pop();
+            try { fn(); } catch {}
+          }
+        };
+
+        if (typeof feather !== 'undefined') {
+          feather.replace();
+        }
+
+        const $ = (sel) => document.querySelector(sel);
+        const addListener = (target, type, handler) => {
+          if (!target) return;
+          target.addEventListener(type, handler);
+          cleanupFns.push(() => target.removeEventListener(type, handler));
+        };
+
+        const globeEl = document.getElementById('vanta-globe');
+        if (globeEl && window.VANTA && typeof VANTA.GLOBE === 'function') {
+          try { window._vantaInstance?.destroy?.(); } catch {}
+          window._vantaInstance = VANTA.GLOBE({
+            el: globeEl,
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x3b82f6,
+            backgroundColor: 0x2563eb,
+            size: 0.8
+          });
+        }
+
+        const chatbotToggle = $('#chatbot-toggle');
+        const chatbotContainer = $('#chatbot-container');
+        const chatbotClose = $('#chatbot-close');
+        const chatMessages = $('#chat-messages');
+        const chatInput = $('#chat-input');
+        const chatSend = $('#chat-send');
+
+        const appendChatMessage = (role, text) => {
+          if (!chatMessages) return;
+          const wrap = document.createElement('div');
+          wrap.className = 'chat-message mb-3 flex ' + (role === 'user' ? 'justify-end' : 'justify-start');
+          const bubble = document.createElement('div');
+          bubble.className = role === 'user'
+            ? 'bg-blue-600 text-white rounded-lg p-3 max-w-xs'
+            : 'bg-blue-100 text-blue-800 rounded-lg p-3 max-w-xs';
+          bubble.textContent = text;
+          wrap.appendChild(bubble);
+          chatMessages.appendChild(wrap);
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+        };
+
+        const botReply = (input) => {
+          const text = (input || '').toLowerCase();
+          const contains = (...keywords) => keywords.some((keyword) => text.includes(keyword));
+          if (contains('สมัคร', 'ลงทะเบียน', 'register', 'sign up')) {
+            return 'การลงทะเบียน: ไปที่ปุ่ม “เข้าสู่ระบบ” แล้วเลือกสร้างบัญชีใหม่ หรือเชื่อมบัญชีหน่วยงาน หากต้องการคู่มือ กด “วิธีการใช้งานเว็บไซต์นี้”.';
+          }
+          if (contains('แบบสอบถาม', 'questionnaire', 'survey')) {
+            return 'สร้าง/จัดการแบบสอบถาม: ไปที่เมนู “แบบสอบถาม” เลือกสร้างแบบฟอร์ม กำหนดผู้ตอบ และดูสรุปผลได้แบบเรียลไทม์.';
+          }
+          if (contains('นิเทศ', 'รายงาน', 'report')) {
+            return 'บันทึกการนิเทศและรายงาน: ใช้เมนู “บันทึกการนิเทศ” เพื่อกรอกข้อมูล/อัปโหลดไฟล์ และดูรายงานในเมนู “รายงานผล”.';
+          }
+          if (contains('ติดต่อ', 'contact', 'เบอร์', 'อีเมล')) {
+            return 'ติดต่อเรา: contact@edusupervisor.ac.th หรือ 02-123-4567 (เวลาราชการ).';
+          }
+          if (contains('ช่วย', 'วิธีใช้', 'how', 'help')) {
+            return 'ฉันช่วยได้เรื่องสมัครใช้งาน, บันทึกการนิเทศ, แบบสอบถาม, รายงานผล และข้อมูลติดต่อ ลองพิมพ์หัวข้อที่สนใจได้เลยครับ.';
+          }
+          if (contains('ai', 'coding')) {
+            return 'เนื้อหา AI และ Coding: ดูที่เมนู “การเรียนรู้ CODING/AI” จะมีสื่อการเรียนรู้และลิงก์ที่เกี่ยวข้อง.';
+          }
+          return 'ขอบคุณครับ รับทราบคำถามแล้ว ขณะนี้ยังเป็นเวอร์ชันทดลอง หากต้องการความช่วยเหลือด่วน แนะนำเมนู “วิธีการใช้งานเว็บไซต์นี้” หรือพิมพ์คำสำคัญ เช่น “สมัคร”, “แบบสอบถาม”, “รายงาน”, “ติดต่อ”.';
+        };
+
+        const openChat = () => {
+          if (!chatbotContainer) return;
+          chatbotContainer.classList.remove('chatbot-hidden');
+          chatbotContainer.setAttribute('aria-modal', 'true');
+          if (chatInput) {
+            setTimeout(() => chatInput.focus(), 50);
+          }
+        };
+
+        const closeChat = () => {
+          if (!chatbotContainer) return;
+          chatbotContainer.classList.add('chatbot-hidden');
+          chatbotContainer.setAttribute('aria-modal', 'false');
+        };
+
+        const sendChat = () => {
+          if (!chatInput) return;
+          const value = chatInput.value.trim();
+          if (!value) return;
+          appendChatMessage('user', value);
+          chatInput.value = '';
+          setTimeout(() => appendChatMessage('bot', botReply(value)), 200);
+        };
+
+        if (chatbotToggle) {
+          addListener(chatbotToggle, 'click', () => {
+            if (!chatbotContainer) return;
+            const hidden = chatbotContainer.classList.contains('chatbot-hidden');
+            if (hidden) {
+              openChat();
+              if (chatMessages && chatMessages.childElementCount === 0) {
+                appendChatMessage('bot', 'สวัสดีครับ ผมคือแชทบอทของระบบนิเทศการศึกษา พิมพ์ “ช่วย” เพื่อดูสิ่งที่ช่วยได้ครับ');
+              }
+            } else {
+              closeChat();
+            }
+          });
+        }
+        if (chatbotClose) addListener(chatbotClose, 'click', closeChat);
+        if (chatSend) addListener(chatSend, 'click', sendChat);
+        if (chatInput) {
+          addListener(chatInput, 'keydown', (event) => {
+            if (event.key === 'Enter' && !event.shiftKey) {
+              event.preventDefault();
+              sendChat();
+            }
+          });
+        }
+        const escHandler = (event) => {
+          if (event.key === 'Escape') {
+            closeChat();
+          }
+        };
+        addListener(document, 'keydown', escHandler);
+
+        (function setupTestimonials() {
+          const GRID_ID = 'testimonials-grid';
+          const META_ID = 'testimonials-meta';
+          const BTN_ID = 'shuffle-testimonials';
+          const DISPLAY_COUNT = 3;
+          const ENDPOINT = window.TESTIMONIALS_ENDPOINT || null;
+
+          const grid = document.getElementById(GRID_ID);
+          if (!grid) return;
+          const meta = document.getElementById(META_ID);
+          const btn = document.getElementById(BTN_ID);
+
+          const fallback = [
+            { name: 'ดร.สมชาย ใจดี', role: 'ศึกษานิเทศก์เชี่ยวชาญ', message: 'ระบบนี้ช่วยลดเวลาในการจัดทำรายงานการนิเทศได้มาก ทำให้มีเวลาไปนิเทศครูได้มากขึ้น', avatar: 'http://static.photos/people/200x200/1' },
+            { name: 'นางสาวเพชรา มณีโชติ', role: 'ครูผู้รับการนิเทศ', message: 'สะดวกมากที่สามารถส่งงานและดูผลการนิเทศผ่านระบบออนไลน์ ไม่ต้องเดินทางไปส่งเอกสาร', avatar: 'http://static.photos/people/200x200/2' },
+            { name: 'นายวิทยา พัฒนาการ', role: 'ผู้อำนวยการโรงเรียน', message: 'เห็นภาพรวมของโรงเรียนได้ชัดเจนขึ้นจากรายงานที่ระบบสร้างให้อัตโนมัติ', avatar: 'http://static.photos/people/200x200/3' }
+          ];
+
+          let allItems = [];
+          let rotateTimer = null;
+          cleanupFns.push(() => { if (rotateTimer) clearInterval(rotateTimer); });
+
+          const shuffle = (arr) => {
+            for (let i = arr.length - 1; i > 0; i--) {
+              const j = Math.floor(Math.random() * (i + 1));
+              [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+          };
+          const sample = (arr, n) => {
+            if (!arr || arr.length === 0) return [];
+            const copy = arr.slice();
+            shuffle(copy);
+            return copy.slice(0, Math.min(n, copy.length));
+          };
+          const card = (item) => {
+            const wrap = document.createElement('div');
+            wrap.className = 'bg-gray-50 p-6 rounded-xl shadow-md';
+            const row = document.createElement('div');
+            row.className = 'flex items-center mb-4';
+            const img = document.createElement('img');
+            img.src = item.avatar || `https://ui-avatars.com/api/?background=3b82f6&color=fff&name=${encodeURIComponent(item.name || 'U')}`;
+            img.alt = 'ผู้ใช้งาน';
+            img.className = 'w-12 h-12 rounded-full mr-4 object-cover';
+            const info = document.createElement('div');
+            const h4 = document.createElement('h4');
+            h4.className = 'font-bold';
+            h4.textContent = item.name || 'ผู้ใช้งาน';
+            const role = document.createElement('p');
+            role.className = 'text-sm text-gray-500';
+            role.textContent = item.role || '';
+            info.appendChild(h4);
+            info.appendChild(role);
+            row.appendChild(img);
+            row.appendChild(info);
+            const p = document.createElement('p');
+            p.className = 'text-gray-600';
+            p.textContent = item.message || '';
+            wrap.appendChild(row);
+            wrap.appendChild(p);
+            return wrap;
+          };
+          const renderTestimonials = (items) => {
+            grid.innerHTML = '';
+            items.forEach((item) => grid.appendChild(card(item)));
+            if (meta) meta.textContent = `แสดง ${items.length}/${allItems.length} ความคิดเห็น`;
+          };
+          const tryParseGviz = (text) => {
+            if (!text || text.indexOf('google.visualization') === -1) return null;
+            try {
+              const start = text.indexOf('(') + 1;
+              const end = text.lastIndexOf(')');
+              const payload = JSON.parse(text.slice(start, end));
+              const rows = payload.table && payload.table.rows ? payload.table.rows : [];
+              return rows.map((r) => {
+                const c = r.c || [];
+                return {
+                  name: c[0]?.v || '',
+                  role: c[1]?.v || '',
+                  message: c[2]?.v || '',
+                  avatar: c[3]?.v || ''
+                };
+              }).filter((entry) => entry.message);
+            } catch {
+              return null;
+            }
+          };
+          const load = async () => {
+            if (!ENDPOINT) {
+              allItems = fallback;
+              renderTestimonials(sample(allItems, DISPLAY_COUNT));
+              startRotate();
+              return;
+            }
+            try {
+              const res = await fetch(ENDPOINT, { cache: 'no-store' });
+              const text = await res.text();
+              let data = null;
+              try { data = JSON.parse(text); } catch {}
+              if (Array.isArray(data)) {
+                allItems = data.map((entry) => ({
+                  name: entry.name || entry.fullName || entry.displayName || 'ผู้ใช้งาน',
+                  role: entry.role || entry.title || '',
+                  message: entry.message || entry.comment || '',
+                  avatar: entry.avatar || entry.photo || ''
+                })).filter((entry) => entry.message);
+              } else {
+                const gviz = tryParseGviz(text);
+                allItems = Array.isArray(gviz) && gviz.length ? gviz : fallback;
+              }
+            } catch {
+              allItems = fallback;
+            }
+            renderTestimonials(sample(allItems, DISPLAY_COUNT));
+            startRotate();
+          };
+          const startRotate = () => {
+            if (rotateTimer) clearInterval(rotateTimer);
+            if (allItems.length > DISPLAY_COUNT) {
+              rotateTimer = setInterval(() => {
+                renderTestimonials(sample(allItems, DISPLAY_COUNT));
+              }, 12000);
+            }
+          };
+          if (btn) {
+            addListener(btn, 'click', () => {
+              renderTestimonials(sample(allItems, DISPLAY_COUNT));
+            });
+          }
+          load();
+        })();
+      } catch (err) {
+        console.error('initDevelop error:', err);
+      }
+    };
+
     // โหลด Header
     fetch('components/header.html')
       .then(response => response.text())
